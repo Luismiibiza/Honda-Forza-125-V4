@@ -7,7 +7,7 @@
 
     <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0e6cbf">
-    <title>Honda Forza 125 V4</title>
+    <title>PRUEBA FORZA V4</title>
     
     <style>
          
@@ -238,7 +238,7 @@ margin-bottom:15px;
             🟢 APC al día
         </div>
 
-        <div class="alert">
+        <div class="alert" id="estadoITV">
             🔴 ITV pendiente
         </div>
         <div class="alert" id="ultimoProducto">
@@ -615,6 +615,10 @@ function mostrarHistorialMantenimientos(){
          }
          actualizarEstadoGeneral();
          mostrarHistorialMantenimientos();
+         if(localStorage.getItem("fechaITV")){
+    document.getElementById("estadoITV").innerHTML =
+    "🟢 ITV al día";
+}
     }
     </script>
 </body>
