@@ -1,15 +1,13 @@
 {
-  "name": "Honda Forza 125 V4",
-  "short_name": "Forza V4",
-  "description": "Control de mantenimiento y detailing de Honda Forza 125",
-  "start_url": "./index.html",
+  "name": "Honda Forza 125 V5.3",
+  "short_name": "Forza V5.3",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#0e6cbf",
-  "orientation": "portrait",
   "icons": [
     {
-      "src": "icon-512.png",
+      "src": "icono-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
