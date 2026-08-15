@@ -73,6 +73,21 @@ button{
     color:white;
     cursor:pointer;
 }
+.verde{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+.naranja{
+    color:#f59e0b;
+    font-weight:bold;
+}
+
+.rojo{
+    color:#ef4444;
+    font-weight:bold;
+}
+
 </style>
 </head>
 
@@ -176,19 +191,24 @@ button{
 Sin registros
 </div>
 
+<button onclick="limpiarPruebas()">
+🧹 Limpiar historial de pruebas
+</button>
+
 <button onclick="exportarBackup()">
 📤 Exportar Backup
+</button>
+
+<button onclick="document.getElementById('importarJSON').click()">
+📥 Importar Backup
 </button>
 
 <input
 type="file"
 id="importarJSON"
-accept=".json">
-
-<button onclick="seleccionarBackup()">
-📥 Importar Backup
-</button>
-
+accept=".json"
+style="display:none"
+onchange="seleccionarBackup()">
 </div>
 
 
@@ -242,6 +262,7 @@ function realizarMantenimiento(tipo){
         tipo: tipo,
         fecha: hoy
     });
+    console.log(historial);
     localStorage.setItem(
         "historialMantenimientos",
         JSON.stringify(historial)
@@ -261,16 +282,13 @@ if(tipo === "ITV"){
     );
 }
 if(tipo === "Aceite"){
-
     const kmActual = Number(
         prompt("Introduce los kilómetros actuales:")
     );
-
     localStorage.setItem(
         "fechaAceite",
         hoy
     );
-
     localStorage.setItem(
         "kmAceite",
         kmActual
@@ -286,23 +304,24 @@ if(tipo === "Correa CVT"){
         sumarAnios(hoy, 2)
     );
 }
+console.log("Guardando aceite...");
 location.reload();    
 }
 function mostrarHistorial(){
     const historial =
-    JSON.parse(
-        localStorage.getItem(
-        "historialMantenimientos"
-        ) || "[]"
-    );
+        JSON.parse(
+            localStorage.getItem(
+                "historialMantenimientos"
+            ) || "[]"
+        );
     let html = "";
-    historial.forEach(item=>{
+    historial.forEach(item => {
         html += `
         <div class="alert">
-        ${item.tipo} · ${item.fecha}
+            ${item.tipo} · ${item.fecha}
         </div>`;
     });
-    if(html===""){
+    if(html === ""){
         html = "Sin registros";
     }
     document.getElementById(
@@ -311,47 +330,68 @@ function mostrarHistorial(){
 }
 function exportarBackup(){
     const backup = {
-        historial:
-        JSON.parse(
-        localStorage.getItem(
-        "historialMantenimientos"
-        )||"[]")
+        version: "5.3",
+        fecha: new Date().toISOString(),
+        datos: {...localStorage}
     };
-    const blob =
-    new Blob(
-    [JSON.stringify(backup,null,2)],
-    {type:"application/json"}
+    const blob = new Blob(
+        [JSON.stringify(backup, null, 2)],
+        {type:"application/json"}
     );
-    const a =
-    document.createElement("a");
-    a.href =
-    URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
     a.download =
-    "forza-v5-backup.json";
+        "forza-v53-backup.json";
     a.click();
 }
 function seleccionarBackup(){
+
     const archivo =
-    document.getElementById(
-    "importarJSON"
-    ).files[0];
-    if(!archivo) return;
+        document.getElementById(
+            "importarJSON"
+        ).files[0];
+
+    if(!archivo){
+        alert("Selecciona un backup");
+        return;
+    }
+
     const lector =
-    new FileReader();
-    lector.onload =
-    function(e){
-        const datos =
-        JSON.parse(
-        e.target.result
-        );
-        localStorage.setItem(
-        "historialMantenimientos",
-        JSON.stringify(
-        datos.historial || []
-        ));
-        location.reload();
+        new FileReader();
+
+    lector.onload = function(e){
+        try{
+            const backup =
+                JSON.parse(
+                    e.target.result
+                );
+            if(!backup.datos){
+                alert(
+                    "Backup incompatible"
+                );
+                return;
+            }
+            localStorage.clear();
+            Object.keys(
+                backup.datos
+            ).forEach(key => {
+                localStorage.setItem(
+                    key,
+                    backup.datos[key]
+                );
+            });
+            alert(
+                "Backup restaurado correctamente"
+            );
+            location.reload();
+        }catch(error){
+            alert(
+                "Error al restaurar backup"
+            );
+        }
     };
     lector.readAsText(archivo);
+
 }
 function diasTranscurridos(fechaTexto){
     if(!fechaTexto) return null;
@@ -430,8 +470,44 @@ function estadoVencimiento(fechaTexto, frecuencia){
         (1000 * 60 * 60 * 24)
     );
 }
+    function obtenerClaseDias(dias){
+    if(dias === null){
+        return "verde";
+    }
+    if(dias <= 30){
+        return "rojo";
+    }
+    if(dias <= 60){
+        return "naranja";
+    }
+    return "verde";
+}
+function limpiarPruebas(){
+    if(!confirm(
+        "¿Dejar solo el último registro de ITV, Aceite y Correa?"
+    )){
+        return;
+    }
+    const historial = JSON.parse(
+        localStorage.getItem(
+            "historialMantenimientos"
+        ) || "[]"
+    );
+    const nuevoHistorial = [];
+    const tiposGuardados = [];
+    historial.forEach(item => {
+        if(!tiposGuardados.includes(item.tipo)){
+            nuevoHistorial.push(item);
+            tiposGuardados.push(item.tipo);
+        }
+    });
+    localStorage.setItem(
+        "historialMantenimientos",
+        JSON.stringify(nuevoHistorial)
+    );
+    location.reload();
 
-
+}
 
 
 
@@ -463,7 +539,7 @@ window.onload = function(){
         "HidraMate",
         "TurtleWax"
     ];
-    productos.forEach(nombre => {         
+    productos.forEach(nombre => {       
         const fecha =
             localStorage.getItem(
                 "fecha" + nombre
@@ -477,7 +553,6 @@ window.onload = function(){
                 "✅ Aplicado: " + fecha;
         }       
     });     
-
 // ITV
 let resumenMantenimiento = "";
 const fechaITV =
@@ -495,12 +570,16 @@ if(fechaITV){
             "📅 Primera ITV: " +
             vencimientoITV +
             "<br>";
-        resumenMantenimiento +=
-            "⏳ Restan: " +
-            diasITV +
-            " días<br><br>";
-        }
-       }   
+        const claseITV =
+    obtenerClaseDias(diasITV); 
+    resumenMantenimiento +=
+    '<span class="' + claseITV + '">' +
+    "⏳ ITV: " +
+    diasITV +
+    " días restantes" +
+    '</span><br><br>';
+      }  
+  }   
 // Aceite
 const fechaAceite =
     localStorage.getItem("fechaAceite");
@@ -511,6 +590,17 @@ const kmAceite =
 console.log("kmAceite:", kmAceite);
 const proximoAceite =
     kmAceite + 6000;
+const kmActual =
+    kmAceite;
+const kmRestantes =
+    proximoAceite - kmActual;
+let claseAceite = "verde";
+if(kmRestantes <= 500){
+    claseAceite = "rojo";
+}
+else if(kmRestantes <= 1000){
+    claseAceite = "naranja";
+}
 if(fechaAceite){
     resumenMantenimiento +=
         "🛢️ Último aceite: " +
@@ -521,9 +611,15 @@ if(fechaAceite){
         kmAceite +
         " km<br>";
     resumenMantenimiento +=
-        "📍 Próximo cambio: " +
-        proximoAceite +
-        " km<br><br>";    
+    "📍 Próximo cambio: " +
+    proximoAceite +
+    " km<br>";
+resumenMantenimiento +=
+    '<span class="' + claseAceite + '">' +
+    "⛽ Restan " +
+    kmRestantes +
+    " km" +
+    "</span><br><br>";
 }
 // Correa
 const fechaCorrea =
@@ -542,10 +638,14 @@ if(fechaCorrea){
             "📅 Vence: " +
             vencimientoCorrea +
             "<br>";
+        const claseCorrea =
+            obtenerClaseDias(diasCorrea);
         resumenMantenimiento +=
-            "⏳ Restan: " +
+            '<span class="' + claseCorrea + '">' +
+            "⏳ Correa: " +
             diasCorrea +
-            " días<br><br>";
+            " días restantes" +
+            '</span><br><br>';
     }
 }
 console.log(resumenMantenimiento);
