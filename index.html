@@ -109,6 +109,21 @@ button{
      class="alert">
      Estados de productos
 </div>
+<div class="card">
+    <h2>🏍️ Kilometraje</h2>
+
+    <div id="kmActual" class="alert">
+        Kilometraje actual: Sin registrar
+    </div>
+
+    <div id="fechaKm" class="alert">
+        Última actualización: -
+    </div>
+
+    <button onclick="actualizarKilometros()">
+        ✏️ Actualizar kilómetros
+    </button>
+</div>
     <div id="ultimoProducto" class="alert">
         🧴 Último producto: Ninguno
     </div>
@@ -391,7 +406,6 @@ function seleccionarBackup(){
         }
     };
     lector.readAsText(archivo);
-
 }
 function diasTranscurridos(fechaTexto){
     if(!fechaTexto) return null;
@@ -506,13 +520,47 @@ function limpiarPruebas(){
         JSON.stringify(nuevoHistorial)
     );
     location.reload();
-
+}
+ function actualizarKilometros(){
+    const km = prompt(
+        "Introduce los kilómetros actuales:"
+    );
+    if(!km){
+        return;
+    }
+    const hoy =
+        new Date().toLocaleDateString("es-ES");
+    localStorage.setItem(
+        "kmActual",
+        km
+    );
+    localStorage.setItem(
+        "fechaKmActual",
+        hoy
+    );
+    location.reload();
 }
 
 
 
-
-window.onload = function(){
+window.onload = function(){  
+    const kmActual =
+        localStorage.getItem("kmActual");
+    const fechaKmActual =
+        localStorage.getItem("fechaKmActual");
+    if(kmActual){
+        document.getElementById(
+            "kmActual"
+        ).innerHTML =
+            "🏍️ Kilometraje actual: " +
+            kmActual +
+            " km";
+        document.getElementById(
+            "fechaKm"
+        ).innerHTML =
+            "📅 Última actualización: " +
+            fechaKmActual;
+    }    
     mostrarHistorial();
     const ultimo =
         localStorage.getItem("ultimoProducto");
