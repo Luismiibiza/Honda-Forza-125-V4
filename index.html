@@ -309,6 +309,10 @@ if(tipo === "Aceite"){
         kmActual
     );
 }
+localStorage.setItem(
+    "proximoAceite",
+    6000
+);
 if(tipo === "Correa CVT"){
     localStorage.setItem(
         "fechaCorrea",
@@ -320,8 +324,8 @@ if(tipo === "Correa CVT"){
     );
 }
 console.log("Guardando aceite...");
-location.reload();    
-}
+location.reload();  
+}  
 function mostrarHistorial(){
     const historial =
         JSON.parse(
@@ -635,13 +639,14 @@ const kmAceite =
     Number(
         localStorage.getItem("kmAceite")
     );
-console.log("kmAceite:", kmAceite);
 const proximoAceite =
-    kmAceite + 6000;
+    Number(
+        localStorage.getItem("proximoAceite")
+    ) || 6000;
 const kmActualAceite =
-    kmAceite;
+    Number(localStorage.getItem("kmActual")) || 0;    
 const kmRestantes =
-proximoAceite - kmActualAceite;
+    proximoAceite - kmActualAceite;
 let claseAceite = "verde";
 if(kmRestantes <= 500){
     claseAceite = "rojo";
