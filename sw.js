@@ -13,12 +13,12 @@ self.addEventListener("install", event => {
 
         caches.open(CACHE_NAME)
             .then(cache => {
-                return cache.addAll(urlsToCache);
-            })
-
-    );
-
-});
+               return cache.addAll([
+    "./",
+    "index.html",
+    "manifest.json",
+    "icono-512.png"
+]);
 
 self.addEventListener("activate", event => {
 
