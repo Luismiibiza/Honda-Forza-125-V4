@@ -38,8 +38,10 @@ body{
 .header{
     background:linear-gradient(135deg,#0d47a1,#0284c7);
     border-radius:20px;
-    padding:20px;
+    padding:25px;
     text-align:center;
+
+    position:relative; /* NUEVO */
 }
 
 .logo{
@@ -94,32 +96,36 @@ button{
     font-weight:bold;
 }
 .matriculaMoto{
+    position:absolute;
+    top:15px;
+    right:15px;
+
     display:flex;
-    width:95px;
-    height: 65px;
-    margin:1px auto;
+    width:70px;
+    height:48px;
+
     background:#f5f5f5;
-    border:2px solid #333;
-    border-radius:4px;
+    border:1px solid #333;
+    border-radius:3px;
     overflow:hidden;
-    box-shadow:0 2px 6px rgba(0,0,0,0.3);
+
+    box-shadow:0 2px 4px rgba(0,0,0,0.3);
 }
 
 .eu{
-    width:35px;
+    width:20px;
     background:#0046ad;
     color:white;
+
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    font-size:10px;
-    font-weight:bold;
-    line-height:1.1;
 
-    padding:4px 0;
-    box-sizing:border-box;
+    font-size:6px;
+    font-weight:bold;
 }
+
 
 .estrellas{
     font-size:7px;
@@ -136,19 +142,19 @@ button{
 }
 
 .numeros{
-    font-size:20px;
+    font-size:14px;
+    font-weight:900;
+    color:black;
+    line-height:1;
+    letter-spacing:1px;
+}
+
+.letras{
+    font-size:12px;
     font-weight:900;
     color:black;
     line-height:1;
     letter-spacing:2px;
-}
-
-.letras{
-    font-size:18px;
-    font-weight:900;
-    color:black;
-    line-height:1;
-    letter-spacing:4px;
 }
 </style>
 </head>
