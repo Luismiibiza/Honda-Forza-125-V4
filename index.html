@@ -96,7 +96,7 @@ button{
 <div class="header">
     <img src="icon-512.png" class="logo">
     <h2>Honda Forza 125 V4</h2>
-    <p>Ibiza Edition</p>
+    <p>Ibiza Edition  </p>
 </div>
 
 <div class="card">
@@ -191,7 +191,10 @@ button{
     <strong>⚙️ Correa CVT</strong>
     <button onclick="realizarMantenimiento('Correa CVT')">Realizado</button>
 </div>
-
+<div class="producto">
+    <strong>🛞 Neumáticos</strong>
+    <button onclick="realizarMantenimiento('Neumaticos')">Realizado</button>
+</div>
 </div>
 
 <div class="card">
@@ -321,6 +324,19 @@ if(tipo === "Correa CVT"){
     localStorage.setItem(
         "vencimientoCorrea",
         sumarAnios(hoy, 2)
+    );
+}
+if(tipo === "Neumaticos"){
+    const kmActual = Number(
+        localStorage.getItem("kmActual")
+    ) || 0;
+    localStorage.setItem(
+        "fechaNeumaticos",
+        hoy
+    );
+    localStorage.setItem(
+        "kmNeumaticos",
+        kmActual
     );
 }
 console.log("Guardando aceite...");
@@ -700,7 +716,74 @@ if(fechaCorrea){
             " días restantes" +
             '</span><br><br>';
     }
+   }
+
+    // Neumáticos
+const fechaNeumaticos =
+    localStorage.getItem(
+        "fechaNeumaticos"
+    );
+const kmNeumaticos =
+    Number(
+        localStorage.getItem(
+            "kmNeumaticos"
+        )
+    );
+const kmActualNeumaticos =
+    Number(
+        localStorage.getItem(
+            "kmActual"
+        )
+    ) || 0;
+const kmRecorridos =
+    kmActualNeumaticos -
+    kmNeumaticos;
+    const vidaNeumatico = 12000;
+const kmRestantesNeumatico =
+    vidaNeumatico -
+    kmRecorridos;
+let claseNeumaticos = "verde";
+let mensajeNeumaticos = "";
+if(kmRestantesNeumatico <= 0){
+    claseNeumaticos = "rojo";
+    mensajeNeumaticos =
+        "🔴 Cambio recomendado";
 }
+else if(kmRestantesNeumatico <= 4000){
+    claseNeumaticos = "naranja";
+    mensajeNeumaticos =
+        "🟠 Desgaste avanzado (" +
+        kmRestantesNeumatico +
+        " km restantes)";
+}
+else{
+    mensajeNeumaticos =
+        "🟢 Buen estado (" +
+        kmRestantesNeumatico +
+        " km restantes)";
+}
+if(fechaNeumaticos){
+    resumenMantenimiento +=
+        "🛞 Último cambio neumáticos: "
+        + fechaNeumaticos +
+        "<br>";
+    resumenMantenimiento +=
+        "🏍️ Km montaje: "
+        + kmNeumaticos +
+        " km<br>";
+    resumenMantenimiento +=
+        '<span class="' +
+        claseNeumaticos +
+        '">📏 Recorridos: '
+        + kmRecorridos +
+        ' km</span><br><br>';
+       resumenMantenimiento +=
+    '<span class="' +
+    claseNeumaticos +
+    '">' +
+    mensajeNeumaticos +
+    '</span><br><br>';
+ }  
 console.log(resumenMantenimiento);
 document.getElementById(
     "estadoMantenimiento"
