@@ -87,7 +87,63 @@ button{
     color:#ef4444;
     font-weight:bold;
 }
+.matriculaMoto{
+    display:flex;
+    width:140px;
+    height:95px;
+    margin:15px auto;
+    background:#f5f5f5;
+    border:2px solid #333;
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
 
+.eu{
+    width:35px;
+    background:#0046ad;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size:10px;
+    font-weight:bold;
+    line-height:1.1;
+
+    padding:4px 0;
+    box-sizing:border-box;
+}
+
+.estrellas{
+    font-size:7px;
+    letter-spacing:0px;
+    white-space:nowrap;
+}
+
+.contenidoMatricula{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.numeros{
+    font-size:32px;
+    font-weight:900;
+    color:black;
+    line-height:1;
+    letter-spacing:2px;
+}
+
+.letras{
+    font-size:30px;
+    font-weight:900;
+    color:black;
+    line-height:1;
+    letter-spacing:4px;
+}
 </style>
 </head>
 
@@ -97,6 +153,25 @@ button{
     <img src="icon-512.png" class="logo">
     <h2>Honda Forza 125 V4</h2>
     <p>Ibiza Edition  </p>
+   <div class="matriculaMoto">
+
+    <div class="eu">
+        <div class="estrellas">★★★★</div>
+        <span>E</span>
+    </div>
+
+    <div class="contenidoMatricula">
+
+        <div class="numeros">
+            9414
+        </div>
+
+        <div class="letras">
+            NNF
+        </div>
+
+    </div>
+
 </div>
 
 <div class="card">
