@@ -192,8 +192,16 @@ button{
     <button onclick="realizarMantenimiento('Correa CVT')">Realizado</button>
 </div>
 <div class="producto">
-    <strong>🛞 Neumáticos</strong>
-    <button onclick="realizarMantenimiento('Neumaticos')">Realizado</button>
+    <strong>🛞 Neumático delantero</strong>
+    <button onclick="realizarMantenimiento('NeumaticoDelantero')">
+        Realizado
+    </button>
+</div>
+<div class="producto">
+    <strong>🛞 Neumático trasero</strong>
+    <button onclick="realizarMantenimiento('NeumaticoTrasero')">
+        Realizado
+    </button>
 </div>
 </div>
 
@@ -326,16 +334,32 @@ if(tipo === "Correa CVT"){
         sumarAnios(hoy, 2)
     );
 }
-if(tipo === "Neumaticos"){
+if(tipo === "NeumaticoDelantero"){
+
+    const kmActual = Number(
+        localStorage.getItem("kmActual")
+    ) || 0;
+
+    localStorage.setItem(
+        "fechaNeumaticoDelantero",
+        hoy
+    );
+
+    localStorage.setItem(
+        "kmNeumaticoDelantero",
+        kmActual
+    );
+}
+if(tipo === "NeumaticoTrasero"){
     const kmActual = Number(
         localStorage.getItem("kmActual")
     ) || 0;
     localStorage.setItem(
-        "fechaNeumaticos",
+        "fechaNeumaticoTrasero",
         hoy
     );
     localStorage.setItem(
-        "kmNeumaticos",
+        "kmNeumaticoTrasero",
         kmActual
     );
 }
@@ -530,15 +554,21 @@ function limpiarPruebas(){
     const nuevoHistorial = [];
     const tiposGuardados = [];
     historial.forEach(item => {
-        if(!tiposGuardados.includes(item.tipo)){
-            nuevoHistorial.push(item);
-            tiposGuardados.push(item.tipo);
-        }
-    });
-    localStorage.setItem(
-        "historialMantenimientos",
-        JSON.stringify(nuevoHistorial)
+    if(!tiposGuardados.includes(item.tipo)){
+        nuevoHistorial.push(item);
+        tiposGuardados.push(item.tipo);
+    }
+});
+
+const historialFiltrado =
+    nuevoHistorial.filter(
+        item => item.tipo !== "Neumaticos"
     );
+
+localStorage.setItem(
+    "historialMantenimientos",
+    JSON.stringify(historialFiltrado)
+);
     location.reload();
 }
  function actualizarKilometros(){
@@ -718,72 +748,174 @@ if(fechaCorrea){
     }
    }
 
-    // Neumáticos
-const fechaNeumaticos =
+   // Neumático delantero
+
+const fechaNeumaticoDelantero =
     localStorage.getItem(
-        "fechaNeumaticos"
+        "fechaNeumaticoDelantero"
     );
-const kmNeumaticos =
+
+const kmNeumaticoDelantero =
     Number(
         localStorage.getItem(
-            "kmNeumaticos"
+            "kmNeumaticoDelantero"
         )
     );
-const kmActualNeumaticos =
+
+const kmActualDelantero =
     Number(
         localStorage.getItem(
             "kmActual"
         )
     ) || 0;
-const kmRecorridos =
-    kmActualNeumaticos -
-    kmNeumaticos;
-    const vidaNeumatico = 12000;
-const kmRestantesNeumatico =
-    vidaNeumatico -
-    kmRecorridos;
-let claseNeumaticos = "verde";
-let mensajeNeumaticos = "";
-if(kmRestantesNeumatico <= 0){
-    claseNeumaticos = "rojo";
-    mensajeNeumaticos =
+
+const kmRecorridosDelantero =
+    kmActualDelantero -
+    kmNeumaticoDelantero;
+
+const kmRestantesDelantero =
+    12000 -
+    kmRecorridosDelantero;
+
+let claseDelantero = "verde";
+let mensajeDelantero = "";
+
+if(kmRestantesDelantero <= 0){
+
+    claseDelantero = "rojo";
+
+    mensajeDelantero =
         "🔴 Cambio recomendado";
+
 }
-else if(kmRestantesNeumatico <= 4000){
-    claseNeumaticos = "naranja";
-    mensajeNeumaticos =
-        "🟠 Desgaste avanzado (" +
-        kmRestantesNeumatico +
+else if(kmRestantesDelantero <= 4000){
+
+    claseDelantero = "naranja";
+
+    mensajeDelantero =
+        "🟠 Revisar desgaste pronto (" +
+        kmRestantesDelantero +
         " km restantes)";
 }
 else{
-    mensajeNeumaticos =
+
+    mensajeDelantero =
         "🟢 Buen estado (" +
-        kmRestantesNeumatico +
+        kmRestantesDelantero +
         " km restantes)";
 }
-if(fechaNeumaticos){
+
+if(fechaNeumaticoDelantero){
+
     resumenMantenimiento +=
-        "🛞 Último cambio neumáticos: "
-        + fechaNeumaticos +
-        "<br>";
+        "🛞 Delantero<br>";
+        resumenMantenimiento +=
+        "📅 Montado: " +
+        fechaNeumaticoDelantero +
+        "<br>";   
+
     resumenMantenimiento +=
-        "🏍️ Km montaje: "
-        + kmNeumaticos +
+        "🏍️ Km montaje: " +
+        kmNeumaticoDelantero +
         " km<br>";
+
+    resumenMantenimiento +=
+        "📏 Recorridos: " +
+        kmRecorridosDelantero +
+        " km<br>";
+
     resumenMantenimiento +=
         '<span class="' +
-        claseNeumaticos +
-        '">📏 Recorridos: '
-        + kmRecorridos +
-        ' km</span><br><br>';
-       resumenMantenimiento +=
-    '<span class="' +
-    claseNeumaticos +
-    '">' +
-    mensajeNeumaticos +
-    '</span><br><br>';
- }  
+        claseDelantero +
+        '">' +
+        mensajeDelantero +
+        '</span><br><br>';
+}
+
+
+// Neumático trasero
+
+const fechaNeumaticoTrasero =
+    localStorage.getItem(
+        "fechaNeumaticoTrasero"
+    );
+
+const kmNeumaticoTrasero =
+    Number(
+        localStorage.getItem(
+            "kmNeumaticoTrasero"
+        )
+    );
+
+const kmActualTrasero =
+    Number(
+        localStorage.getItem(
+            "kmActual"
+        )
+    ) || 0;
+
+const kmRecorridosTrasero =
+    kmActualTrasero -
+    kmNeumaticoTrasero;
+
+const kmRestantesTrasero =
+    12000 -
+    kmRecorridosTrasero;
+
+let claseTrasero = "verde";
+let mensajeTrasero = "";
+
+if(kmRestantesTrasero <= 0){
+
+    claseTrasero = "rojo";
+
+    mensajeTrasero =
+        "🔴 Cambio recomendado";
+
+}
+else if(kmRestantesTrasero <= 4000){
+
+    claseTrasero = "naranja";
+
+    mensajeTrasero =
+        "🟠 Revisar desgaste pronto (" +
+        kmRestantesTrasero +
+        " km restantes)";
+}
+else{
+
+    mensajeTrasero =
+        "🟢 Buen estado (" +
+        kmRestantesTrasero +
+        " km restantes)";
+}
+
+if(fechaNeumaticoTrasero){
+
+    resumenMantenimiento +=
+        "🛞 Trasero<br>";
+        resumenMantenimiento +=
+        "📅 Montado: " +
+        fechaNeumaticoTrasero +
+        "<br>";
+
+    resumenMantenimiento +=
+        "🏍️ Km montaje: " +
+        kmNeumaticoTrasero +
+        " km<br>";
+
+    resumenMantenimiento +=
+        "📏 Recorridos: " +
+        kmRecorridosTrasero +
+        " km<br>";
+
+    resumenMantenimiento +=
+        '<span class="' +
+        claseTrasero +
+        '">' +
+        mensajeTrasero +
+        '</span><br><br>';
+}
 console.log(resumenMantenimiento);
 document.getElementById(
     "estadoMantenimiento"
