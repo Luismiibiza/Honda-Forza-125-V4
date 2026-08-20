@@ -23,26 +23,33 @@
 body{
     margin:0;
     padding:10px;
-    background:var(--bg);
-    color:var(--text);
-    font-family:Arial,sans-serif;
+    padding-bottom:90px;
+    background:
+    linear-gradient(
+        180deg,
+        #0f172a,
+        #111827
+    );
+    color:white;
+    font-family:
+        system-ui,
+        sans-serif;
 }
+
 
 .card{
     background:var(--card);
     border-radius:18px;
     padding:15px;
     margin-top:12px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:
+        0 6px 16px
+        rgba(0,0,0,.25);
+    animation:
+        fadeIn .35s ease;
 }
 
-.header{
-    background:linear-gradient(135deg,#0d47a1,#0284c7);
-    border-radius:20px;
-    padding:20px;
-    text-align:center;
-
-    position:relative; /* NUEVO */
-}
 
 .logo{
     width:140px;
@@ -53,11 +60,11 @@ body{
 
 .alert{
     background:#334155;
-    padding:10px;
-
-
+    border-left:4px solid #60a5fa;
+    padding:12px;
     border-radius:12px;
     margin-top:8px;
+    border:1px solid rgba(255,255,255,.05);
 }
 #estadoProductos{
     text-align:left;
@@ -97,8 +104,8 @@ button{
 }
 .matriculaMoto{
     position:absolute;
-    top:15px;
-    right:15px;
+    top:25px;
+    right:25px;
 
     display:flex;
     width:70px;
@@ -156,46 +163,217 @@ button{
     line-height:1;
     letter-spacing:2px;
 }
+.menuInferior{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(30,41,59,.95)
+    backdrop-filter:blur(12px);
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    padding:10px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    z-index:1000;
+}
+
+.menuBtn{
+    color:white;
+    font-size:11px;
+    text-align:center;
+    cursor:pointer;
+    padding:4px;
+}
+.menuBtn span{
+    display:block;
+    font-size:26px !important;
+    margin-bottom:4px;
+    transition:all .3s ease;
+}
+.menuBtn.activo{
+    color:#60a5fa;
+    font-weight:bold;
+}
+
+.menuBtn.activo span{
+    filter:drop-shadow(0 0 8px #60a5fa);
+    transform:scale(1.15);
+}
+
+.menuBtn:hover{
+    color:#38bdf8;
+}
+
+.pantalla{
+    display:none;
+}
+
+#inicio{
+    display:block;
+}
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:
+            translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:
+            translateY(0);
+    }
+}
+    .header{
+    background:
+    linear-gradient(
+        135deg,
+        #0d47a1,
+        #0284c7
+    );
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    position:relative;
+    box-shadow:
+        0 10px 25px
+        rgba(2,132,199,.35);
+}
+
+button{
+    width:100%;
+    margin-top:8px;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:#0284c7;
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s;
+}
+button:hover{
+    filter:brightness(1.1);
+}
+button:active{
+    transform:scale(.97);
+}
+#kmActual{
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    color:#60a5fa;
+}
+#ultimoProducto{
+    border-left:5px solid #22c55e;
+}
+
+#ultimoMantenimiento{
+    border-left:5px solid #f59e0b;
+}
+
+#estadoITV{
+    border-left:5px solid #ef4444;
+}
+.barraITV{
+    width:100%;
+    height:12px;
+    background:#1e293b;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+#progresoITV{
+    width:0%;
+    height:100%;
+    background:#22c55e;
+    border-radius:20px;
+    transition:1s;
+}
+#progresoAceite{
+    width:0%;
+    height:100%;
+    background:#22c55e;
+    border-radius:20px;
+    transition:1s;
+}
+#progresoCorrea{
+    width:0%;
+    height:100%;
+    background:#22c55e;
+    border-radius:20px;
+    transition:1s;
+}
+#progresoDelantero{
+    width:0%;
+    height:100%;
+    background:#22c55e;
+    border-radius:20px;
+    transition:1s;
+}
+
+#progresoTrasero{
+    width:0%;
+    height:100%;
+    background:#22c55e;
+    border-radius:20px;
+    transition:1s;
+}
+
+#textoITV{
+    margin-top:8px;
+    margin-bottom:2px;
+    font-size:12px;
+    color:#94a3b8;
+    text-align:right;
+}
+#textoAceite{
+    margin-top:8px;
+    margin-bottom:6px;
+    font-size:12px;
+    color:#94a3b8;
+    text-align:right;
+}
 </style>
 </head>
-
-<body>
-
+<body> 
+<div id="inicio" class="pantalla">
 <div class="header">
-    <img src="icon-512.png" class="logo">
-    <h2>Honda Forza 125 V4</h2>
-    <p>Ibiza Edition  </p>
-   <div class="matriculaMoto">
-
-    <div class="eu">
-        <div class="estrellas">★★★★</div>
-        <span>E</span>
-    </div>
-
-    <div class="contenidoMatricula">
-
-        <div class="numeros">
-            9414
-        </div>
-
-        <div class="letras">
-            NNF
-        </div>
-
-    </div>
-
+    <h2>🏍️ Honda Forza 125</h2>
+    <p>Ibiza Edition</p>
 </div>
-
+<!--
 <div class="card">
     <h2>📊 Estado general</h2>
-
-    <div id="estadoGeneral" class="alert">
-        ✅ Sistema operativo
-    </div>
-        <div id="estadoProductos"
-     class="alert">
-     Estados de productos
+...
 </div>
+-->
+<!--
+<div class="card">
+    <h2>🏍️ Kilometraje</h2>
+...
+</div>
+-->
+<!--
+<div class="card">
+    <h2>🧴 Productos</h2>
+...
+</div>
+-->
+<!--
+<div class="card">
+    <h2>🛠️ Mantenimiento</h2>
+...
+</div>
+-->
+<!--
+<div class="card">
+...
+Historial
+...
+</div>
+-->
 <div class="card">
     <h2>🏍️ Kilometraje</h2>
 
@@ -211,6 +389,11 @@ button{
         ✏️ Actualizar kilómetros
     </button>
 </div>
+
+    <div class="card">
+
+    <h2>📊 Estado de la moto</h2>
+
     <div id="ultimoProducto" class="alert">
         🧴 Último producto: Ninguno
     </div>
@@ -219,11 +402,69 @@ button{
         🛠️ Último mantenimiento: Ninguno
     </div>
 
-    <div id="estadoITV" class="alert">
-        🔴 ITV pendiente
-    </div>
+   <div id="estadoITV" class="alert">
+    🔴 ITV pendiente    
 </div>
 
+<div id="textoITV">
+    ITV al 70%
+</div>
+
+<div class="barraITV">
+    <div id="progresoITV"></div>
+</div>
+</div>
+<div id="estadoAceite" class="alert">
+    🛢️ Aceite pendiente
+</div>
+
+<div id="textoAceite">
+    Aceite al 100%
+</div>
+
+<div class="barraITV">
+    <div id="progresoAceite"></div>
+</div>
+
+<div id="estadoCorrea" class="alert">
+    ⚙️ Correa CVT pendiente
+</div>
+
+<div id="textoCorrea">
+    Correa al 100%
+</div>
+
+<div class="barraITV">
+    <div id="progresoCorrea"></div>
+</div>
+<div id="estadoDelantero" class="alert">
+    🛞 Neumático delantero correcto
+</div>
+
+<div id="textoDelantero">
+    Delantero al 100%
+</div>
+
+<div class="barraITV">
+    <div id="progresoDelantero"></div>
+</div>
+
+<div id="estadoTrasero" class="alert">
+    🛞 Neumático trasero correcto
+</div>
+
+<div id="textoTrasero">
+    Trasero al 100%
+</div>
+
+<div class="barraITV">
+    <div id="progresoTrasero"></div>
+</div>
+
+   </div>
+  </div>
+<div id="limpieza" class="pantalla">
+     
 <div class="card">
 
 <h2>🧴 Productos</h2>
@@ -257,8 +498,10 @@ button{
     <button onclick="aplicarProducto('TurtleWax')">Aplicar</button>
     <div id="fechaTurtleWax">Sin registros</div>
 </div>
-
 </div>
+</div>
+
+<div id="mantenimiento" class="pantalla">
 
 <div class="card">
 
@@ -292,8 +535,7 @@ button{
 </div>
 </div>
 
-<div class="card">
-   
+<div class="card">   
 <div class="alert">
     <strong>🛠️ Estado mantenimiento</strong><br><br>
     <div id="estadoMantenimiento"></div>
@@ -323,7 +565,7 @@ accept=".json"
 style="display:none"
 onchange="seleccionarBackup()">
 </div>
-
+</div>
 
 <script>
 
@@ -408,13 +650,17 @@ if(tipo === "Aceite"){
     );
 }
 localStorage.setItem(
-    "proximoAceite",
+    "kmObjetivoAceite",
     6000
 );
-if(tipo === "Correa CVT"){
+if(tipo === "Correa CVT"){    
     localStorage.setItem(
         "fechaCorrea",
         hoy
+    );
+    localStorage.setItem(
+        "kmCorrea",
+        kmActual
     );
     localStorage.setItem(
         "vencimientoCorrea",
@@ -746,6 +992,35 @@ const vencimientoITV =
     localStorage.getItem("vencimientoITV");
 const diasITV =
     diasRestantes(vencimientoITV);
+    let porcentajeITV = 0;
+if(fechaITV && vencimientoITV){
+    const inicio = new Date(
+        fechaITV.split("/")[2],
+        fechaITV.split("/")[1]-1,
+        fechaITV.split("/")[0]
+    );
+    const fin = new Date(
+        vencimientoITV.split("/")[2],
+        vencimientoITV.split("/")[1]-1,
+        vencimientoITV.split("/")[0]
+    );
+    const hoy = new Date();
+    const totalDias =
+        (fin - inicio) /
+        (1000 * 60 * 60 * 24);
+    const diasConsumidos =
+        (hoy - inicio) /
+        (1000 * 60 * 60 * 24);
+    porcentajeITV =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                100 -
+                ((diasConsumidos / totalDias) * 100)
+            )
+        );
+}
 if(fechaITV){
     resumenMantenimiento +=
         "🏍️ Fecha compra: 20/05/2026" +
@@ -764,6 +1039,52 @@ if(fechaITV){
     " días restantes" +
     '</span><br><br>';
       }  
+      const barraITV =
+    document.getElementById("progresoITV");
+if(barraITV){
+    barraITV.style.width =
+        porcentajeITV + "%";
+    if(porcentajeITV > 60){
+        barraITV.style.background =
+            "#22c55e";
+    }
+    else if(porcentajeITV > 30){
+        barraITV.style.background =
+            "#f59e0b";
+    }
+    else{
+        barraITV.style.background =
+            "#ef4444";
+    }
+}
+const estadoITV =
+    document.getElementById("estadoITV");    
+if(estadoITV){
+    if(porcentajeITV > 60){
+        estadoITV.innerHTML =
+            "🟢 ITV en vigor";
+    }
+    else if(porcentajeITV > 30){
+        estadoITV.innerHTML =
+            "🟠 ITV próxima revisión";
+    }
+    else{
+        estadoITV.innerHTML =
+            "🔴 ITV próxima a caducar";
+    }
+}
+     const textoITV =
+    document.getElementById("textoITV");
+if(textoITV){
+    textoITV.innerHTML =
+        "ITV al " +
+        Math.round(porcentajeITV) +
+        "%";
+     }
+     console.log(
+    "ITV:",
+    porcentajeITV
+);
   }   
 // Aceite
 const fechaAceite =
@@ -772,20 +1093,73 @@ const kmAceite =
     Number(
         localStorage.getItem("kmAceite")
     );
-const proximoAceite =
+const kmObjetivoAceite =
     Number(
-        localStorage.getItem("proximoAceite")
+        localStorage.getItem("kmObjetivoAceite")
     ) || 6000;
 const kmActualAceite =
-    Number(localStorage.getItem("kmActual")) || 0;    
+    Number(localStorage.getItem("kmActual")) || 0;
+
+const kmRecorridosAceite =
+    Math.max(
+        0,
+        kmActualAceite - kmAceite
+    );
 const kmRestantes =
-    proximoAceite - kmActualAceite;
-let claseAceite = "verde";
-if(kmRestantes <= 500){
-    claseAceite = "rojo";
+    Math.max(
+        0,
+        kmObjetivoAceite - kmRecorridosAceite
+    );
+let porcentajeAceite =
+    (kmRestantes / kmObjetivoAceite) * 100;
+    const barraAceite =
+    document.getElementById(
+        "progresoAceite"
+    );
+if(barraAceite){
+    barraAceite.style.width =
+        porcentajeAceite + "%";
+    if(porcentajeAceite > 60){
+        barraAceite.style.background =
+            "#22c55e";
+    }
+    else if(porcentajeAceite > 30){
+        barraAceite.style.background =
+            "#f59e0b";
+    }
+    else{
+        barraAceite.style.background =
+            "#ef4444";
+    }
 }
-else if(kmRestantes <= 1000){
-    claseAceite = "naranja";
+const textoAceite =
+    document.getElementById(
+        "textoAceite"
+    );
+if(textoAceite){
+    textoAceite.innerHTML =
+        "Aceite al " +
+        Math.round(
+            porcentajeAceite
+        ) +
+        "%";
+}
+const estadoAceite =
+    document.getElementById(
+        "estadoAceite"    );
+if(estadoAceite){
+    if(porcentajeAceite > 60){
+        estadoAceite.innerHTML =
+            "🟢 Aceite correcto";
+    }
+    else if(porcentajeAceite > 30){
+        estadoAceite.innerHTML =
+            "🟠 Revisar aceite";
+    }
+    else{
+        estadoAceite.innerHTML =
+            "🔴 Cambio recomendado";
+    }
 }
 if(fechaAceite){
     resumenMantenimiento +=
@@ -798,8 +1172,15 @@ if(fechaAceite){
         " km<br>";
     resumenMantenimiento +=
     "📍 Próximo cambio: " +
-    proximoAceite +
+    kmObjetivoAceite +
     " km<br>";
+    let claseAceite = "verde";
+if(kmRestantes <= 0){
+    claseAceite = "rojo";
+}
+else if(kmRestantes <= 2000){
+    claseAceite = "naranja";
+}
 resumenMantenimiento +=
     '<span class="' + claseAceite + '">' +
     "⛽ Restan " +
@@ -808,17 +1189,104 @@ resumenMantenimiento +=
     "</span><br><br>";
 }
 // Correa
+const kmCorrea =
+    Number(
+        localStorage.getItem("kmCorrea")
+    ) || 0;
+const kmActualCorrea =
+    Number(
+        localStorage.getItem("kmActual")
+    ) || 0;
+const kmRecorridosCorrea =
+    Math.max(
+        0,
+        kmActualCorrea - kmCorrea
+    );
+const kmRestantesCorrea =
+    Math.max(
+        0,
+        24000 - kmRecorridosCorrea
+    );
 const fechaCorrea =
     localStorage.getItem("fechaCorrea");
 const vencimientoCorrea =
     localStorage.getItem("vencimientoCorrea");
 const diasCorrea =
     diasRestantes(vencimientoCorrea);
+    let porcentajeCorrea =
+    (kmRestantesCorrea / 24000) * 100;
+porcentajeCorrea =
+    Math.max(
+        0,
+        Math.min(
+            100,
+            porcentajeCorrea
+        )
+    );   
+    const barraCorrea =
+    document.getElementById("progresoCorrea");
+if(barraCorrea){
+    barraCorrea.style.width =
+        porcentajeCorrea + "%";
+    if(porcentajeCorrea > 60){
+        barraCorrea.style.background =
+            "#22c55e";
+    }
+    else if(porcentajeCorrea > 30){
+        barraCorrea.style.background =
+            "#f59e0b";
+    }
+    else{
+        barraCorrea.style.background =
+            "#ef4444";
+    }
+}
+const estadoCorrea =
+    document.getElementById("estadoCorrea");
+if(estadoCorrea){
+    if(porcentajeCorrea > 60){
+        estadoCorrea.innerHTML =
+            "🟢 Correa correcta";
+    }
+    else if(porcentajeCorrea > 30){
+        estadoCorrea.innerHTML =
+            "🟠 Revisar correa";
+    }
+    else{
+        estadoCorrea.innerHTML =
+            "🔴 Cambio recomendado";
+    }
+}
+const textoCorrea =
+    document.getElementById("textoCorrea");
+if(textoCorrea){
+    textoCorrea.innerHTML =
+        "Correa al " +
+        Math.round(porcentajeCorrea) +
+        "% (" +
+        kmRestantesCorrea +
+        " km)";
+}
 if(fechaCorrea){
     resumenMantenimiento +=
         "⚙️ Última correa: " +
         fechaCorrea +
         "<br>";
+        const kmActual = Number(
+    localStorage.getItem("kmActual")
+) || 0;
+resumenMantenimiento +=
+    "📏 Recorridos: " +
+    kmRecorridosCorrea +
+    " km<br>";
+resumenMantenimiento +=
+    "📉 Restan: " +
+    kmRestantesCorrea +
+    " km<br>";
+        resumenMantenimiento +=
+    "🏍️ Km cambio: " +
+    kmCorrea +
+    " km<br>";
     if(vencimientoCorrea){
         resumenMantenimiento +=
             "📅 Vence: " +
@@ -834,83 +1302,128 @@ if(fechaCorrea){
             '</span><br><br>';
     }
    }
-
    // Neumático delantero
-
+  
 const fechaNeumaticoDelantero =
     localStorage.getItem(
         "fechaNeumaticoDelantero"
     );
-
 const kmNeumaticoDelantero =
     Number(
         localStorage.getItem(
             "kmNeumaticoDelantero"
         )
     );
-
 const kmActualDelantero =
     Number(
         localStorage.getItem(
             "kmActual"
         )
     ) || 0;
-
 const kmRecorridosDelantero =
-    kmActualDelantero -
-    kmNeumaticoDelantero;
-
+    Math.max(
+        0,
+        kmActualDelantero -
+        kmNeumaticoDelantero
+    );
 const kmRestantesDelantero =
-    12000 -
-    kmRecorridosDelantero;
+    Math.min(
+        12000,
+        Math.max(
+            0,
+            12000 - kmRecorridosDelantero
+        )
+    );
+ let porcentajeDelantero =
+    (kmRestantesDelantero / 12000) * 100;
+porcentajeDelantero =
+    Math.max(
+        0,
+        Math.min(
+            100,
+            porcentajeDelantero
+        )
+    );
+const barraDelantero =
+    document.getElementById("progresoDelantero");
+if(barraDelantero){
+    barraDelantero.style.width =
+        porcentajeDelantero + "%";
 
+    if(porcentajeDelantero > 60){
+        barraDelantero.style.background =
+            "#22c55e";
+    }
+    else if(porcentajeDelantero > 30){
+        barraDelantero.style.background =
+            "#f59e0b";
+    }
+    else{
+        barraDelantero.style.background =
+            "#ef4444";
+    }
+}
+const estadoDelantero =
+    document.getElementById("estadoDelantero");
+if(estadoDelantero){
+    if(porcentajeDelantero > 60){
+        estadoDelantero.innerHTML =
+            "🟢 Neumático delantero correcto";
+    }
+    else if(porcentajeDelantero > 30){
+        estadoDelantero.innerHTML =
+            "🟠 Revisar delantero";
+    }
+    else{
+        estadoDelantero.innerHTML =
+            "🔴 Cambio recomendado";
+    }
+}
+const textoDelantero =
+    document.getElementById("textoDelantero");
+if(textoDelantero){
+    textoDelantero.innerHTML =
+        "Delantero al " +
+        Math.round(porcentajeDelantero) +
+        "% (" +
+        kmRestantesDelantero +
+        " km)";
+}
 let claseDelantero = "verde";
 let mensajeDelantero = "";
-
 if(kmRestantesDelantero <= 0){
-
     claseDelantero = "rojo";
-
     mensajeDelantero =
         "🔴 Cambio recomendado";
-
 }
 else if(kmRestantesDelantero <= 4000){
-
     claseDelantero = "naranja";
-
     mensajeDelantero =
         "🟠 Revisar desgaste pronto (" +
         kmRestantesDelantero +
         " km restantes)";
 }
 else{
-
     mensajeDelantero =
         "🟢 Buen estado (" +
         kmRestantesDelantero +
         " km restantes)";
 }
-
 if(fechaNeumaticoDelantero){
-
     resumenMantenimiento +=
         "🛞 Delantero<br>";
         resumenMantenimiento +=
         "📅 Montado: " +
         fechaNeumaticoDelantero +
         "<br>";   
-
     resumenMantenimiento +=
         "🏍️ Km montaje: " +
         kmNeumaticoDelantero +
         " km<br>";
-
     resumenMantenimiento +=
         "📏 Recorridos: " +
         kmRecorridosDelantero +
         " km<br>";
-
     resumenMantenimiento +=
         '<span class="' +
         claseDelantero +
@@ -926,76 +1439,120 @@ const fechaNeumaticoTrasero =
     localStorage.getItem(
         "fechaNeumaticoTrasero"
     );
-
 const kmNeumaticoTrasero =
     Number(
         localStorage.getItem(
             "kmNeumaticoTrasero"
         )
     );
-
 const kmActualTrasero =
     Number(
         localStorage.getItem(
             "kmActual"
         )
     ) || 0;
-
 const kmRecorridosTrasero =
-    kmActualTrasero -
-    kmNeumaticoTrasero;
-
+    Math.max(
+0,
+kmActualTrasero -
+kmNeumaticoTrasero
+);
 const kmRestantesTrasero =
-    12000 -
-    kmRecorridosTrasero;
-
+    Math.min(
+        12000,
+        Math.max(
+            0,
+            12000 - kmRecorridosTrasero
+        )
+    );
+    let porcentajeTrasero =
+    (kmRestantesTrasero / 12000) * 100;
+porcentajeTrasero =
+    Math.max(
+        0,
+        Math.min(
+            100,
+            porcentajeTrasero
+        )
+    );
+const barraTrasero =
+    document.getElementById("progresoTrasero");
+if(barraTrasero){
+    barraTrasero.style.width =
+        porcentajeTrasero + "%";
+    if(porcentajeTrasero > 60){
+        barraTrasero.style.background =
+            "#22c55e";
+    }
+    else if(porcentajeTrasero > 30){
+        barraTrasero.style.background =
+            "#f59e0b";
+    }
+    else{
+        barraTrasero.style.background =
+            "#ef4444";
+    }
+}
+const estadoTrasero =
+    document.getElementById("estadoTrasero");
+if(estadoTrasero){
+    if(porcentajeTrasero > 60){
+        estadoTrasero.innerHTML =
+            "🟢 Neumático trasero correcto";
+    }
+    else if(porcentajeTrasero > 30){
+        estadoTrasero.innerHTML =
+            "🟠 Revisar trasero";
+    }
+    else{
+        estadoTrasero.innerHTML =
+            "🔴 Cambio recomendado";
+    }
+}
+const textoTrasero =
+    document.getElementById("textoTrasero");
+if(textoTrasero){
+    textoTrasero.innerHTML =
+        "Trasero al " +
+        Math.round(porcentajeTrasero) +
+        "% (" +
+        kmRestantesTrasero +
+        " km)";
+}
 let claseTrasero = "verde";
 let mensajeTrasero = "";
-
 if(kmRestantesTrasero <= 0){
-
     claseTrasero = "rojo";
-
     mensajeTrasero =
         "🔴 Cambio recomendado";
-
 }
 else if(kmRestantesTrasero <= 4000){
-
     claseTrasero = "naranja";
-
     mensajeTrasero =
         "🟠 Revisar desgaste pronto (" +
         kmRestantesTrasero +
-        " km restantes)";
-}
+        " km restantes)";}
 else{
-
     mensajeTrasero =
         "🟢 Buen estado (" +
         kmRestantesTrasero +
         " km restantes)";
 }
-
 if(fechaNeumaticoTrasero){
-
     resumenMantenimiento +=
         "🛞 Trasero<br>";
         resumenMantenimiento +=
         "📅 Montado: " +
         fechaNeumaticoTrasero +
         "<br>";
-
     resumenMantenimiento +=
         "🏍️ Km montaje: " +
         kmNeumaticoTrasero +
         " km<br>";
-
     resumenMantenimiento +=
         "📏 Recorridos: " +
         kmRecorridosTrasero +
         " km<br>";
-
     resumenMantenimiento +=
         '<span class="' +
         claseTrasero +
@@ -1030,10 +1587,80 @@ for(const producto in vencimientos){
         ) +
         "<br>";
 }
-document.getElementById(
-    "estadoProductos"
-).innerHTML = resumen;
+const estadoProductos =
+    document.getElementById(
+        "estadoProductos"
+    );
+if(estadoProductos){
+    estadoProductos.innerHTML =
+        resumen;
+}
 };
+function activarMenu(boton){
+    document.querySelectorAll(".menuBtn").forEach(btn=>{
+        btn.classList.remove("activo");
+    });
+    boton.classList.add("activo");
+}
+function mostrarPantalla(id){
+    console.log("Mostrando:", id);
+    document.querySelectorAll(".pantalla").forEach(p=>{
+        p.style.display="none";
+    });
+    const pantalla = document.getElementById(id);
+    console.log(pantalla);
+    pantalla.style.display="block";
+}    
+window.addEventListener("load", function(){
+    document.getElementById("btnInicio").onclick=function(){
+        activarMenu(this);
+        mostrarPantalla("inicio");
+    };
+    document.getElementById("btnLimpieza").onclick=function(){
+        activarMenu(this);
+        mostrarPantalla("limpieza");
+    };
+    document.getElementById("btnMant").onclick=function(){
+        activarMenu(this);
+        mostrarPantalla("mantenimiento");
+    };
+    document.getElementById("btnHist").onclick=function(){
+        activarMenu(this);
+    };
+    document.getElementById("btnAjustes").onclick=function(){
+        activarMenu(this);
+    };
+});
+
 </script>
+<div class="menuInferior">
+
+<div id="btnInicio" class="menuBtn activo">
+    <span>🏠</span>
+    Inicio
+</div>
+
+<div id="btnLimpieza" class="menuBtn">
+    <span>🧴</span>
+    Limpieza
+</div>
+
+<div id="btnMant" class="menuBtn">
+    <span>🛠️</span>
+    Mant.
+</div>
+
+<div id="btnHist" class="menuBtn">
+    <span>📋</span>
+    Hist.
+</div>
+
+<div id="btnAjustes" class="menuBtn">
+    <span>⚙️</span>
+    Ajustes
+</div>
+
+
+
 </body>
 </html>
