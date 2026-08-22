@@ -52,10 +52,12 @@ body{
 
 
 .logo{
-    width:140px;
+    width:60%;
+    max-width:260px;
+    min-width:140px;
     display:block;
-    margin:auto;
-    border-radius:20px;
+    margin:20px auto;
+    border-radius:30px;
 }
 
 .alert{
@@ -104,7 +106,7 @@ button{
 }
 .matriculaMoto{
     position:absolute;
-    top:25px;
+    top:35px;
     right:25px;
 
     display:flex;
@@ -340,9 +342,39 @@ button:active{
 <body> 
 <div id="inicio" class="pantalla">
 <div class="header">
-    <h2>🏍️ Honda Forza 125</h2>
+
+    <div class="matriculaMoto">
+
+        <div class="eu">
+            <div class="estrellas">★★★</div>
+            E
+        </div>
+
+        <div class="contenidoMatricula">
+            <div id="matriculaNumeros" class="numeros">
+                0000
+            </div>
+
+            <div id="matriculaLetras" class="letras">
+                AAA
+            </div>
+        </div>
+
+    </div>
+
+    <img
+        src="icon-512.png"
+        alt="Honda Forza 125 V4"
+        class="logo"
+    >
+
+    <h1>Honda Forza 125 V4</h1>
+
     <p>Ibiza Edition</p>
+
 </div>
+</div>
+
 <!--
 <div class="card">
     <h2>📊 Estado general</h2>
@@ -540,15 +572,7 @@ Historial
     <strong>🛠️ Estado mantenimiento</strong><br><br>
     <div id="estadoMantenimiento"></div>
 </div>
-<h2>📋 Historial</h2>
 
-<div id="historialMantenimientos">
-Sin registros
-</div>
-
-<button onclick="limpiarPruebas()">
-🧹 Limpiar historial de pruebas
-</button>
 
 <button onclick="exportarBackup()">
 📤 Exportar Backup
@@ -566,7 +590,42 @@ style="display:none"
 onchange="seleccionarBackup()">
 </div>
 </div>
+<div id="historial" class="pantalla">
 
+<div class="card">
+
+    <h2>📋 Historial</h2>
+
+    <div id="historialPantalla">
+        Sin registros
+    </div>
+
+    <button onclick="limpiarPruebas()">
+        🧹 Limpiar historial de pruebas
+    </button>
+
+</div>
+</div>
+<div id="ajustes" class="pantalla">
+    <div class="card">
+        <h2>⚙️ Ajustes</h2>
+
+        <div class="alert" id="nombreMotoMostrar">
+    🏍️ Honda Forza 125
+</div>
+
+        <button onclick="cambiarNombreMoto()">
+            ✏️ Cambiar nombre
+        </button>
+<div class="alert" id="matriculaMostrar">
+    🚗 Sin matrícula
+</div>
+
+<button onclick="cambiarMatricula()">
+    ✏️ Cambiar matrícula
+</button>
+    </div>
+</div>
 <script>
 
 function aplicarProducto(nombre){
@@ -614,9 +673,10 @@ function realizarMantenimiento(tipo){
         ) || "[]"
     );
     historial.unshift({
-        tipo: tipo,
-        fecha: hoy
-    });
+    tipo: tipo,
+    fecha: hoy,
+    km: null
+});
     console.log(historial);
     localStorage.setItem(
         "historialMantenimientos",
@@ -637,65 +697,133 @@ if(tipo === "ITV"){
     );
 }
 if(tipo === "Aceite"){
-    const kmActual = Number(
-        prompt("Introduce los kilómetros actuales:")
-    );
-    localStorage.setItem(
-        "fechaAceite",
+    const kmActual =
+        Number(
+            localStorage.getItem("kmActual")
+        ) || 0;
+    const kmAceite =
+        Number(
+            prompt(
+                "Kilómetros del cambio de aceite:",
+                kmActual
+            )
+        );
+    const fechaCambioAceite =
+    prompt(
+        "Fecha del cambio (dd/mm/yyyy):",
         hoy
-    );
-    localStorage.setItem(
-        "kmAceite",
-        kmActual
-    );
+    ) || hoy;
+localStorage.setItem(
+    "fechaAceite",
+    fechaCambioAceite
+);
+historial[0].fecha =
+    fechaCambioAceite;
+    historial[0].km =
+    kmAceite;
+localStorage.setItem(
+    "kmAceite",
+    kmAceite
+);
 }
 localStorage.setItem(
     "kmObjetivoAceite",
     6000
 );
-if(tipo === "Correa CVT"){    
-    localStorage.setItem(
-        "fechaCorrea",
+if(tipo === "Correa CVT"){
+    const kmActual =
+        Number(
+            localStorage.getItem("kmActual")
+        ) || 0;
+    const kmCorrea =
+        Number(
+            prompt(
+                "Kilómetros del cambio de correa:",
+                kmActual
+            )
+        );
+    const fechaCambioCorrea =
+    prompt(
+        "Fecha del cambio de correa (dd/mm/yyyy):",
         hoy
-    );
-    localStorage.setItem(
-        "kmCorrea",
-        kmActual
-    );
-    localStorage.setItem(
-        "vencimientoCorrea",
-        sumarAnios(hoy, 2)
-    );
+    ) || hoy;
+localStorage.setItem(
+    "fechaCorrea",
+    fechaCambioCorrea
+);
+localStorage.setItem(
+    "fechaCorrea",
+    fechaCambioCorrea
+);
+historial[0].fecha =
+    fechaCambioCorrea;
+    historial[0].km =
+    kmCorrea;
 }
 if(tipo === "NeumaticoDelantero"){
-
-    const kmActual = Number(
-        localStorage.getItem("kmActual")
-    ) || 0;
-
-    localStorage.setItem(
-        "fechaNeumaticoDelantero",
+    const kmActual =
+        Number(
+            localStorage.getItem("kmActual")
+        ) || 0;
+    const kmNeumaticoDelantero =
+        Number(
+            prompt(
+                "Kilómetros de montaje del neumático delantero:",
+                kmActual
+            )
+        );
+    const fechaNeumaticoDelantero =
+    prompt(
+        "Fecha de montaje del neumático delantero (dd/mm/yyyy):",
         hoy
-    );
-
+    ) || hoy;
+localStorage.setItem(
+    "fechaNeumaticoDelantero",
+    fechaNeumaticoDelantero
+);
+historial[0].fecha =
+    fechaNeumaticoDelantero;
+    historial[0].km =
+    kmNeumaticoDelantero;    
     localStorage.setItem(
         "kmNeumaticoDelantero",
-        kmActual
+        kmNeumaticoDelantero
     );
 }
 if(tipo === "NeumaticoTrasero"){
-    const kmActual = Number(
-        localStorage.getItem("kmActual")
-    ) || 0;
-    localStorage.setItem(
-        "fechaNeumaticoTrasero",
+    const kmActual =
+        Number(
+            localStorage.getItem("kmActual")
+        ) || 0;
+    const kmNeumaticoTrasero =
+        Number(
+            prompt(
+                "Kilómetros de montaje del neumático trasero:",
+                kmActual
+            )
+        );
+    const fechaNeumaticoTrasero =
+    prompt(
+        "Fecha de montaje del neumático trasero (dd/mm/yyyy):",
         hoy
-    );
+    ) || hoy;
+localStorage.setItem(
+    "fechaNeumaticoTrasero",
+    fechaNeumaticoTrasero
+);
+historial[0].fecha =
+    fechaNeumaticoTrasero;
+    historial[0].km =
+    kmNeumaticoTrasero;
     localStorage.setItem(
         "kmNeumaticoTrasero",
-        kmActual
+        kmNeumaticoTrasero
     );
 }
+localStorage.setItem(
+    "historialMantenimientos",
+    JSON.stringify(historial)
+);
 console.log("Guardando aceite...");
 location.reload();  
 }  
@@ -708,17 +836,53 @@ function mostrarHistorial(){
         );
     let html = "";
     historial.forEach(item => {
+        let icono = "🛠️";
+        let nombre = item.tipo;
+        if(item.tipo === "Aceite"){
+            icono = "🛢️";
+            nombre = "Aceite";
+        }
+        if(item.tipo === "ITV"){
+            icono = "🚦";
+            nombre = "ITV";
+        }
+        if(item.tipo === "Correa CVT"){
+            icono = "⚙️";
+            nombre = "Correa CVT";
+        }
+        if(item.tipo === "NeumaticoDelantero"){
+            icono = "🛞";
+            nombre = "Neumático delantero";
+        }
+        if(item.tipo === "NeumaticoTrasero"){
+            icono = "🛞";
+            nombre = "Neumático trasero";
+        }
         html += `
-        <div class="alert">
-            ${item.tipo} · ${item.fecha}
-        </div>`;
+<div class="alert">
+    ${icono} ${nombre}<br>
+    📅 ${item.fecha}
+    ${item.km ? "<br>🏍️ " + item.km + " km" : ""}
+</div>`;
     });
     if(html === ""){
         html = "Sin registros";
     }
-    document.getElementById(
-        "historialMantenimientos"
-    ).innerHTML = html;
+    const historialMant =
+        document.getElementById(
+            "historialMantenimientos"
+        );
+    if(historialMant){
+        historialMant.innerHTML = html;
+    }
+    const historialPantalla =
+        document.getElementById(
+            "historialPantalla"
+        );
+    if(historialPantalla){
+        historialPantalla.innerHTML = html;
+    }
+
 }
 function exportarBackup(){
     const backup = {
@@ -873,6 +1037,15 @@ function estadoVencimiento(fechaTexto, frecuencia){
     }
     return "verde";
 }
+function obtenerEstadoVisual(porcentaje){
+    if(porcentaje <= 30){
+        return "🔴 Vencido";
+    }
+    if(porcentaje <= 60){
+        return "🟡 Próximo a renovar";
+    }
+    return "🟢 Al día";
+}
 function limpiarPruebas(){
     if(!confirm(
         "¿Dejar solo el último registro de ITV, Aceite y Correa?"
@@ -892,37 +1065,78 @@ function limpiarPruebas(){
         tiposGuardados.push(item.tipo);
     }
 });
-
 const historialFiltrado =
     nuevoHistorial.filter(
         item => item.tipo !== "Neumaticos"
     );
-
 localStorage.setItem(
     "historialMantenimientos",
     JSON.stringify(historialFiltrado)
 );
     location.reload();
 }
- function actualizarKilometros(){
+function cambiarNombreMoto(){
+    const nombre = prompt(
+        "Introduce el nombre de la moto:",
+        localStorage.getItem("nombreMoto") || "Honda Forza 125"
+    );
+    if(!nombre){
+        return;
+    }
+    localStorage.setItem(
+        "nombreMoto",
+        nombre
+    );
+    location.reload();
+}
+function cambiarMatricula(){
+    const matricula = prompt(
+        "Introduce la matrícula:",
+        localStorage.getItem("matriculaMoto") || ""
+    );
+    if(!matricula){
+        return;
+    }
+    localStorage.setItem(
+        "matriculaMoto",
+        matricula.toUpperCase()
+    );
+    location.reload();
+}
+function actualizarKilometros(){ 
     const km = prompt(
         "Introduce los kilómetros actuales:"
     );
     if(!km){
-        return;
-    }
-    const hoy =
-        new Date().toLocaleDateString("es-ES");
-    localStorage.setItem(
-        "kmActual",
-        km
-    );
-    localStorage.setItem(
-        "fechaKmActual",
-        hoy
-    );
-    location.reload();
+    return;
 }
+const kmActualGuardado =
+    Number(
+        localStorage.getItem("kmActual")
+    ) || 0;
+if(Number(km) < kmActualGuardado){
+    alert(
+        "Los kilómetros no pueden ser inferiores a los actuales (" +
+        kmActualGuardado +
+        " km)"
+    );
+    return;
+}
+const hoy =
+    new Date().toLocaleDateString("es-ES");
+    localStorage.setItem(
+    "kmActual",
+    km
+);
+localStorage.setItem(
+    "fechaKmActual",
+    hoy
+);
+location.reload();
+}
+
+
+
 
 
 
@@ -962,7 +1176,20 @@ window.onload = function(){
             "ultimoMantenimiento"
         ).innerHTML =
         "🛠️ Último mantenimiento: " + mantenimiento;
-    }
+    }   
+    const matriculaMoto =
+    localStorage.getItem("matriculaMoto");
+if(matriculaMoto){
+    document.getElementById(
+        "matriculaNumeros"
+    ).innerHTML =
+        matriculaMoto.substring(0,4);
+    document.getElementById(
+        "matriculaLetras"
+    ).innerHTML =
+        matriculaMoto.substring(4);
+}
+};
     const productos = [
         "APC",
         "Maddox",
@@ -979,10 +1206,15 @@ window.onload = function(){
             document.getElementById(
                 "fecha" + nombre
             );
-        if(fecha && elemento){
-            elemento.innerHTML =
-                "✅ Aplicado: " + fecha;
-        }       
+      if(fecha && elemento){
+    const dias =
+        diasTranscurridos(fecha);    
+    elemento.innerHTML =
+        "✅ Aplicado: " + fecha +
+        "<br>⏳ Hace " +
+        dias +
+        " días" ;     
+ }
     });     
 // ITV
 let resumenMantenimiento = "";
@@ -1025,6 +1257,10 @@ if(fechaITV){
     resumenMantenimiento +=
         "🏍️ Fecha compra: 20/05/2026" +
         "<br>";
+    const estadoITVVisual =
+    obtenerEstadoVisual(
+        porcentajeITV
+    );    
     if(vencimientoITV){
         resumenMantenimiento +=
             "📅 Primera ITV: " +
@@ -1037,8 +1273,11 @@ if(fechaITV){
     "⏳ ITV: " +
     diasITV +
     " días restantes" +
-    '</span><br><br>';
-      }  
+    '</span><br>';
+resumenMantenimiento +=
+    estadoITVVisual +
+    "<br><br>";
+    }  
       const barraITV =
     document.getElementById("progresoITV");
 if(barraITV){
@@ -1162,6 +1401,12 @@ if(estadoAceite){
     }
 }
 if(fechaAceite){
+const proximoCambioAceite =
+    kmAceite + kmObjetivoAceite;
+    const estadoAceiteVisual =
+    obtenerEstadoVisual(
+        porcentajeAceite
+    );
     resumenMantenimiento +=
         "🛢️ Último aceite: " +
         fechaAceite +
@@ -1172,8 +1417,8 @@ if(fechaAceite){
         " km<br>";
     resumenMantenimiento +=
     "📍 Próximo cambio: " +
-    kmObjetivoAceite +
-    " km<br>";
+proximoCambioAceite +
+" km<br>";
     let claseAceite = "verde";
 if(kmRestantes <= 0){
     claseAceite = "rojo";
@@ -1186,8 +1431,11 @@ resumenMantenimiento +=
     "⛽ Restan " +
     kmRestantes +
     " km" +
-    "</span><br><br>";
-}
+    "</span><br>";
+resumenMantenimiento +=
+    estadoAceiteVisual +
+    "<br><br>";
+}    
 // Correa
 const kmCorrea =
     Number(
@@ -1268,13 +1516,16 @@ if(textoCorrea){
         " km)";
 }
 if(fechaCorrea){
+const proximoCambioCorrea =
+    kmCorrea + 24000;
+    const estadoCorreaVisual =
+    obtenerEstadoVisual(
+        porcentajeCorrea
+    );
     resumenMantenimiento +=
         "⚙️ Última correa: " +
         fechaCorrea +
-        "<br>";
-        const kmActual = Number(
-    localStorage.getItem("kmActual")
-) || 0;
+        "<br>";       
 resumenMantenimiento +=
     "📏 Recorridos: " +
     kmRecorridosCorrea +
@@ -1287,6 +1538,10 @@ resumenMantenimiento +=
     "🏍️ Km cambio: " +
     kmCorrea +
     " km<br>";
+    resumenMantenimiento +=
+    "📍 Próximo cambio: " +
+    proximoCambioCorrea +
+    " km<br>";
     if(vencimientoCorrea){
         resumenMantenimiento +=
             "📅 Vence: " +
@@ -1295,11 +1550,14 @@ resumenMantenimiento +=
         const claseCorrea =
             obtenerClaseDias(diasCorrea);
         resumenMantenimiento +=
-            '<span class="' + claseCorrea + '">' +
-            "⏳ Correa: " +
-            diasCorrea +
-            " días restantes" +
-            '</span><br><br>';
+    '<span class="' + claseCorrea + '">' +
+    "⏳ Correa: " +
+    diasCorrea +
+    " días restantes" +
+    '</span><br>';
+resumenMantenimiento +=
+    estadoCorreaVisual +
+    "<br><br>";
     }
    }
    // Neumático delantero
@@ -1410,6 +1668,12 @@ else{
         " km restantes)";
 }
 if(fechaNeumaticoDelantero){
+const proximoCambioNeumaticoDelantero =
+kmNeumaticoDelantero + 12000;
+const estadoDelanteroVisual =
+    obtenerEstadoVisual(
+        porcentajeDelantero
+    );
     resumenMantenimiento +=
         "🛞 Delantero<br>";
         resumenMantenimiento +=
@@ -1420,16 +1684,23 @@ if(fechaNeumaticoDelantero){
         "🏍️ Km montaje: " +
         kmNeumaticoDelantero +
         " km<br>";
+        resumenMantenimiento +=
+    "📍 Próximo cambio: " +
+    proximoCambioNeumaticoDelantero +
+    " km<br>";
     resumenMantenimiento +=
         "📏 Recorridos: " +
         kmRecorridosDelantero +
         " km<br>";
     resumenMantenimiento +=
-        '<span class="' +
-        claseDelantero +
-        '">' +
-        mensajeDelantero +
-        '</span><br><br>';
+    '<span class="' +
+    claseDelantero +
+    '">' +
+    mensajeDelantero +
+    '</span><br>';
+resumenMantenimiento +=
+    estadoDelanteroVisual +
+    "<br><br>";
 }
 
 
@@ -1539,6 +1810,12 @@ else{
         " km restantes)";
 }
 if(fechaNeumaticoTrasero){
+const proximoCambioNeumaticoTrasero =
+    kmNeumaticoTrasero + 12000;
+ const estadoTraseroVisual =
+    obtenerEstadoVisual(
+        porcentajeTrasero
+    );
     resumenMantenimiento +=
         "🛞 Trasero<br>";
         resumenMantenimiento +=
@@ -1549,16 +1826,23 @@ if(fechaNeumaticoTrasero){
         "🏍️ Km montaje: " +
         kmNeumaticoTrasero +
         " km<br>";
+        resumenMantenimiento +=
+    "📍 Próximo cambio: " +
+    proximoCambioNeumaticoTrasero +
+    " km<br>";
     resumenMantenimiento +=
         "📏 Recorridos: " +
         kmRecorridosTrasero +
         " km<br>";
     resumenMantenimiento +=
-        '<span class="' +
-        claseTrasero +
-        '">' +
-        mensajeTrasero +
-        '</span><br><br>';
+    '<span class="' +
+    claseTrasero +
+    '">' +
+    mensajeTrasero +
+    '</span><br>';
+resumenMantenimiento +=
+    estadoTraseroVisual +
+    "<br><br>";
 }
 console.log(resumenMantenimiento);
 document.getElementById(
@@ -1595,7 +1879,6 @@ if(estadoProductos){
     estadoProductos.innerHTML =
         resumen;
 }
-};
 function activarMenu(boton){
     document.querySelectorAll(".menuBtn").forEach(btn=>{
         btn.classList.remove("activo");
@@ -1625,11 +1908,13 @@ window.addEventListener("load", function(){
         mostrarPantalla("mantenimiento");
     };
     document.getElementById("btnHist").onclick=function(){
-        activarMenu(this);
-    };
+    activarMenu(this);
+    mostrarPantalla("historial");
+};
     document.getElementById("btnAjustes").onclick=function(){
-        activarMenu(this);
-    };
+    activarMenu(this);
+    mostrarPantalla("ajustes");
+    };   
 });
 
 </script>
