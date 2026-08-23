@@ -170,7 +170,7 @@ button{
     bottom:0;
     left:0;
     width:100%;
-    background:rgba(30,41,59,.95)
+    background:#1e293b;
     backdrop-filter:blur(12px);
     display:flex;
     justify-content:space-around;
@@ -322,6 +322,7 @@ button:active{
     border-radius:20px;
     transition:1s;
 }
+
 
 #textoITV{
     margin-top:8px;
@@ -520,37 +521,69 @@ Historial
 <h2>🧴 Productos</h2>
 
 <div class="producto">
-    <strong>🧼 Sisbrill 361 APC</strong>
-    <button onclick="aplicarProducto('APC')">Aplicar</button>
+    <strong id="nombreAPC">🧼 Sisbrill 361 APC</strong>
+
+    <button onclick="aplicarProducto('APC')">
+        Aplicar
+    </button>    
+
     <div id="fechaAPC">Sin registros</div>
 </div>
 
 <div class="producto">
-    <strong>✨ Maddox Detail</strong>
+    <strong id="nombreMaddox">✨ Maddox Detail</strong>
     <button onclick="aplicarProducto('Maddox')">Aplicar</button>
+   
+
     <div id="fechaMaddox">Sin registros</div>
 </div>
 
 <div class="producto">
-    <strong>🛡️ Sisbrill Car</strong>
-    <button onclick="aplicarProducto('SisbrillCar')">Aplicar</button>
-    <div id="fechaSisbrillCar">Sin registros</div>
+
+    <strong id="nombreSisbrillCar">
+        🛡️ Sisbrill Car
+    </strong>
+
+    <button onclick="aplicarProducto('SisbrillCar')">
+        Aplicar
+    </button>
+
+    
+
+    <div id="fechaSisbrillCar">
+        Sin registros
+    </div>
+
 </div>
 
 <div class="producto">
-    <strong>🧴 Hidra Mate & Natural</strong>
+    <strong id="nombreHidraMate">🧴 Hidra Mate & Natural</strong>
     <button onclick="aplicarProducto('HidraMate')">Aplicar</button>
+    
+
+
+
     <div id="fechaHidraMate">Sin registros</div>
 </div>
 
 <div class="producto">
-    <strong>🏆 Turtle Wax Hybrid</strong>
-    <button onclick="aplicarProducto('TurtleWax')">Aplicar</button>
-    <div id="fechaTurtleWax">Sin registros</div>
-</div>
-</div>
-</div>
 
+    <strong id="nombreTurtleWax">
+        🏆 Turtle Wax Hybrid
+    </strong>
+
+    <button onclick="aplicarProducto('TurtleWax')">
+        Aplicar
+    </button>
+
+   
+
+    <div id="fechaTurtleWax">
+        Sin registros
+    </div>
+</div>    
+</div>
+</div>
 <div id="mantenimiento" class="pantalla">
 
 <div class="card">
@@ -641,6 +674,43 @@ onchange="seleccionarBackup()">
 
 <button onclick="cambiarMatricula()">
     ✏️ Cambiar matrícula
+</button>
+<h3>🧴 Productos</h3>
+
+<div class="alert" id="nombreAPCMostrar">
+    🧼 APC actual: Sisbrill 361 APC
+    <br>
+    📍 Plásticos, motor y limpieza general
+</div>
+
+<button onclick="cambiarNombreAPC()">
+    🧼 Cambiar APC
+</button>
+
+</button>
+<div class="alert" id="nombreMaddoxMostrar">
+    ✨ Maddox actual: Maddox Detail
+</div>
+<button onclick="cambiarNombreMaddox()">
+    ✨ Cambiar Maddox
+</button>
+<div class="alert" id="nombreSisbrillCarMostrar">
+    🛡️ Sisbrill Car actual: Sisbrill Car
+</div>
+<button onclick="cambiarNombreSisbrillCar()">
+    🛡️ Cambiar Sisbrill Car
+</button>
+<div class="alert" id="nombreHidraMateMostrar">
+    🧴 Hidra Mate actual: Hidra Mate & Natural
+</div>
+<button onclick="cambiarNombreHidraMate()">
+🧴 Cambiar Hidra Mate
+</button>
+<div class="alert" id="nombreTurtleWaxMostrar">
+    🏆 Turtle Wax actual: Turtle Wax Hybrid
+</div>
+<button onclick="cambiarNombreTurtleWax()">
+    🏆 Cambiar Turtle Wax
 </button>
     </div>
 </div>
@@ -1107,6 +1177,122 @@ function cambiarNombreMoto(){
     );
     location.reload();
 }
+function cambiarNombreAPC(){
+    const nuevoNombre = prompt(
+        "Nombre del producto:",
+        localStorage.getItem("nombreAPC") || "Sisbrill 361 APC"
+    );
+    if(!nuevoNombre){
+        return;
+    }
+    localStorage.setItem(
+        "nombreAPC",
+        nuevoNombre
+    );
+    location.reload();
+}
+function cambiarNombreMaddox(){
+    const nuevoNombre = prompt(
+        "Nombre del producto:",
+        localStorage.getItem("nombreMaddox") || "Maddox Detail"
+    );
+    if(!nuevoNombre){
+        return;
+    }
+    localStorage.setItem(
+        "nombreMaddox",
+        nuevoNombre
+    );
+    location.reload();
+}
+function cambiarNombreSisbrillCar(){
+    const nuevoNombre = prompt(
+        "Nombre del producto:",
+        localStorage.getItem("nombreSisbrillCar") || "Sisbrill Car"
+    );
+    if(!nuevoNombre){
+        return;
+    }
+    localStorage.setItem(
+        "nombreSisbrillCar",
+        nuevoNombre
+    );
+    location.reload();
+}
+function cambiarNombreHidraMate(){
+    const nuevoNombre = prompt(
+        "Nombre del producto:",
+        localStorage.getItem("nombreHidraMate") || "Hidra Mate & Natural"
+    );
+    if(!nuevoNombre){
+        return;
+    }
+    localStorage.setItem(
+        "nombreHidraMate",
+        nuevoNombre
+    );
+    location.reload();
+}
+function cambiarNombreTurtleWax(){
+    const nuevoNombre = prompt(
+        "Nombre del producto:",
+        localStorage.getItem("nombreTurtleWax") || "Turtle Wax Hybrid"
+    );
+    if(!nuevoNombre){
+        return;
+    }
+    localStorage.setItem(
+        "nombreTurtleWax",
+        nuevoNombre
+    );
+    location.reload();
+}
+const nombreSisbrillCar =
+    localStorage.getItem("nombreSisbrillCar");
+if(nombreSisbrillCar){
+    document.getElementById(
+        "nombreSisbrillCar"
+    ).innerHTML =
+        "🛡️ " + nombreSisbrillCar;
+}
+if(nombreSisbrillCar){
+    document.getElementById(
+        "nombreSisbrillCarMostrar"
+    ).innerHTML =
+        "🛡️ " + nombreSisbrillCar +
+"<br>📍 Pintura, carenados y protección exterior";
+}
+const nombreHidraMate =
+    localStorage.getItem("nombreHidraMate");
+if(nombreHidraMate){
+    document.getElementById(
+        "nombreHidraMate"
+    ).innerHTML =
+        "🧴 " + nombreHidraMate;
+}
+if(nombreHidraMate){
+    document.getElementById(
+        "nombreHidraMateMostrar"
+    ).innerHTML =
+        "🧴 " + nombreHidraMate +
+"<br>📍 Plásticos mate y gomas";
+}
+const nombreTurtleWax =
+    localStorage.getItem("nombreTurtleWax");
+if(nombreTurtleWax){
+    document.getElementById(
+        "nombreTurtleWax"
+    ).innerHTML =
+        "🏆 " + nombreTurtleWax;
+}
+if(nombreTurtleWax){
+    document.getElementById(
+        "nombreTurtleWaxMostrar"
+    ).innerHTML =
+        "🏆 " + nombreTurtleWax +
+"<br>📍 Sellado y protección hidrofóbica";
+
+}
 function cambiarMatricula(){
     const matricula = prompt(
         "Introduce la matrícula:",
@@ -1195,6 +1381,36 @@ window.onload = function(){
         ).innerHTML =
         "🛠️ Último mantenimiento: " + mantenimiento;
     }   
+    const nombreAPC =
+    localStorage.getItem("nombreAPC");
+if(nombreAPC){
+    document.getElementById(
+        "nombreAPC"
+    ).innerHTML =
+        "🧼 " + nombreAPC;
+}
+if(nombreAPC){
+    document.getElementById(
+        "nombreAPCMostrar"
+    ).innerHTML =
+        "🧼 " + nombreAPC +
+"<br>📍 Plásticos, motor y limpieza general";
+}
+const nombreMaddox =
+    localStorage.getItem("nombreMaddox");
+if(nombreMaddox){
+    document.getElementById(
+        "nombreMaddox"
+    ).innerHTML =
+        "✨ " + nombreMaddox;
+}
+if(nombreMaddox){
+    document.getElementById(
+        "nombreMaddoxMostrar"
+    ).innerHTML =
+       "✨ " + nombreMaddox +
+"<br>📍 Acabado rápido y brillo";
+}
     const matriculaMoto =
     localStorage.getItem("matriculaMoto");
 if(matriculaMoto){
