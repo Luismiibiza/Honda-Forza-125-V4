@@ -519,10 +519,12 @@ Historial
 <div class="card">
 
 <h2>🧴 Productos</h2>
-
+<div class="alert" id="resumenLimpieza">
+    Calculando estado...
+</div>
 <div class="producto">
     <strong id="nombreAPC">🧼 Sisbrill 361 APC</strong>
-
+    <div>⏳ Duración: 60 días</div>
     <button onclick="aplicarProducto('APC')">
         Aplicar
     </button>    
@@ -532,6 +534,7 @@ Historial
 
 <div class="producto">
     <strong id="nombreMaddox">✨ Maddox Detail</strong>
+    <div>⏳ Duración: 7 días</div>
     <button onclick="aplicarProducto('Maddox')">Aplicar</button>
    
 
@@ -543,6 +546,7 @@ Historial
     <strong id="nombreSisbrillCar">
         🛡️ Sisbrill Car
     </strong>
+    <div>⏳ Duración: 30 días</div>
 
     <button onclick="aplicarProducto('SisbrillCar')">
         Aplicar
@@ -558,10 +562,8 @@ Historial
 
 <div class="producto">
     <strong id="nombreHidraMate">🧴 Hidra Mate & Natural</strong>
-    <button onclick="aplicarProducto('HidraMate')">Aplicar</button>
-    
-
-
+    <div>⏳ Duración: 30 días</div>
+    <button onclick="aplicarProducto('HidraMate')">Aplicar</button>  
 
     <div id="fechaHidraMate">Sin registros</div>
 </div>
@@ -571,12 +573,12 @@ Historial
     <strong id="nombreTurtleWax">
         🏆 Turtle Wax Hybrid
     </strong>
+    <div>⏳ Duración: 180 días</div>
 
     <button onclick="aplicarProducto('TurtleWax')">
         Aplicar
     </button>
-
-   
+  
 
     <div id="fechaTurtleWax">
         Sin registros
@@ -717,7 +719,13 @@ onchange="seleccionarBackup()">
 <script>
 
 function aplicarProducto(nombre){
-
+if(!confirm(
+    "¿Confirmar aplicación de " +
+    nombre +
+    "?"
+)){
+    return;
+}
     const hoy =
         new Date().toLocaleDateString("es-ES");
 
@@ -725,13 +733,16 @@ function aplicarProducto(nombre){
         "fecha" + nombre,
         hoy
     );
-
     localStorage.setItem(
-        "ultimoProducto",
-        nombre
-    );
-
-    location.reload();
+    "ultimoProducto",
+    nombre
+);
+alert(
+    "✅ " +
+    nombre +
+    " aplicado correctamente"
+);
+location.reload();
 }
 function sumarAnios(fechaTexto, anios){
 
@@ -752,6 +763,13 @@ function sumarAnios(fechaTexto, anios){
     );
 }
 function realizarMantenimiento(tipo){
+    if(!confirm(
+    "¿Confirmar mantenimiento de " +
+    tipo +
+    "?"
+)){
+    return;
+}
     const hoy =
     new Date().toLocaleDateString("es-ES");
     let historial =
@@ -913,6 +931,11 @@ localStorage.setItem(
     JSON.stringify(historial)
 );
 console.log("Guardando aceite...");
+alert(
+    "✅ " +
+    tipo +
+    " registrado correctamente"
+);
 location.reload();  
 }  
 function mostrarHistorial(){
@@ -970,7 +993,6 @@ function mostrarHistorial(){
     if(historialPantalla){
         historialPantalla.innerHTML = html;
     }
-
 }
 function exportarBackup(){
     const backup = {
@@ -989,7 +1011,6 @@ function exportarBackup(){
     a.click();
 }
 function seleccionarBackup(){
-
     const archivo =
         document.getElementById(
             "importarJSON"
@@ -999,7 +1020,6 @@ function seleccionarBackup(){
         alert("Selecciona un backup");
         return;
     }
-
     const lector =
         new FileReader();
 
@@ -1440,15 +1460,56 @@ if(matriculaMoto){
             document.getElementById(
                 "fecha" + nombre
             );
-      if(fecha && elemento){
+     if(fecha && elemento){
     const dias =
-        diasTranscurridos(fecha);    
+        diasTranscurridos(fecha);
     elemento.innerHTML =
         "✅ Aplicado: " + fecha +
         "<br>⏳ Hace " +
         dias +
-        " días" ;     
- }
+        " días";
+    if(
+    nombre === "APC" ||
+    nombre === "Maddox" ||
+    nombre === "SisbrillCar" ||
+    nombre === "HidraMate" ||
+    nombre === "TurtleWax"
+){
+    let frecuencia = 60;
+    if(nombre === "Maddox"){
+        frecuencia = 7;
+    }
+    if(nombre === "SisbrillCar"){
+        frecuencia = 30;
+    }
+    if(nombre === "HidraMate"){
+    frecuencia = 30;
+}
+if(nombre === "TurtleWax"){
+    frecuencia = 180;
+}
+    const restantes =
+        frecuencia - dias;
+    if(restantes > (frecuencia * 0.20)){
+    elemento.innerHTML +=
+        "<br>🟢 Restan " +
+        restantes +
+        " días";
+}
+else if(restantes >= 0){
+    elemento.innerHTML +=
+        "<br>🟡 Restan " +
+        restantes +
+        " días";
+}
+else{
+    elemento.innerHTML +=
+        "<br>🔴 Vencido hace " +
+        Math.abs(restantes) +
+        " días";
+}
+}
+}
     });     
 // ITV
 let resumenMantenimiento = "";
@@ -2090,6 +2151,9 @@ document.getElementById(
     HidraMate: 30,
     TurtleWax: 180
 };
+let verdes = 0;
+let amarillos = 0;
+let rojos = 0;
 let resumen = "";
 for(const producto in vencimientos){
     const fecha =
@@ -2103,7 +2167,21 @@ for(const producto in vencimientos){
             fecha,
             vencimientos[producto]
         ) +
-        "<br>";
+        "<br>";const estado =
+    estadoVencimiento(
+        fecha,
+        vencimientos[producto]
+    );
+
+if(estado.includes("🟢")){
+    verdes++;
+}
+else if(estado.includes("🟡")){
+    amarillos++;
+}
+else if(estado.includes("🔴")){
+    rojos++;
+}
 }
 const estadoProductos =
     document.getElementById(
@@ -2112,6 +2190,17 @@ const estadoProductos =
 if(estadoProductos){
     estadoProductos.innerHTML =
         resumen;
+}
+const resumenLimpieza =
+    document.getElementById(
+        "resumenLimpieza"
+    );
+if(resumenLimpieza){
+    resumenLimpieza.innerHTML =
+        "📊 <strong>Estado general</strong><br><br>" +
+        "🟢 " + verdes + " al día<br>" +
+        "🟡 " + amarillos + " próximos a vencer<br>" +
+        "🔴 " + rojos + " vencidos";
 }
 function activarMenu(boton){
     document.querySelectorAll(".menuBtn").forEach(btn=>{
