@@ -1247,51 +1247,7 @@ function cambiarNombreTurtleWax(){
     );
     location.reload();
 }
-const nombreSisbrillCar =
-    localStorage.getItem("nombreSisbrillCar");
-if(nombreSisbrillCar){
-    document.getElementById(
-        "nombreSisbrillCar"
-    ).innerHTML =
-        "🛡️ " + nombreSisbrillCar;
-}
-if(nombreSisbrillCar){
-    document.getElementById(
-        "nombreSisbrillCarMostrar"
-    ).innerHTML =
-        "🛡️ " + nombreSisbrillCar +
-"<br>📍 Pintura, carenados y protección exterior";
-}
-const nombreHidraMate =
-    localStorage.getItem("nombreHidraMate");
-if(nombreHidraMate){
-    document.getElementById(
-        "nombreHidraMate"
-    ).innerHTML =
-        "🧴 " + nombreHidraMate;
-}
-if(nombreHidraMate){
-    document.getElementById(
-        "nombreHidraMateMostrar"
-    ).innerHTML =
-        "🧴 " + nombreHidraMate +
-"<br>📍 Plásticos mate y gomas";
-}
-const nombreTurtleWax =
-    localStorage.getItem("nombreTurtleWax");
-if(nombreTurtleWax){
-    document.getElementById(
-        "nombreTurtleWax"
-    ).innerHTML =
-        "🏆 " + nombreTurtleWax;
-}
-if(nombreTurtleWax){
-    document.getElementById(
-        "nombreTurtleWaxMostrar"
-    ).innerHTML =
-        "🏆 " + nombreTurtleWax +
-"<br>📍 Sellado y protección hidrofóbica";
-}
+
 function cambiarMatricula(){
     const matricula = prompt(
         "Introduce la matrícula:",
@@ -1409,6 +1365,51 @@ if(nombreMaddox){
     ).innerHTML =
        "✨ " + nombreMaddox +
 "<br>📍 Acabado rápido y brillo";
+}
+const nombreSisbrillCar =
+    localStorage.getItem("nombreSisbrillCar");
+if(nombreSisbrillCar){
+    document.getElementById(
+        "nombreSisbrillCar"
+    ).innerHTML =
+        "🛡️ " + nombreSisbrillCar;
+}
+if(nombreSisbrillCar){
+    document.getElementById(
+        "nombreSisbrillCarMostrar"
+    ).innerHTML =
+        "🛡️ " + nombreSisbrillCar +
+"<br>📍 Pintura, carenados y protección exterior";
+}
+const nombreHidraMate =
+    localStorage.getItem("nombreHidraMate");
+if(nombreHidraMate){
+    document.getElementById(
+        "nombreHidraMate"
+    ).innerHTML =
+        "🧴 " + nombreHidraMate;
+}
+if(nombreHidraMate){
+    document.getElementById(
+        "nombreHidraMateMostrar"
+    ).innerHTML =
+        "🧴 " + nombreHidraMate +
+"<br>📍 Plásticos mate y gomas";
+}
+const nombreTurtleWax =
+    localStorage.getItem("nombreTurtleWax");
+if(nombreTurtleWax){
+    document.getElementById(
+        "nombreTurtleWax"
+    ).innerHTML =
+        "🏆 " + nombreTurtleWax;
+}
+if(nombreTurtleWax){
+    document.getElementById(
+        "nombreTurtleWaxMostrar"
+    ).innerHTML =
+        "🏆 " + nombreTurtleWax +
+"<br>📍 Sellado y protección hidrofóbica";
 }
     const matriculaMoto =
     localStorage.getItem("matriculaMoto");
