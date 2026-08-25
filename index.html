@@ -78,8 +78,21 @@ body{
     border-radius:12px;
     padding:12px;
     margin-top:10px;
+    border-left:5px solid #22c55e;
+    transition:0.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,.20);
+}
+.producto-verde{
+    border-left:5px solid #22c55e !important;
 }
 
+.producto-amarillo{
+    border-left:5px solid #f59e0b !important;
+}
+
+.producto-rojo{
+    border-left:5px solid #ef4444 !important;
+}
 button{
     width:100%;
     margin-top:8px;
@@ -440,7 +453,12 @@ Historial
         ✏️ Actualizar kilómetros
     </button>
 </div>
-
+<div class="card">
+    <h2>🔔 Avisos</h2>
+    <div id="avisosMoto" class="alert">
+    ✅ No hay avisos pendientes
+</div>
+</div>
     <div class="card">
 
     <h2>📊 Estado de la moto</h2>
@@ -522,9 +540,12 @@ Historial
 <div class="alert" id="resumenLimpieza">
     Calculando estado...
 </div>
-<div class="producto">
+<div class="alert" id="ultimoProductoLimpieza">
+    🧴 Último aplicado: Ninguno
+</div>
+<div class="producto producto-verde" id="productoAPC">
     <strong id="nombreAPC">🧼 Sisbrill 361 APC</strong>
-    <div>⏳ Duración: 60 días</div>
+    <div id="duracionAPCTexto">⏳ Duración: 60 días</div>
     <button onclick="aplicarProducto('APC')">
         Aplicar
     </button>    
@@ -532,7 +553,7 @@ Historial
     <div id="fechaAPC">Sin registros</div>
 </div>
 
-<div class="producto">
+<div class="producto producto-verde" id="productoMaddox">
     <strong id="nombreMaddox">✨ Maddox Detail</strong>
     <div>⏳ Duración: 7 días</div>
     <button onclick="aplicarProducto('Maddox')">Aplicar</button>
@@ -541,8 +562,7 @@ Historial
     <div id="fechaMaddox">Sin registros</div>
 </div>
 
-<div class="producto">
-
+<div class="producto producto-verde" id="productoSisbrillCar">
     <strong id="nombreSisbrillCar">
         🛡️ Sisbrill Car
     </strong>
@@ -560,7 +580,7 @@ Historial
 
 </div>
 
-<div class="producto">
+<div class="producto producto-verde" id="productoHidraMate">
     <strong id="nombreHidraMate">🧴 Hidra Mate & Natural</strong>
     <div>⏳ Duración: 30 días</div>
     <button onclick="aplicarProducto('HidraMate')">Aplicar</button>  
@@ -568,7 +588,7 @@ Historial
     <div id="fechaHidraMate">Sin registros</div>
 </div>
 
-<div class="producto">
+<div class="producto producto-verde" id="productoTurtleWax">
 
     <strong id="nombreTurtleWax">
         🏆 Turtle Wax Hybrid
@@ -662,25 +682,42 @@ onchange="seleccionarBackup()">
 <div id="ajustes" class="pantalla">
     <div class="card">
         <h2>⚙️ Ajustes</h2>
+        <h3>🏍️ Moto</h3>
 
         <div class="alert" id="nombreMotoMostrar">
-    🏍️ Honda Forza 125
+    🏍️ Nombre de la moto: Honda Forza 125
 </div>
 
         <button onclick="cambiarNombreMoto()">
             ✏️ Cambiar nombre
         </button>
 <div class="alert" id="matriculaMostrar">
-    🚗 Sin matrícula
+    🚗 Matrícula: Sin registrar
 </div>
 
 <button onclick="cambiarMatricula()">
     ✏️ Cambiar matrícula
 </button>
+<br>
+<h3>⚙️ Configuración</h3>
+
+<div class="alert">
+    ⚙️ Opciones avanzadas
+    <br><br>
+    🚧 Próximamente disponibles
+</div>
+<div class="alert" id="duracionAPCMostrar">
+    🧼 Duración APC: 60 días
+</div>
+
+<button onclick="cambiarDuracionAPC()">
+    🧼 Cambiar duración APC
+</button>
+<br>
 <h3>🧴 Productos</h3>
 
 <div class="alert" id="nombreAPCMostrar">
-    🧼 APC actual: Sisbrill 361 APC
+    🧼 APC: Sisbrill 361 APC
     <br>
     📍 Plásticos, motor y limpieza general
 </div>
@@ -691,25 +728,25 @@ onchange="seleccionarBackup()">
 
 </button>
 <div class="alert" id="nombreMaddoxMostrar">
-    ✨ Maddox actual: Maddox Detail
+    ✨ Maddox: Maddox Detail
 </div>
 <button onclick="cambiarNombreMaddox()">
     ✨ Cambiar Maddox
 </button>
 <div class="alert" id="nombreSisbrillCarMostrar">
-    🛡️ Sisbrill Car actual: Sisbrill Car
+    🛡️ Sisbrill Car: Sisbrill Car
 </div>
 <button onclick="cambiarNombreSisbrillCar()">
     🛡️ Cambiar Sisbrill Car
 </button>
 <div class="alert" id="nombreHidraMateMostrar">
-    🧴 Hidra Mate actual: Hidra Mate & Natural
+    🧴 Hidra Mate: Hidra Mate & Natural
 </div>
 <button onclick="cambiarNombreHidraMate()">
 🧴 Cambiar Hidra Mate
 </button>
 <div class="alert" id="nombreTurtleWaxMostrar">
-    🏆 Turtle Wax actual: Turtle Wax Hybrid
+    🏆 Turtle Wax: Turtle Wax Hybrid
 </div>
 <button onclick="cambiarNombreTurtleWax()">
     🏆 Cambiar Turtle Wax
@@ -1282,6 +1319,20 @@ function cambiarMatricula(){
     );
     location.reload();
 }
+function cambiarDuracionAPC(){
+    const dias = prompt(
+        "Duración del APC en días:",
+        localStorage.getItem("duracionAPC") || "60"
+    );
+    if(!dias){
+        return;
+    }
+    localStorage.setItem(
+        "duracionAPC",
+        dias
+    );
+    location.reload();
+}
 function actualizarKilometros(){ 
     const km = prompt(
         "Introduce los kilómetros actuales:"
@@ -1341,11 +1392,38 @@ window.onload = function(){
     const ultimo =
         localStorage.getItem("ultimoProducto");
     if(ultimo){
-        document.getElementById(
-            "ultimoProducto"
-        ).innerHTML =
-        "🧴 Último producto: " + ultimo;
+    let nombreMostrar = ultimo;
+    if(ultimo === "APC"){
+        nombreMostrar =
+            localStorage.getItem("nombreAPC")
+            || "Sisbrill 361 APC";
     }
+    if(ultimo === "Maddox"){
+        nombreMostrar =
+            localStorage.getItem("nombreMaddox")
+            || "Maddox Detail";
+    }
+    if(ultimo === "SisbrillCar"){
+        nombreMostrar =
+            localStorage.getItem("nombreSisbrillCar")
+            || "Sisbrill Car";
+    }
+    if(ultimo === "HidraMate"){
+        nombreMostrar =
+            localStorage.getItem("nombreHidraMate")
+            || "Hidra Mate & Natural";
+    }
+    if(ultimo === "TurtleWax"){
+        nombreMostrar =
+            localStorage.getItem("nombreTurtleWax")
+            || "Turtle Wax Hybrid";
+    }
+    document.getElementById(
+        "ultimoProducto"
+    ).innerHTML =
+        "🧴 Último producto: " +
+        nombreMostrar;
+}
     const mantenimiento =
         localStorage.getItem(
             "ultimoMantenimiento"
@@ -1356,6 +1434,35 @@ window.onload = function(){
         ).innerHTML =
         "🛠️ Último mantenimiento: " + mantenimiento;
     }   
+    const duracionAPC =
+    localStorage.getItem("duracionAPC");
+if(duracionAPC){
+    document.getElementById(
+        "duracionAPCMostrar"
+    ).innerHTML =
+        "🧼 Duración APC: " +
+        duracionAPC +
+        " días";
+}
+const duracionAPCTexto =
+    document.getElementById(
+        "duracionAPCTexto"
+    );
+if(duracionAPCTexto && duracionAPC){
+    duracionAPCTexto.innerHTML =
+        "⏳ Duración: " +
+        duracionAPC +
+        " días";
+}
+    const nombreMoto =
+    localStorage.getItem("nombreMoto");
+if(nombreMoto){
+    document.getElementById(
+        "nombreMotoMostrar"
+    ).innerHTML =
+        "🏍️ Nombre de la moto: " +
+        nombreMoto;
+}
     const nombreAPC =
     localStorage.getItem("nombreAPC");
 if(nombreAPC){
@@ -1442,6 +1549,11 @@ if(matriculaMoto){
         "matriculaLetras"
     ).innerHTML =
         matriculaMoto.substring(4);
+        document.getElementById(
+    "matriculaMostrar"
+).innerHTML =
+    "🚗 Matrícula: " +
+    matriculaMoto;
 }
 };
     const productos = [
@@ -1475,7 +1587,10 @@ if(matriculaMoto){
     nombre === "HidraMate" ||
     nombre === "TurtleWax"
 ){
-    let frecuencia = 60;
+    let frecuencia =
+    Number(
+        localStorage.getItem("duracionAPC")
+    ) || 60;
     if(nombre === "Maddox"){
         frecuencia = 7;
     }
@@ -1486,10 +1601,45 @@ if(matriculaMoto){
     frecuencia = 30;
 }
 if(nombre === "TurtleWax"){
-    frecuencia = 180;
-}
+    frecuencia = 180;}
     const restantes =
         frecuencia - dias;
+        const fechaAplicacion =
+    new Date(
+        fecha.split("/")[2],
+        fecha.split("/")[1] - 1,
+        fecha.split("/")[0]
+    );
+const proximaAplicacion =
+    new Date(fechaAplicacion);
+proximaAplicacion.setDate(
+    proximaAplicacion.getDate() +
+    frecuencia
+);
+        if(nombre === "Maddox"){
+    const tarjetaMaddox =
+        document.getElementById(
+            "productoMaddox"
+        );
+    if(tarjetaMaddox){
+        if(restantes < 0){
+            tarjetaMaddox.className =
+                "producto producto-rojo";
+        }
+        else if(
+            restantes <=
+            (frecuencia * 0.20)
+        ){
+            tarjetaMaddox.className =
+                "producto producto-amarillo";
+        }
+        else{
+    tarjetaMaddox.className =
+        "producto producto-verde";
+}
+
+    }
+}
     if(restantes > (frecuencia * 0.20)){
     elemento.innerHTML +=
         "<br>🟢 Restan " +
@@ -1508,6 +1658,9 @@ else{
         Math.abs(restantes) +
         " días";
 }
+elemento.innerHTML +=
+    "<br>📅 Próxima aplicación: " +
+    proximaAplicacion.toLocaleDateString("es-ES");
 }
 }
     });     
@@ -2155,6 +2308,8 @@ let verdes = 0;
 let amarillos = 0;
 let rojos = 0;
 let resumen = "";
+let listaAmarillos = [];
+let listaRojos = [];
 for(const producto in vencimientos){
     const fecha =
         localStorage.getItem(
@@ -2172,15 +2327,16 @@ for(const producto in vencimientos){
         fecha,
         vencimientos[producto]
     );
-
 if(estado.includes("🟢")){
     verdes++;
 }
 else if(estado.includes("🟡")){
     amarillos++;
+    listaAmarillos.push(producto);
 }
 else if(estado.includes("🔴")){
     rojos++;
+    listaRojos.push(producto);
 }
 }
 const estadoProductos =
@@ -2202,6 +2358,95 @@ if(resumenLimpieza){
         "🟡 " + amarillos + " próximos a vencer<br>" +
         "🔴 " + rojos + " vencidos";
 }
+const avisosMoto =
+    document.getElementById(
+        "avisosMoto"
+    );
+if(avisosMoto){
+    let avisos = "";
+    if(rojos > 0){
+    avisos +=
+        "🔴 " +
+        rojos +
+        (rojos === 1
+            ? " producto vencido"
+            : " productos vencidos") +
+        "<br>";
+    listaRojos.forEach(producto => {
+        const nombreMostrar =
+    localStorage.getItem("nombre" + producto)
+    || producto;
+     avisos += "&nbsp;&nbsp;• " + nombreMostrar + "<br>";
+    });
+    avisos += "<br>";
+}
+   if(amarillos > 0){
+    avisos +=
+        "🟡 " +
+        amarillos +
+        (amarillos === 1
+            ? " producto próximo a vencer"
+            : " productos próximos a vencer") +
+        "<br>";
+    listaAmarillos.forEach(producto => {
+       const nombreMostrar =
+    localStorage.getItem("nombre" + producto)
+    || producto;
+     avisos += "&nbsp;&nbsp;• " + nombreMostrar + "<br>";
+    });
+    avisos += "<br>";
+}
+    if(avisos === ""){
+    avisos =
+    "✅ Todo al día<br>" +
+    "Sin avisos pendientes";
+    }
+    avisosMoto.innerHTML =
+    avisos.trim();
+}
+const ultimoProductoLimpieza =
+    document.getElementById(
+        "ultimoProductoLimpieza"
+    );
+const ultimoProductoGuardado =
+    localStorage.getItem(
+        "ultimoProducto"
+    );
+if(
+    ultimoProductoLimpieza &&
+    ultimoProductoGuardado
+){
+    let nombreMostrar =
+        ultimoProductoGuardado;
+    if(ultimoProductoGuardado === "APC"){
+        nombreMostrar =
+            localStorage.getItem("nombreAPC")
+            || "Sisbrill 361 APC";
+    }
+    if(ultimoProductoGuardado === "Maddox"){
+        nombreMostrar =
+            localStorage.getItem("nombreMaddox")
+            || "Maddox Detail";
+    }
+    if(ultimoProductoGuardado === "SisbrillCar"){
+        nombreMostrar =
+            localStorage.getItem("nombreSisbrillCar")
+            || "Sisbrill Car";
+    }
+    if(ultimoProductoGuardado === "HidraMate"){
+        nombreMostrar =
+            localStorage.getItem("nombreHidraMate")
+            || "Hidra Mate & Natural";
+    }
+    if(ultimoProductoGuardado === "TurtleWax"){
+        nombreMostrar =
+            localStorage.getItem("nombreTurtleWax")
+            || "Turtle Wax Hybrid";
+    }
+    ultimoProductoLimpieza.innerHTML =
+        "🧴 Último aplicado: " +
+        nombreMostrar;
+}
 function activarMenu(boton){
     document.querySelectorAll(".menuBtn").forEach(btn=>{
         btn.classList.remove("activo");
@@ -2209,14 +2454,16 @@ function activarMenu(boton){
     boton.classList.add("activo");
 }
 function mostrarPantalla(id){
-    console.log("Mostrando:", id);
     document.querySelectorAll(".pantalla").forEach(p=>{
-        p.style.display="none";
+        p.style.display = "none";
     });
-    const pantalla = document.getElementById(id);
-    console.log(pantalla);
-    pantalla.style.display="block";
-}    
+    const pantalla =
+        document.getElementById(id);
+
+    if(pantalla){
+        pantalla.style.display = "block";
+    }
+}
 window.addEventListener("load", function(){
     document.getElementById("btnInicio").onclick=function(){
         activarMenu(this);
