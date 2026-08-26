@@ -546,6 +546,7 @@ Historial
 <div class="producto producto-verde" id="productoAPC">
     <strong id="nombreAPC">🧼 Sisbrill 361 APC</strong>
     <div id="duracionAPCTexto">⏳ Duración: 60 días</div>
+    <div>📍 Plásticos, motor y limpieza general</div>
     <button onclick="aplicarProducto('APC')">
         Aplicar
     </button>    
@@ -556,6 +557,7 @@ Historial
 <div class="producto producto-verde" id="productoMaddox">
     <strong id="nombreMaddox">✨ Maddox Detail</strong>
     <div id="duracionMaddoxTexto">⏳ Duración: 7 días</div>
+    <div>📍 Acabado rápido y brillo</div>
     <button onclick="aplicarProducto('Maddox')">Aplicar</button>
    
 
@@ -566,7 +568,8 @@ Historial
     <strong id="nombreSisbrillCar">
         🛡️ Sisbrill Car
     </strong>
-    <div id="duracionSisbrillCarTexto">⏳ Duración: 30 días</div>             
+    <div id="duracionSisbrillCarTexto">⏳ Duración: 30 días</div> 
+     <div>📍 Pintura y carenados</div>           
        <button onclick="aplicarProducto('SisbrillCar')">
         Aplicar
     </button>
@@ -582,6 +585,7 @@ Historial
 <div class="producto producto-verde" id="productoHidraMate">
     <strong id="nombreHidraMate">🧴 Hidra Mate & Natural</strong>
     <div id="duracionHidraMateTexto">⏳ Duración: 30 días</div>
+    <div>📍 Plásticos mate y gomas</div>
     <button onclick="aplicarProducto('HidraMate')">Aplicar</button>  
 
     <div id="fechaHidraMate">Sin registros</div>
@@ -593,6 +597,7 @@ Historial
         🏆 Turtle Wax Hybrid
     </strong>
     <div id="duracionTurtleWaxTexto">⏳ Duración: 180 días</div>
+    <div>📍 Sellado y protección hidrofóbica</div>
     <button onclick="aplicarProducto('TurtleWax')">
         Aplicar
     </button>
@@ -709,14 +714,18 @@ onchange="seleccionarBackup()">
 </div>
 <br><br>
 <div class="alert" id="duracionAPCMostrar">
-    🧼 Duración APC: 60 días
+    🧼 Sisbrill 361 APC
+    <br>
+    ⏳ Duración: 60 días
 </div>
 
 <button onclick="cambiarDuracionAPC()">
     🧼 Cambiar duración APC
 </button>
 <div class="alert" id="duracionMaddoxMostrar">
-    ✨ Duración Maddox: 7 días
+    ✨ Maddox Detail
+    <br>
+    ⏳ Duración: 7 días
 </div>
 
 <button onclick="cambiarDuracionMaddox()">
@@ -724,21 +733,27 @@ onchange="seleccionarBackup()">
 </button>
 <br>
 <div class="alert" id="duracionSisbrillCarMostrar">
-    🛡️ Duración Sisbrill Car: 30 días
+    🛡️ Sisbrill Car
+    <br>
+    ⏳ Duración: 30 días
 </div>
 
 <button onclick="cambiarDuracionSisbrillCar()">
     🛡️ Cambiar duración Sisbrill Car
 </button>
 <div class="alert" id="duracionHidraMateMostrar">
-    🧴 Duración Hidra Mate: 30 días
+    🧴 Hidra Mate & Natural
+    <br>
+    ⏳ Duración: 30 días
 </div>
 
 <button onclick="cambiarDuracionHidraMate()">
     🧴 Cambiar duración Hidra Mate
 </button>
 <div class="alert" id="duracionTurtleWaxMostrar">
-    🏆 Duración Turtle Wax: 180 días
+    🏆 Turtle Wax Hybrid
+    <br>
+    ⏳ Duración: 180 días
 </div>
 
 <button onclick="cambiarDuracionTurtleWax()">
@@ -747,7 +762,9 @@ onchange="seleccionarBackup()">
 </div>
 
 <div class="card">
-<h3>🛠️ Mantenimiento</h3>
+<h3 style="margin-top:10px;">
+    🛠️ Mantenimiento
+</h3>
 
 <div class="alert" id="kmAceiteMostrar">
     🛢️ Intervalo aceite: Sin configurar
@@ -1620,7 +1637,9 @@ if(duracionAPC){
     document.getElementById(
         "duracionAPCMostrar"
     ).innerHTML =
-        "🧼 Duración APC: " +
+        "🧼 " +
+        (localStorage.getItem("nombreAPC") || "Sisbrill 361 APC") +
+        "<br>⏳ Duración: " +
         duracionAPC +
         " días";
 }
@@ -1630,9 +1649,12 @@ if(duracionMaddox){
     document.getElementById(
         "duracionMaddoxMostrar"
     ).innerHTML =
-        "✨ Duración Maddox: " +
+        "✨ " +
+        (localStorage.getItem("nombreMaddox") || "Maddox Detail") +
+        "<br>⏳ Duración: " +
         duracionMaddox +
-        " días";}
+        " días";
+}
 const duracionMaddoxTexto =
     document.getElementById(
         "duracionMaddoxTexto"
@@ -1651,7 +1673,9 @@ if(duracionSisbrillCar){
     document.getElementById(
         "duracionSisbrillCarMostrar"
     ).innerHTML =
-        "🛡️ Duración Sisbrill Car: " +
+        "🛡️ " +
+        (localStorage.getItem("nombreSisbrillCar") || "Sisbrill Car") +
+        "<br>⏳ Duración: " +
         duracionSisbrillCar +
         " días";
 }
@@ -1663,7 +1687,9 @@ if(duracionHidraMate){
     document.getElementById(
         "duracionHidraMateMostrar"
     ).innerHTML =
-        "🧴 Duración Hidra Mate: " +
+        "🧴 " +
+        (localStorage.getItem("nombreHidraMate") || "Hidra Mate & Natural") +
+        "<br>⏳ Duración: " +
         duracionHidraMate +
         " días";
 }
@@ -1675,7 +1701,9 @@ if(duracionTurtleWax){
     document.getElementById(
         "duracionTurtleWaxMostrar"
     ).innerHTML =
-        "🏆 Duración Turtle Wax: " +
+        "🏆 " +
+        (localStorage.getItem("nombreTurtleWax") || "Turtle Wax Hybrid") +
+        "<br>⏳ Duración: " +
         duracionTurtleWax +
         " días";
 }
