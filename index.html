@@ -555,7 +555,7 @@ Historial
 
 <div class="producto producto-verde" id="productoMaddox">
     <strong id="nombreMaddox">✨ Maddox Detail</strong>
-    <div>⏳ Duración: 7 días</div>
+    <div id="duracionMaddoxTexto">⏳ Duración: 7 días</div>
     <button onclick="aplicarProducto('Maddox')">Aplicar</button>
    
 
@@ -566,9 +566,8 @@ Historial
     <strong id="nombreSisbrillCar">
         🛡️ Sisbrill Car
     </strong>
-    <div>⏳ Duración: 30 días</div>
-
-    <button onclick="aplicarProducto('SisbrillCar')">
+    <div id="duracionSisbrillCarTexto">⏳ Duración: 30 días</div>             
+       <button onclick="aplicarProducto('SisbrillCar')">
         Aplicar
     </button>
 
@@ -582,7 +581,7 @@ Historial
 
 <div class="producto producto-verde" id="productoHidraMate">
     <strong id="nombreHidraMate">🧴 Hidra Mate & Natural</strong>
-    <div>⏳ Duración: 30 días</div>
+    <div id="duracionHidraMateTexto">⏳ Duración: 30 días</div>
     <button onclick="aplicarProducto('HidraMate')">Aplicar</button>  
 
     <div id="fechaHidraMate">Sin registros</div>
@@ -593,8 +592,7 @@ Historial
     <strong id="nombreTurtleWax">
         🏆 Turtle Wax Hybrid
     </strong>
-    <div>⏳ Duración: 180 días</div>
-
+    <div id="duracionTurtleWaxTexto">⏳ Duración: 180 días</div>
     <button onclick="aplicarProducto('TurtleWax')">
         Aplicar
     </button>
@@ -713,7 +711,42 @@ onchange="seleccionarBackup()">
 <button onclick="cambiarDuracionAPC()">
     🧼 Cambiar duración APC
 </button>
+<div class="alert" id="duracionMaddoxMostrar">
+    ✨ Duración Maddox: 7 días
+</div>
+
+<button onclick="cambiarDuracionMaddox()">
+    ✨ Cambiar duración Maddox
+</button>
 <br>
+<div class="alert" id="duracionSisbrillCarMostrar">
+    🛡️ Duración Sisbrill Car: 30 días
+</div>
+
+<button onclick="cambiarDuracionSisbrillCar()">
+    🛡️ Cambiar duración Sisbrill Car
+</button>
+<div class="alert" id="duracionHidraMateMostrar">
+    🧴 Duración Hidra Mate: 30 días
+</div>
+
+<button onclick="cambiarDuracionHidraMate()">
+    🧴 Cambiar duración Hidra Mate
+</button>
+<div class="alert" id="duracionTurtleWaxMostrar">
+    🏆 Duración Turtle Wax: 180 días
+</div>
+
+<button onclick="cambiarDuracionTurtleWax()">
+    🏆 Cambiar duración Turtle Wax
+</button>
+<div class="alert" id="kmAceiteMostrar">
+    🛢️ Intervalo aceite: 6000 km
+</div>
+
+<button onclick="cambiarKmAceite()">
+    🛢️ Cambiar intervalo aceite
+</button>
 <h3>🧴 Productos</h3>
 
 <div class="alert" id="nombreAPCMostrar">
@@ -748,6 +781,7 @@ onchange="seleccionarBackup()">
 <div class="alert" id="nombreTurtleWaxMostrar">
     🏆 Turtle Wax: Turtle Wax Hybrid
 </div>
+
 <button onclick="cambiarNombreTurtleWax()">
     🏆 Cambiar Turtle Wax
 </button>
@@ -819,8 +853,7 @@ function realizarMantenimiento(tipo){
     tipo: tipo,
     fecha: hoy,
     km: null
-});
-    console.log(historial);
+});   
     localStorage.setItem(
         "historialMantenimientos",
         JSON.stringify(historial)
@@ -869,10 +902,6 @@ localStorage.setItem(
     kmAceite
 );
 }
-localStorage.setItem(
-    "kmObjetivoAceite",
-    6000
-);
 if(tipo === "Correa CVT"){
     const kmActual =
         Number(
@@ -894,14 +923,14 @@ localStorage.setItem(
     "fechaCorrea",
     fechaCambioCorrea
 );
-localStorage.setItem(
-    "fechaCorrea",
-    fechaCambioCorrea
-);
 historial[0].fecha =
     fechaCambioCorrea;
     historial[0].km =
     kmCorrea;
+localStorage.setItem(
+    "kmCorrea",
+    kmCorrea
+);
 }
 if(tipo === "NeumaticoDelantero"){
     const kmActual =
@@ -967,7 +996,6 @@ localStorage.setItem(
     "historialMantenimientos",
     JSON.stringify(historial)
 );
-console.log("Guardando aceite...");
 alert(
     "✅ " +
     tipo +
@@ -1033,7 +1061,7 @@ function mostrarHistorial(){
 }
 function exportarBackup(){
     const backup = {
-        version: "5.3",
+        version: "6.5",
         fecha: new Date().toISOString(),
         datos: {...localStorage}
     };
@@ -1044,7 +1072,7 @@ function exportarBackup(){
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download =
-        "forza-v53-backup.json";
+        "forza-v65-backup.json";
     a.click();
 }
 function seleccionarBackup(){
@@ -1333,6 +1361,82 @@ function cambiarDuracionAPC(){
     );
     location.reload();
 }
+function cambiarDuracionMaddox(){
+    const dias = prompt(
+        "Duración de Maddox en días:",
+        localStorage.getItem("duracionMaddox") || "7"
+    );
+
+    if(!dias){
+        return;
+    }
+
+    localStorage.setItem(
+        "duracionMaddox",
+        dias
+    );
+
+    location.reload();
+}
+function cambiarDuracionSisbrillCar(){
+    const dias = prompt(
+        "Duración de Sisbrill Car en días:",
+        localStorage.getItem("duracionSisbrillCar") || "30"
+    );
+    if(!dias){
+        return;
+    }
+    localStorage.setItem(
+        "duracionSisbrillCar",
+        dias
+    );
+    location.reload();
+}
+function cambiarDuracionHidraMate(){
+    const dias = prompt(
+        "Duración de Hidra Mate en días:",
+        localStorage.getItem("duracionHidraMate") || "30"
+    );
+    if(!dias){
+        return;
+    }
+    localStorage.setItem(
+        "duracionHidraMate",
+        dias
+    );
+    location.reload();
+}
+function cambiarDuracionTurtleWax(){
+    const dias = prompt(
+        "Duración de Turtle Wax en días:",
+        localStorage.getItem("duracionTurtleWax") || "180"
+    );
+
+    if(!dias){
+        return;
+    }
+
+    localStorage.setItem(
+        "duracionTurtleWax",
+        dias
+    );
+
+    location.reload();
+}
+function cambiarKmAceite(){
+    const km = prompt(
+        "Intervalo de aceite en km:",
+        localStorage.getItem("kmObjetivoAceite") || "6000"
+    );
+    if(!km){
+        return;
+    }
+    localStorage.setItem(
+        "kmObjetivoAceite",
+        km
+    );
+    location.reload();
+}
 function actualizarKilometros(){ 
     const km = prompt(
         "Introduce los kilómetros actuales:"
@@ -1442,6 +1546,112 @@ if(duracionAPC){
     ).innerHTML =
         "🧼 Duración APC: " +
         duracionAPC +
+        " días";
+}
+const duracionMaddox =
+    localStorage.getItem("duracionMaddox");
+if(duracionMaddox){
+    document.getElementById(
+        "duracionMaddoxMostrar"
+    ).innerHTML =
+        "✨ Duración Maddox: " +
+        duracionMaddox +
+        " días";}
+const duracionMaddoxTexto =
+    document.getElementById(
+        "duracionMaddoxTexto"
+    );
+if(duracionMaddoxTexto && duracionMaddox){
+    duracionMaddoxTexto.innerHTML =
+        "⏳ Duración: " +
+        duracionMaddox +
+        " días";
+}
+const duracionSisbrillCar =
+    localStorage.getItem(
+        "duracionSisbrillCar"
+    );
+if(duracionSisbrillCar){
+    document.getElementById(
+        "duracionSisbrillCarMostrar"
+    ).innerHTML =
+        "🛡️ Duración Sisbrill Car: " +
+        duracionSisbrillCar +
+        " días";
+}
+const duracionHidraMate =
+    localStorage.getItem(
+        "duracionHidraMate"
+    );
+if(duracionHidraMate){
+    document.getElementById(
+        "duracionHidraMateMostrar"
+    ).innerHTML =
+        "🧴 Duración Hidra Mate: " +
+        duracionHidraMate +
+        " días";
+}
+const duracionTurtleWax =
+    localStorage.getItem(
+        "duracionTurtleWax"
+    );
+if(duracionTurtleWax){
+    document.getElementById(
+        "duracionTurtleWaxMostrar"
+    ).innerHTML =
+        "🏆 Duración Turtle Wax: " +
+        duracionTurtleWax +
+        " días";
+}
+const kmObjetivoAceite =
+    localStorage.getItem(
+        "kmObjetivoAceite"
+    );
+if(kmObjetivoAceite){
+    document.getElementById(
+        "kmAceiteMostrar"
+    ).innerHTML =
+        "🛢️ Intervalo aceite: " +
+        kmObjetivoAceite +
+        " km";
+}
+const duracionTurtleWaxTexto =
+    document.getElementById(
+        "duracionTurtleWaxTexto"
+    );
+if(
+    duracionTurtleWaxTexto &&
+    duracionTurtleWax
+){
+    duracionTurtleWaxTexto.innerHTML =
+        "⏳ Duración: " +
+        duracionTurtleWax +
+        " días";
+}
+const duracionHidraMateTexto =
+    document.getElementById(
+        "duracionHidraMateTexto"
+    );
+if(
+    duracionHidraMateTexto &&
+    duracionHidraMate
+){
+    duracionHidraMateTexto.innerHTML =
+        "⏳ Duración: " +
+        duracionHidraMate +
+        " días";
+}
+const duracionSisbrillCarTexto =
+    document.getElementById(
+        "duracionSisbrillCarTexto"
+    );
+if(
+    duracionSisbrillCarTexto &&
+    duracionSisbrillCar
+){
+    duracionSisbrillCarTexto.innerHTML =
+        "⏳ Duración: " +
+        duracionSisbrillCar +
         " días";
 }
 const duracionAPCTexto =
@@ -1592,52 +1802,71 @@ if(matriculaMoto){
         localStorage.getItem("duracionAPC")
     ) || 60;
     if(nombre === "Maddox"){
-        frecuencia = 7;
-    }
+    frecuencia =
+        Number(
+            localStorage.getItem(
+                "duracionMaddox"
+            )
+        ) || 7;
+}
     if(nombre === "SisbrillCar"){
-        frecuencia = 30;
-    }
+    frecuencia =
+        Number(
+            localStorage.getItem(
+                "duracionSisbrillCar"
+            )
+        ) || 30;
+}
     if(nombre === "HidraMate"){
-    frecuencia = 30;
+    frecuencia =
+        Number(
+            localStorage.getItem(
+                "duracionHidraMate"
+            )
+        ) || 30;
 }
 if(nombre === "TurtleWax"){
-    frecuencia = 180;}
+    frecuencia =
+        Number(
+            localStorage.getItem(
+                "duracionTurtleWax"
+            )
+        ) || 180;
+}        
     const restantes =
         frecuencia - dias;
-        const fechaAplicacion =
-    new Date(
-        fecha.split("/")[2],
-        fecha.split("/")[1] - 1,
-        fecha.split("/")[0]
-    );
+    const fechaAplicacion =
+        new Date(
+            fecha.split("/")[2],
+            fecha.split("/")[1] - 1,
+            fecha.split("/")[0]
+        );
 const proximaAplicacion =
     new Date(fechaAplicacion);
 proximaAplicacion.setDate(
     proximaAplicacion.getDate() +
     frecuencia
 );
-        if(nombre === "Maddox"){
-    const tarjetaMaddox =
-        document.getElementById(
-            "productoMaddox"
-        );
-    if(tarjetaMaddox){
-        if(restantes < 0){
-            tarjetaMaddox.className =
-                "producto producto-rojo";
-        }
-        else if(
-            restantes <=
-            (frecuencia * 0.20)
-        ){
-            tarjetaMaddox.className =
-                "producto producto-amarillo";
-        }
-        else{
-    tarjetaMaddox.className =
-        "producto producto-verde";
-}
+        const tarjetaProducto =
+    document.getElementById(
+        "producto" + nombre
+    );
 
+if(tarjetaProducto){
+    if(restantes < 0){
+        tarjetaProducto.className =
+            "producto producto-rojo";
+    }
+    else if(
+        restantes <=
+        (frecuencia * 0.20)
+    ){
+        tarjetaProducto.className =
+            "producto producto-amarillo";
+    }
+    else{
+        tarjetaProducto.className =
+            "producto producto-verde";
     }
 }
     if(restantes > (frecuencia * 0.20)){
@@ -1767,11 +1996,7 @@ if(textoITV){
         "ITV al " +
         Math.round(porcentajeITV) +
         "%";
-     }
-     console.log(
-    "ITV:",
-    porcentajeITV
-);
+     }      
   }   
 // Aceite
 const fechaAceite =
@@ -2292,17 +2517,16 @@ resumenMantenimiento +=
     estadoTraseroVisual +
     "<br><br>";
 }
-console.log(resumenMantenimiento);
 document.getElementById(
     "estadoMantenimiento"
 ).innerHTML =
     resumenMantenimiento;
-   const vencimientos = {
-    APC: 60,
-    Maddox: 7,
-    SisbrillCar: 30,
-    HidraMate: 30,
-    TurtleWax: 180
+  const vencimientos = {
+    APC: Number(localStorage.getItem("duracionAPC")) || 60,
+    Maddox: Number(localStorage.getItem("duracionMaddox")) || 7,
+    SisbrillCar: Number(localStorage.getItem("duracionSisbrillCar")) || 30,
+    HidraMate: Number(localStorage.getItem("duracionHidraMate")) || 30,
+    TurtleWax: Number(localStorage.getItem("duracionTurtleWax")) || 180
 };
 let verdes = 0;
 let amarillos = 0;
