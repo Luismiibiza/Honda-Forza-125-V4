@@ -741,11 +741,32 @@ onchange="seleccionarBackup()">
     🏆 Cambiar duración Turtle Wax
 </button>
 <div class="alert" id="kmAceiteMostrar">
-    🛢️ Intervalo aceite: 6000 km
+    🛢️ Intervalo aceite: Sin configurar
 </div>
 
 <button onclick="cambiarKmAceite()">
     🛢️ Cambiar intervalo aceite
+</button>
+<div class="alert" id="kmCorreaMostrar">
+    ⚙️ Intervalo correa: Sin configurar
+</div>
+
+<button onclick="cambiarKmCorrea()">
+    ⚙️ Cambiar intervalo correa
+</button>
+<div class="alert" id="kmDelanteroMostrar">
+    🛞 Intervalo neumático delantero: Sin configurar
+</div>
+
+<button onclick="cambiarKmDelantero()">
+    🛞 Cambiar intervalo delantero
+</button>
+<div class="alert" id="kmTraseroMostrar">
+    🛞 Intervalo neumático trasero: Sin configurar
+</div>
+
+<button onclick="cambiarKmTrasero()">
+    🛞 Cambiar intervalo trasero
 </button>
 <h3>🧴 Productos</h3>
 
@@ -1437,6 +1458,50 @@ function cambiarKmAceite(){
     );
     location.reload();
 }
+function cambiarKmCorrea(){
+    const km = prompt(
+        "Intervalo de correa en km:",
+        localStorage.getItem("kmObjetivoCorrea") || "24000"
+    );
+
+    if(!km){
+        return;
+    }
+
+    localStorage.setItem(
+        "kmObjetivoCorrea",
+        km
+    );
+    location.reload();
+}
+function cambiarKmDelantero(){
+    const km = prompt(
+        "Intervalo del neumático delantero en km:",
+        localStorage.getItem("kmObjetivoDelantero") || "12000"
+    );
+    if(!km){
+        return;
+    }
+    localStorage.setItem(
+        "kmObjetivoDelantero",
+        km
+    );
+    location.reload();
+}
+function cambiarKmTrasero(){
+    const km = prompt(
+        "Intervalo del neumático trasero en km:",
+        localStorage.getItem("kmObjetivoTrasero") || "12000"
+    );
+    if(!km){
+        return;
+    }
+    localStorage.setItem(
+        "kmObjetivoTrasero",
+        km
+    );
+    location.reload();
+}
 function actualizarKilometros(){ 
     const km = prompt(
         "Introduce los kilómetros actuales:"
@@ -1613,6 +1678,42 @@ if(kmObjetivoAceite){
     ).innerHTML =
         "🛢️ Intervalo aceite: " +
         kmObjetivoAceite +
+        " km";
+}
+const kmObjetivoCorrea =
+    localStorage.getItem(
+        "kmObjetivoCorrea"
+    );
+if(kmObjetivoCorrea){
+    document.getElementById(
+        "kmCorreaMostrar"
+    ).innerHTML =
+        "⚙️ Intervalo correa: " +
+        kmObjetivoCorrea +
+        " km";
+}
+const kmObjetivoDelantero =
+    localStorage.getItem(
+        "kmObjetivoDelantero"
+    );
+if(kmObjetivoDelantero){
+    document.getElementById(
+        "kmDelanteroMostrar"
+    ).innerHTML =
+        "🛞 Intervalo neumático delantero: " +
+        kmObjetivoDelantero +
+        " km";
+}
+const kmObjetivoTrasero =
+    localStorage.getItem(
+        "kmObjetivoTrasero"
+    );
+if(kmObjetivoTrasero){
+    document.getElementById(
+        "kmTraseroMostrar"
+    ).innerHTML =
+        "🛞 Intervalo neumático trasero: " +
+        kmObjetivoTrasero +
         " km";
 }
 const duracionTurtleWaxTexto =
@@ -2126,7 +2227,9 @@ const kmRecorridosCorrea =
 const kmRestantesCorrea =
     Math.max(
         0,
-        24000 - kmRecorridosCorrea
+        (Number(localStorage.getItem("kmObjetivoCorrea")) || 24000)
+        -
+        kmRecorridosCorrea
     );
 const fechaCorrea =
     localStorage.getItem("fechaCorrea");
@@ -2134,9 +2237,13 @@ const vencimientoCorrea =
     localStorage.getItem("vencimientoCorrea");
 const diasCorrea =
     diasRestantes(vencimientoCorrea);
-    let porcentajeCorrea =
-    (kmRestantesCorrea / 24000) * 100;
-porcentajeCorrea =
+    const kmObjetivoCorrea =
+    Number(
+        localStorage.getItem("kmObjetivoCorrea")
+    ) || 24000;
+let porcentajeCorrea =
+    (kmRestantesCorrea / kmObjetivoCorrea) * 100;
+     porcentajeCorrea =
     Math.max(
         0,
         Math.min(
@@ -2189,8 +2296,12 @@ if(textoCorrea){
         " km)";
 }
 if(fechaCorrea){
+const kmObjetivoCorrea =
+    Number(
+        localStorage.getItem("kmObjetivoCorrea")
+    ) || 24000;
 const proximoCambioCorrea =
-    kmCorrea + 24000;
+    kmCorrea + kmObjetivoCorrea;
     const estadoCorreaVisual =
     obtenerEstadoVisual(
         porcentajeCorrea
@@ -2257,16 +2368,20 @@ const kmRecorridosDelantero =
         kmActualDelantero -
         kmNeumaticoDelantero
     );
+const kmObjetivoDelantero =
+    Number(
+        localStorage.getItem("kmObjetivoDelantero")
+    ) || 12000;
 const kmRestantesDelantero =
     Math.min(
-        12000,
+        kmObjetivoDelantero,
         Math.max(
             0,
-            12000 - kmRecorridosDelantero
+            kmObjetivoDelantero - kmRecorridosDelantero
         )
     );
  let porcentajeDelantero =
-    (kmRestantesDelantero / 12000) * 100;
+    (kmRestantesDelantero / kmObjetivoDelantero) * 100;
 porcentajeDelantero =
     Math.max(
         0,
@@ -2342,7 +2457,7 @@ else{
 }
 if(fechaNeumaticoDelantero){
 const proximoCambioNeumaticoDelantero =
-kmNeumaticoDelantero + 12000;
+    kmNeumaticoDelantero + kmObjetivoDelantero;
 const estadoDelanteroVisual =
     obtenerEstadoVisual(
         porcentajeDelantero
@@ -2401,16 +2516,22 @@ const kmRecorridosTrasero =
 kmActualTrasero -
 kmNeumaticoTrasero
 );
+const kmObjetivoTrasero =
+    Number(
+        localStorage.getItem("kmObjetivoTrasero")
+    ) || 12000;
+
 const kmRestantesTrasero =
     Math.min(
-        12000,
+        kmObjetivoTrasero,
         Math.max(
             0,
-            12000 - kmRecorridosTrasero
+            kmObjetivoTrasero -
+            kmRecorridosTrasero
         )
     );
     let porcentajeTrasero =
-    (kmRestantesTrasero / 12000) * 100;
+    (kmRestantesTrasero / kmObjetivoTrasero) * 100;
 porcentajeTrasero =
     Math.max(
         0,
@@ -2484,7 +2605,7 @@ else{
 }
 if(fechaNeumaticoTrasero){
 const proximoCambioNeumaticoTrasero =
-    kmNeumaticoTrasero + 12000;
+    kmNeumaticoTrasero + kmObjetivoTrasero;
  const estadoTraseroVisual =
     obtenerEstadoVisual(
         porcentajeTrasero
