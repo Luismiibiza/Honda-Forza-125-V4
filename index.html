@@ -372,6 +372,10 @@ button:active{
 </style>
 </head>
 <body> 
+ <input
+    type="date"
+    id="selectorFechaPrueba"
+    style="display:none;">   
 <div id="inicio" class="pantalla">
 <div class="header">
 
@@ -697,7 +701,9 @@ onchange="seleccionarBackup()">
 <div class="alert" id="matriculaMostrar">
     🚗 Matrícula: Sin registrar
 </div>
-
+<button onclick="probarCalendario()">
+    📅 Probar calendario
+</button>
 <button onclick="cambiarMatricula()">
     ✏️ Cambiar matrícula
 </button>
@@ -836,6 +842,11 @@ onchange="seleccionarBackup()">
 </button>
     </div>
 </div>
+function probarCalendario(){
+    document
+        .getElementById("selectorFechaPrueba")
+        .showPicker();
+}
 <script>
 
 function aplicarProducto(nombre){
@@ -1701,9 +1712,7 @@ if(duracionTurtleWax){
     document.getElementById(
         "duracionTurtleWaxMostrar"
     ).innerHTML =
-        "🏆 " +
-        (localStorage.getItem("nombreTurtleWax") || "Turtle Wax Hybrid") +
-        "<br>⏳ Duración: " +
+        "🏆 Duración Turtle Wax: " +
         duracionTurtleWax +
         " días";
 }
@@ -2747,46 +2756,103 @@ const avisosMoto =
         "avisosMoto"
     );
 if(avisosMoto){
+
     let avisos = "";
-    if(rojos > 0){
+
+    if(porcentajeAceite <= 30){
+        avisos +=
+            "🔴 Cambio de aceite recomendado<br>" +
+            "Restan " + kmRestantes + " km<br><br>";
+    }
+    else if(porcentajeAceite <= 60){
+        avisos +=
+            "🟠 Revisar aceite<br>" +
+            "Restan " + kmRestantes + " km<br><br>";
+    }
+    if(porcentajeCorrea <= 30){
     avisos +=
-        "🔴 " +
-        rojos +
-        (rojos === 1
-            ? " producto vencido"
-            : " productos vencidos") +
-        "<br>";
-    listaRojos.forEach(producto => {
-        const nombreMostrar =
-    localStorage.getItem("nombre" + producto)
-    || producto;
-     avisos += "&nbsp;&nbsp;• " + nombreMostrar + "<br>";
-    });
-    avisos += "<br>";
+        "🔴 Cambio de correa recomendado<br>" +
+        "Restan " + kmRestantesCorrea + " km<br><br>";
 }
-   if(amarillos > 0){
+else if(porcentajeCorrea <= 60){
     avisos +=
-        "🟡 " +
-        amarillos +
-        (amarillos === 1
-            ? " producto próximo a vencer"
-            : " productos próximos a vencer") +
-        "<br>";
-    listaAmarillos.forEach(producto => {
-       const nombreMostrar =
-    localStorage.getItem("nombre" + producto)
-    || producto;
-     avisos += "&nbsp;&nbsp;• " + nombreMostrar + "<br>";
-    });
-    avisos += "<br>";
+        "🟠 Revisar correa CVT<br>" +
+        "Restan " + kmRestantesCorrea + " km<br><br>";
 }
+if(porcentajeTrasero <= 30){
+    avisos +=
+        "🔴 Cambio de neumático trasero recomendado<br>" +
+        "Restan " + kmRestantesTrasero + " km<br><br>";
+}
+else if(porcentajeTrasero <= 60){
+    avisos +=
+        "🟠 Revisar neumático trasero<br>" +
+        "Restan " + kmRestantesTrasero + " km<br><br>";
+}   if(porcentajeITV <= 30){
+    avisos +=
+        "🔴 ITV próxima a caducar<br>" +
+        "Restan " + diasITV + " días<br><br>";
+}
+else if(porcentajeITV <= 60){
+    avisos +=
+        "🟠 Revisar ITV<br>" +
+        "Restan " + diasITV + " días<br><br>";
+}
+    if(porcentajeDelantero <= 30){
+    avisos +=
+        "🔴 Cambio de neumático delantero recomendado<br>" +
+        "Restan " + kmRestantesDelantero + " km<br><br>";
+}
+else if(porcentajeDelantero <= 60){
+    avisos +=
+        "🟠 Revisar neumático delantero<br>" +
+        "Restan " + kmRestantesDelantero + " km<br><br>";
+}
+   /* if(rojos > 0){
+        avisos +=
+            "🔴 " +
+            rojos +
+            (rojos === 1
+                ? " producto vencido"
+                : " productos vencidos") +
+            "<br>";
+        listaRojos.forEach(producto => {
+            const nombreMostrar =
+                localStorage.getItem("nombre" + producto)
+                || producto;
+            avisos +=
+                "&nbsp;&nbsp;• " +
+                nombreMostrar +
+                "<br>";
+        });
+        avisos += "<br>";
+    }
+    if(amarillos > 0){
+        avisos +=
+            "🟡 " +
+            amarillos +
+            (amarillos === 1
+                ? " producto próximo a vencer"
+                : " productos próximos a vencer") +
+            "<br>";
+        listaAmarillos.forEach(producto => {
+            const nombreMostrar =
+                localStorage.getItem("nombre" + producto)
+                || producto;
+            avisos +=
+                "&nbsp;&nbsp;• " +
+                nombreMostrar +
+                "<br>";
+        });
+        avisos += "<br>";
+    }*/
     if(avisos === ""){
-    avisos =
-    "✅ Todo al día<br>" +
-    "Sin avisos pendientes";
+        avisos =
+            "✅ Todo al día<br>" +
+            "Sin avisos pendientes";
     }
     avisosMoto.innerHTML =
-    avisos.trim();
+        avisos.trim();
 }
 const ultimoProductoLimpieza =
     document.getElementById(
