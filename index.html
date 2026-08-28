@@ -59,7 +59,9 @@
 #diasCalendario{
     display:grid;
     grid-template-columns:repeat(7,1fr);
+    grid-template-rows:repeat(6,42px);
     gap:4px;
+    min-height:272px;
 }
 
 .diaCalendario{
@@ -70,6 +72,10 @@
     border-radius:10px;
     background:#334155;
     cursor:pointer;
+}
+
+.diaVacio{
+    height:42px;
 }
 
 .diaCalendario:hover{
@@ -91,11 +97,13 @@
     --blue:#0284c7;
     --text:#ffffff;
 }
-
+.diaSeleccionado{
+    background:#0284c7 !important;
+    border:2px solid #60a5fa;
+}
 *{
     box-sizing:border-box;
 }
-
 body{
     margin:0;
     padding:10px;
@@ -578,6 +586,12 @@ Historial
 <button onclick="abrirCalendario()">
     📅 Probar calendario
 </button>
+<div
+    id="fechaPruebaCalendario"
+    class="alert"
+>
+    Fecha seleccionada: ninguna
+</div>
 </div>
     <div class="card">
 
@@ -958,6 +972,13 @@ onchange="seleccionarBackup()">
 </div>
 
 <script>
+let fechaSeleccionada = null;
+let destinoFecha = null;
+let mesActual =
+    new Date().getMonth();
+
+let anioActual =
+    new Date().getFullYear();
    function abrirCalendario(){
     generarCalendario();
     document.getElementById(
@@ -969,26 +990,139 @@ function cerrarCalendario(){
         "calendarioModal"
     ).style.display = "none";
 }
+document.getElementById(
+    "mesSiguiente"
+).onclick = function(){
+    mesActual++;
+    if(mesActual > 11){
+        mesActual = 0;
+        anioActual++;
+    }
+    generarCalendario();
+};
+document.getElementById(
+    "mesAnterior"
+).onclick = function(){
+    mesActual--;
+    if(mesActual < 0){
+        mesActual = 11;
+        anioActual--;
+    }
+    generarCalendario();
+};
 function generarCalendario(){
+    const hoy = new Date();
+
+const meses = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre"
+];
+document.getElementById(
+    "tituloCalendario"
+).innerHTML =
+    meses[mesActual] +
+    " " +
+    anioActual;
+    hoy.getFullYear();
     const contenedor =
         document.getElementById(
             "diasCalendario"
         );
     contenedor.innerHTML = "";
-    for(let dia = 1; dia <= 31; dia++){
+    const diasMes = new Date(
+    anioActual,
+    mesActual + 1,
+    0
+).getDate();
+let primerDia = new Date(
+    anioActual,
+    mesActual,
+    1
+).getDay();
+primerDia =
+    primerDia === 0
+    ? 6
+    : primerDia - 1;
+    for(let i = 0; i < primerDia; i++){
+    const vacio =
+        document.createElement("div");
+    vacio.className =
+        "diaVacio";
+    contenedor.appendChild(
+        vacio
+    );
+}
+for(let dia = 1; dia <= diasMes; dia++){
         const celda =
             document.createElement("div");
         celda.className =
             "diaCalendario";
         celda.innerHTML = dia;
-        contenedor.appendChild(
-            celda
-        );
+celda.onclick = function(){
+    document
+        .querySelectorAll(".diaCalendario")
+        .forEach(d => {
+            d.classList.remove(
+                "diaSeleccionado"
+            );
+        });
+    celda.classList.add(
+        "diaSeleccionado"
+    );
+        fechaSeleccionada = dia;
+};
+contenedor.appendChild(
+    celda
+);
     }
 }
 document.getElementById(
     "cancelarCalendario"
-).onclick = cerrarCalendario; 
+).onclick = cerrarCalendario;
+document.getElementById(
+    "aceptarCalendario"
+).onclick = function(){
+    if(fechaSeleccionada === null){
+        alert(
+            "Selecciona un día"
+        );
+        return;
+    }
+    const dia =
+        String(fechaSeleccionada)
+        .padStart(2,"0");
+    const mes =
+        String(mesActual + 1)
+        .padStart(2,"0");
+    const fechaFinal =
+        dia +
+        "/" +
+        mes +
+        "/" +
+        anioActual;
+  window.fechaCalendario =
+    fechaFinal;
+localStorage.setItem(
+    "fechaCalendario",
+    fechaFinal
+);
+document.getElementById(
+    "fechaPruebaCalendario"
+).innerHTML =
+    "Fecha seleccionada: " +
+    fechaFinal;
+cerrarCalendario();
+}; 
 function aplicarProducto(nombre){
 if(!confirm(
     "¿Confirmar aplicación de " +
@@ -1064,9 +1198,11 @@ function realizarMantenimiento(tipo){
 );
 if(tipo === "ITV"){
     localStorage.setItem(
-        "fechaITV",
-        hoy
-    );
+    "fechaITV",
+    localStorage.getItem(
+        "fechaCalendario"
+    ) || hoy
+);
     localStorage.setItem(
         "vencimientoITV",
         "20/05/2030"
@@ -1085,9 +1221,8 @@ if(tipo === "Aceite"){
             )
         );
     const fechaCambioAceite =
-    prompt(
-        "Fecha del cambio (dd/mm/yyyy):",
-        hoy
+    localStorage.getItem(
+        "fechaCalendario"
     ) || hoy;
 localStorage.setItem(
     "fechaAceite",
@@ -1115,9 +1250,8 @@ if(tipo === "Correa CVT"){
             )
         );
     const fechaCambioCorrea =
-    prompt(
-        "Fecha del cambio de correa (dd/mm/yyyy):",
-        hoy
+    localStorage.getItem(
+        "fechaCalendario"
     ) || hoy;
 localStorage.setItem(
     "fechaCorrea",
@@ -1144,10 +1278,9 @@ if(tipo === "NeumaticoDelantero"){
                 kmActual
             )
         );
-    const fechaNeumaticoDelantero =
-    prompt(
-        "Fecha de montaje del neumático delantero (dd/mm/yyyy):",
-        hoy
+   const fechaNeumaticoDelantero =
+    localStorage.getItem(
+        "fechaCalendario"
     ) || hoy;
 localStorage.setItem(
     "fechaNeumaticoDelantero",
@@ -1175,9 +1308,8 @@ if(tipo === "NeumaticoTrasero"){
             )
         );
     const fechaNeumaticoTrasero =
-    prompt(
-        "Fecha de montaje del neumático trasero (dd/mm/yyyy):",
-        hoy
+    localStorage.getItem(
+        "fechaCalendario"
     ) || hoy;
 localStorage.setItem(
     "fechaNeumaticoTrasero",
