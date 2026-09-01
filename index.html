@@ -2463,6 +2463,18 @@ if(matriculaMoto){
 ).innerHTML =
     "🚗 Matrícula: " +
     matriculaMoto;
+    const dashboardMatricula =
+document.getElementById(
+    "dashboardMatriculaTexto"
+);
+
+if(
+    dashboardMatricula &&
+    matriculaMoto
+){
+    dashboardMatricula.innerHTML =
+        matriculaMoto;
+}
 }
 };
     const productos = [
