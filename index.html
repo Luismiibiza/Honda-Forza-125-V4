@@ -301,44 +301,66 @@ border:none;
 }
 .menuInferior{
     position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
+    bottom:12px;
+    left:12px;
+    right:12px;
+
+    width:auto;
+
     background:
-    rgba(9,16,28,.96);
-    backdrop-filter:blur(12px);
+    rgba(9,16,28,.92);
+
+    backdrop-filter:blur(20px);
+
     display:flex;
     justify-content:space-around;
     align-items:center;
-    padding:10px 0;
-    border-top:1px solid rgba(255,255,255,.08);
-    z-index:1000;
+
+    padding:12px 8px;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,255,255,.06);
+
     box-shadow:
-0 -10px 30px
-rgba(0,0,0,.4);
+        0 10px 30px rgba(0,0,0,.45);
+
+    z-index:1000;
 }
 
 .menuBtn{
-    color:white;
+    color:#94a3b8;
+
     font-size:11px;
+
     text-align:center;
+
     cursor:pointer;
-    padding:4px;
+
+    padding:6px 8px;
+
+    transition:.25s;
 }
 .menuBtn span{
     display:block;
-    font-size:26px !important;
-    margin-bottom:4px;
-    transition:all .3s ease;
+
+    font-size:24px !important;
+
+    margin-bottom:6px;
+
+    transition:.25s;
 }
 .menuBtn.activo{
-    color:#60a5fa;
-    font-weight:bold;
+    color:#ffffff;
+    font-weight:600;
 }
 
 .menuBtn.activo span{
-    filter:drop-shadow(0 0 8px #60a5fa);
-    transform:scale(1.15);
+    transform:translateY(-2px);
+    filter:drop-shadow(
+        0 0 10px
+        rgba(59,130,246,.8)
+    );
 }
 
 .menuBtn:hover{
@@ -498,7 +520,21 @@ button:active{
     .letras{
         font-size:10px;
     }
+    h2{
+    font-size:18px;
+    font-weight:600;
+    letter-spacing:.3px;
+    margin-bottom:16px;
+    color:#ffffff;
+}
+       .alert{
+    background:
+    rgba(255,255,255,.03);
 
+    border:1px solid rgba(255,255,255,.04);
+
+    border-radius:14px;
+}
 }
 </style>
 </head>
