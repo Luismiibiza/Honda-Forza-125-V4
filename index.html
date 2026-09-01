@@ -143,7 +143,11 @@ linear-gradient(
     margin:10px auto 25px;
 
     border-radius:22px;
-
+    filter:
+drop-shadow(
+0 10px 25px
+rgba(0,0,0,.45)
+);
     transition:.3s;
 }
     .header h1{
@@ -161,26 +165,43 @@ linear-gradient(
 }
 
 .alert{
-    background:#334155;
-    border-left:4px solid #60a5fa;
-    padding:12px;
-    border-radius:12px;
-    margin-top:8px;
-    border:1px solid rgba(255,255,255,.05);
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.04);
+
+    border-radius:16px;
+
+    padding:14px;
+
+    line-height:1.5;
 }
+``
 #estadoProductos{
     text-align:left;
     line-height:1.8;
     padding-left:15px;
 }
 .producto{
-    background:#334155;
-    border-radius:12px;
-    padding:12px;
-    margin-top:10px;
-    border-left:5px solid #22c55e;
-    transition:0.3s;
-    box-shadow:0 4px 10px rgba(0,0,0,.20);
+    background:rgba(255,255,255,.03);
+
+    border-radius:18px;
+
+    padding:16px;
+
+    margin-top:12px;
+
+    border-left:4px solid #22c55e;
+
+    transition:.3s;
+
+    border-top:1px solid rgba(255,255,255,.04);
+
+    border-right:1px solid rgba(255,255,255,.04);
+
+    border-bottom:1px solid rgba(255,255,255,.04);
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.25);
 }
 .producto-verde{
     border-left:5px solid #22c55e !important;
@@ -195,7 +216,9 @@ linear-gradient(
 }
 button{
     width:100%;
+
     margin-top:10px;
+
     padding:14px;
 
     border:none;
@@ -203,11 +226,11 @@ button{
     border-radius:14px;
 
     background:
-    linear-gradient(
-        180deg,
-        #2563eb,
-        #1d4ed8
-    );
+        linear-gradient(
+            180deg,
+            #2563eb,
+            #1d4ed8
+        );
 
     color:white;
 
@@ -246,12 +269,14 @@ button:active{
     display:flex;
     width:60px;
     height:42px;
+    
 
     background:white;
 border:none;
     border-radius:3px;
     overflow:hidden;
-
+    transform:scale(.95);
+opacity:.95;
     box-shadow:0 2px 4px rgba(0,0,0,0.3);
 }
 
@@ -428,9 +453,14 @@ button:active{
 }
 #kmActual{
     text-align:center;
-    font-size:22px;
+
+    font-size:32px;
+
     font-weight:700;
-    color:#60a5fa;
+
+    color:#ffffff;
+
+    letter-spacing:.5px;
 }
 #ultimoProducto{
     border-left:5px solid #22c55e;
@@ -445,10 +475,16 @@ button:active{
 }
 .barraITV{
     width:100%;
-    height:12px;
-    background:#1e293b;
-    border-radius:20px;
+
+    height:10px;
+
+    background:
+    rgba(255,255,255,.06);
+
+    border-radius:50px;
+
     overflow:hidden;
+
     margin-top:10px;
 }
 
@@ -560,6 +596,102 @@ button:active{
 
 .alert{
     padding:14px;
+}
+    strong{
+    font-size:15px;
+    font-weight:600;
+    color:#ffffff;
+}
+
+p{
+    color:#94a3b8;
+}
+    body{
+    letter-spacing:.2px;
+}
+
+.card h2{
+    margin-top:0;
+}
+
+.card{
+    overflow:hidden;
+}
+    .dashboardMoto{
+
+    margin-top:18px;
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(9,16,28,.98),
+        rgba(3,8,15,.98)
+    );
+
+    border-radius:28px;
+
+    padding:24px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.45);
+
+    text-align:center;
+}
+
+.dashboardNombre{
+
+    font-size:26px;
+
+    font-weight:700;
+
+    color:white;
+}
+
+.dashboardVersion{
+
+    margin-top:6px;
+
+    color:#94a3b8;
+
+    font-size:14px;
+}
+
+.dashboardKilometros{
+
+    margin-top:22px;
+}
+
+.dashboardKilometros span{
+
+    font-size:36px;
+
+    font-weight:700;
+
+    color:white;
+}
+
+.dashboardMatricula{
+
+    margin-top:18px;
+}
+
+.dashboardMatricula span{
+
+    display:inline-block;
+
+    padding:10px 16px;
+
+    background:white;
+
+    color:black;
+
+    font-weight:700;
+
+    border-radius:8px;
+
+    letter-spacing:2px;
 }
     
 }
@@ -675,6 +807,28 @@ Historial
 ...
 </div>
 -->
+    <div class="dashboardMoto">
+
+    <div class="dashboardNombre">
+        Honda Forza 125
+    </div>
+
+    <div class="dashboardVersion">
+        NSS125AD · Ibiza Edition
+    </div>
+
+    <div class="dashboardKilometros">
+        <span id="dashboardKm">0 km</span>
+    </div>
+
+    <div class="dashboardMatricula">
+        <span id="dashboardMatriculaTexto">
+            0000 AAA
+        </span>
+    </div>
+
+</div>
+
 <div class="card">
     <h2>Kilometraje</h2>
 
@@ -1979,7 +2133,19 @@ window.onload = function(){
         ).innerHTML =
             "📅 Última actualización: " +
             fechaKmActual;
-    }    
+    }
+    const dashboardKm =
+document.getElementById(
+    "dashboardKm"
+);
+
+if(
+    dashboardKm &&
+    kmActual
+){
+    dashboardKm.innerHTML =
+        kmActual + " km";
+}
     mostrarHistorial();
     const ultimo =
         localStorage.getItem("ultimoProducto");
