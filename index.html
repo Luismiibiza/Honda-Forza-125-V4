@@ -535,6 +535,33 @@ button:active{
 
     border-radius:14px;
 }
+    .modeloMoto{
+    font-size:28px;
+    font-weight:700;
+    color:#ffffff;
+    margin-top:10px;
+}
+
+.versionMoto{
+    font-size:14px;
+    color:#94a3b8;
+    margin-top:6px;
+    letter-spacing:.5px;
+}
+    #kmActual{
+    font-size:26px;
+    font-weight:700;
+    color:#ffffff;
+}
+
+#fechaKm{
+    color:#94a3b8;
+}
+
+.alert{
+    padding:14px;
+}
+    
 }
 </style>
 </head>
@@ -603,15 +630,17 @@ button:active{
     </div>
 
     <img
-        src="icon-512.png"
-        alt="Honda Forza 125 V4"
-        class="logo"
-    >
+    src="icon-512.png"
+    alt="Honda Forza 125 V4"
+    class="logo"
+>
 
-    <h1>Honda Forza 125 V4</h1>
+<div class="modeloMoto">
+    Honda Forza 125
+</div>
 
-    <p>Ibiza Edition</p>
-
+<div class="versionMoto">
+    NSS125AD · Ibiza Edition
 </div>
 
 
@@ -647,7 +676,7 @@ Historial
 </div>
 -->
 <div class="card">
-    <h2>🏍️ Kilometraje</h2>
+    <h2>Kilometraje</h2>
 
     <div id="kmActual" class="alert">
         Kilometraje actual: Sin registrar
@@ -662,7 +691,7 @@ Historial
     </button>
 </div>
 <div class="card">
-    <h2>🔔 Avisos</h2>
+    <h2>Avisos</h2>
     <div id="avisosMoto" class="alert">
     ✅ No hay avisos pendientes
 </div>
@@ -678,7 +707,7 @@ Historial
 </div>
     <div class="card">
 
-    <h2>📊 Estado de la moto</h2>
+    <h2>Estado de la moto</h2>
 
     <div id="ultimoProducto" class="alert">
         🧴 Último producto: Ninguno
@@ -753,7 +782,7 @@ Historial
      
 <div class="card">
 
-<h2>🧴 Productos</h2>
+<h2>Productos</h2>
 <div class="alert" id="resumenLimpieza">
     Calculando estado...
 </div>
@@ -830,7 +859,7 @@ Historial
 
 <div class="card">
 
-<h2>🛠️ Mantenimiento</h2>
+<h2>Mantenimiento</h2>
 
 <div class="producto">
     <strong>🛢️ Aceite</strong>
