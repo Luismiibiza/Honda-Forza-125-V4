@@ -790,7 +790,61 @@ p{
 
     color:white;
 }
-    
+  .settings-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 20px;
+    margin-bottom:12px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+}
+
+.settings-row:hover{
+    background:rgba(255,255,255,.08);
+}
+
+.settings-row:active{
+    transform:scale(.98);
+}
+
+.settings-title{
+    color:#ffffff;
+    font-weight:600;
+}
+
+.settings-value{
+    margin-top:4px;
+    color:#9ca3af;
+    font-size:.9rem;
+}
+
+.settings-arrow{
+    color:#6b7280;
+    font-size:24px;
+    font-weight:300;
+}
+
+.settings-section-title{
+    color:#9ca3af;
+    font-size:.8rem;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin-bottom:16px;
+
+  
 }
 </style>
 </head>
@@ -1200,25 +1254,39 @@ onchange="seleccionarBackup()">
         <h2>⚙️ Ajustes</h2>
         <h3>🏍️ Moto</h3>
 
-        <div class="alert" id="nombreMotoMostrar">
-    🏍️ Nombre de la moto: Honda Forza 125
-</div>
+       <div class="settings-row" onclick="cambiarNombreMoto()">
+    <div>
+        <div class="settings-title">
+            Nombre de la moto
+        </div>
 
-        <button onclick="cambiarNombreMoto()">
-            ✏️ Cambiar nombre
-        </button>
-<div class="alert" id="matriculaMostrar">
-    🚗 Matrícula: Sin registrar
-</div>
+        <div class="settings-value" id="nombreMotoMostrar">
+            Honda Forza 125
+        </div>
+    </div>
 
-<button onclick="cambiarMatricula()">
-    ✏️ Cambiar matrícula
-</button>
+    <div class="settings-arrow">›</div>
+</div>
+<div class="settings-row" onclick="cambiarMatricula()">
+    <div>
+        <div class="settings-title">
+            Matrícula
+        </div>
+
+        <div class="settings-value" id="matriculaMostrar">
+            Sin registrar
+        </div>
+    </div>
+
+    <div class="settings-arrow">›</div>
+</div>
 </div>
 
 <div class="card">
 <br>
-<h3>⏳ Duración de productos</h3>
+<h3 class="settings-section-title">
+    MANTENIMIENTO
+</h3>
 <br>
 <div class="alert">
     ⏳ Configuración de duración
@@ -1226,19 +1294,27 @@ onchange="seleccionarBackup()">
     🚧 Modifica la duración estimada de cada producto.
 </div>
 <br><br>
-<div class="alert" id="duracionAPCMostrar">
-    🧼 Sisbrill 361 APC
-    <br>
-    ⏳ Duración: 60 días
+<div class="settings-row" id="duracionAPCMostrar">
+    <div class="settings-title">
+    Sisbrill 361 APC
+</div>
+
+<div class="settings-value">
+    Duración: 60 días
+</div>
 </div>
 
 <button onclick="cambiarDuracionAPC()">
     🧼 Cambiar duración APC
 </button>
-<div class="alert" id="duracionMaddoxMostrar">
-    ✨ Maddox Detail
-    <br>
-    ⏳ Duración: 7 días
+<div class="settings-row" id="duracionMaddoxMostrar">
+    <div class="settings-title">
+    Maddox Detail
+</div>
+
+<div class="settings-value">
+    Duración: 7 días
+</div>
 </div>
 
 <button onclick="cambiarDuracionMaddox()">
