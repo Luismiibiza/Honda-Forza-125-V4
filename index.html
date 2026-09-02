@@ -862,7 +862,7 @@ p{
 
 .settings-bike-image{
     width:100%;
-    height:180px;
+    height:140px;
 
     object-fit:cover;
 
@@ -877,6 +877,8 @@ p{
     font-size:1.2rem;
     font-weight:600;
     color:#fff;
+    letter-spacing:.5px;
+
 }
 
 .bike-plate{
@@ -1297,12 +1299,12 @@ onchange="seleccionarBackup()">
     <div class="settings-bike-info">
 
         <div class="bike-name">
-            Honda Forza 125 V4
-        </div>
+    Honda Forza 125
+</div>
 
-        <div class="bike-plate">
-            Tu matrícula
-        </div>
+       <div class="bike-plate">
+    Configuración del vehículo
+</div>
 
     </div>
 
@@ -1311,7 +1313,10 @@ onchange="seleccionarBackup()">
 
 </div>
         <h2>⚙️ Ajustes</h2>
-        <h3>🏍️ Moto</h3>
+
+<h3 class="settings-section-title">
+    VEHÍCULO
+</h3>
 
        <div class="settings-row" onclick="cambiarNombreMoto()">
     <div>
@@ -2373,7 +2378,7 @@ window.onload = function(){
         document.getElementById(
             "kmActual"
         ).innerHTML =
-            "🏍️ Kilometraje actual: " +
+            "Kilometraje actual: " +
             kmActual +
             " km";
         document.getElementById(
