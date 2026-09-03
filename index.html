@@ -154,6 +154,11 @@ circle at top,
     margin-top:10px;
     border:1px solid rgba(255,255,255,.06);
     color:#ffffff;
+    transition:all .2s ease;
+}
+
+.alert:hover{
+    background:rgba(255,255,255,.05);
 }
 
 #estadoProductos{
@@ -853,17 +858,18 @@ onchange="seleccionarBackup()">
 <div id="ajustes" class="pantalla">
     <div class="card">
         <h2>⚙️ Ajustes</h2>
-        <h3>🏍️ Moto</h3>
+        <h3>Moto</h3>
+
 
         <div class="alert" id="nombreMotoMostrar">
-    🏍️ Nombre de la moto: Honda Forza 125
+      Nombre de la moto: Honda Forza 125
 </div>
 
         <button onclick="cambiarNombreMoto()">
             ✏️ Cambiar nombre
         </button>
 <div class="alert" id="matriculaMostrar">
-    🚗 Matrícula: Sin registrar
+      Matrícula: Sin registrar
 </div>
 
 <button onclick="cambiarMatricula()">
