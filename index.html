@@ -574,6 +574,21 @@ h3{
     font-size:22px;
     color:#7f93b7;
 }
+.label-ajuste{
+    display:block;
+    font-size:11px;
+    letter-spacing:2px;
+    color:#7f93b7;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.valor-ajuste{
+    display:block;
+    font-size:20px;
+    font-weight:600;
+    color:#ffffff;
+}
 
  
 }
@@ -950,17 +965,17 @@ onchange="seleccionarBackup()">
 
 
         <div class="alert" id="nombreMotoMostrar">
-    <strong>Nombre de la moto</strong>
-    Honda Forza 125
+    <span class="label-ajuste">MOTO</span>
+    <span class="valor-ajuste">Honda Forza 125</span>
 </div>
+
         <button onclick="cambiarNombreMoto()">
             ✏️ Cambiar nombre
         </button>
 <div class="alert" id="matriculaMostrar">
-    <strong>Matrícula</strong>
-    Sin registrar
+    <span class="label-ajuste">MATRÍCULA</span>
+    <span class="valor-ajuste">9414FFN</span>
 </div>
-
 <button onclick="cambiarMatricula()">
     ✏️ Cambiar matrícula
 </button>
