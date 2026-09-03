@@ -2355,24 +2355,29 @@ if(nombreTurtleWax){
     ).innerHTML =
         "🏆 " + nombreTurtleWax +
 "<br>📍 Sellado y protección hidrofóbica";
-}
-    const matriculaMoto =
+}const matriculaMoto =
     localStorage.getItem("matriculaMoto");
+
 if(matriculaMoto){
+
     document.getElementById(
         "matriculaNumeros"
     ).innerHTML =
         matriculaMoto.substring(0,4);
+
     document.getElementById(
         "matriculaLetras"
     ).innerHTML =
         matriculaMoto.substring(4);
-        document.getElementById(
-    "matriculaMostrar"
-).innerHTML =
-    "🚗 Matrícula: " +
-    matriculaMoto;
+
+    document.getElementById(
+        "matriculaMostrar"
+    ).innerHTML = `
+        <span class="label-ajuste">MATRÍCULA</span>
+        <span class="valor-ajuste">${matriculaMoto}</span>
+    `;
 }
+
 };
     const productos = [
         "APC",
