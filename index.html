@@ -2269,16 +2269,15 @@ if(duracionAPCTexto && duracionAPC){
         duracionAPC +
         " días";
 }
-   const nombreMoto =
+  const nombreMoto =
     localStorage.getItem("nombreMoto");
 
 if(nombreMoto){
     document.getElementById(
         "nombreMotoMostrar"
-    ).innerHTML = `
-        <span class="label-ajuste">MOTO</span>
-        <span class="valor-ajuste">${nombreMoto}</span>
-    `;
+    ).innerHTML =
+        "🏍️ Nombre de la moto: " +
+        nombreMoto;
 }
 
     const nombreAPC =
@@ -2355,11 +2354,10 @@ if(nombreTurtleWax){
     ).innerHTML =
         "🏆 " + nombreTurtleWax +
 "<br>📍 Sellado y protección hidrofóbica";
-}const matriculaMoto =
+const matriculaMoto =
     localStorage.getItem("matriculaMoto");
 
 if(matriculaMoto){
-
     document.getElementById(
         "matriculaNumeros"
     ).innerHTML =
@@ -2372,10 +2370,9 @@ if(matriculaMoto){
 
     document.getElementById(
         "matriculaMostrar"
-    ).innerHTML = `
-        <span class="label-ajuste">MATRÍCULA</span>
-        <span class="valor-ajuste">${matriculaMoto}</span>
-    `;
+    ).innerHTML =
+        "🚗 Matrícula: " +
+        matriculaMoto;
 }
 
 };
