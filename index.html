@@ -92,9 +92,9 @@
     margin:0;
 }
 :root{
-    --bg:#0f172a;
-    --card:#1e293b;
-    --blue:#0284c7;
+    --bg:#050b16;
+    --card:#0e1726;
+    --blue:#2b7cff;
     --text:#ffffff;
 }
 .diaSeleccionado{
@@ -109,11 +109,12 @@ body{
     padding:10px;
     padding-bottom:90px;
     background:
-    linear-gradient(
-        180deg,
-        #0f172a,
-        #111827
-    );
+radial-gradient(
+circle at top,
+#071f44 0%,
+#050c18 45%,
+#03060d 100%
+);
     color:white;
     font-family:
         system-ui,
@@ -122,7 +123,11 @@ body{
 
 
 .card{
-    background:var(--card);
+    background:
+    linear-gradient(
+    180deg,
+    rgba(15,25,45,.95),
+    rgba(8,15,28,.95));
     border-radius:18px;
     padding:15px;
     margin-top:12px;
