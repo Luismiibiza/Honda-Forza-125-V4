@@ -94,9 +94,12 @@
 
 :root{
     --bg:#020617;
-    --card:#0b1220;
+    --card:#111827;
     --blue:#3b82f6;
     --text:#f8fafc;
+    --tesla-border:rgba(255,255,255,.08);
+    --tesla-glass:rgba(255,255,255,.04);
+    --tesla-radius:28px;
 }
 .diaSeleccionado{
     background:#0284c7 !important;
@@ -106,8 +109,9 @@
     box-sizing:border-box;
 }
 body{
+    body{
     margin:0;
-    padding:10px;
+    padding:14px;
     padding-bottom:130px;
    background:
 linear-gradient(
@@ -123,11 +127,12 @@ linear-gradient(
 
 
 .card{
-    background:rgba(9,16,28,.92);
-    border-radius:24px;
-    padding:18px;
-    margin-top:16px;
-    border:1px solid rgba(255,255,255,.05);
+    .card{
+    background:rgba(15,23,42,.92);
+    border-radius:var(--tesla-radius);
+    padding:20px;
+    margin-top:18px;
+    border:1px solid var(--tesla-border);
     box-shadow:0 10px 30px rgba(0,0,0,.35);
     animation:fadeIn .35s ease;
 }
@@ -416,9 +421,10 @@ opacity:.95;
     background:
     linear-gradient(
         180deg,
-        rgba(9,16,28,.98),
-        rgba(4,8,15,.98)
+        rgba(17,24,39,.98),
+        rgba(3,7,18,.98)
     );
+
 
     border:1px solid rgba(255,255,255,.06);
 
@@ -620,7 +626,7 @@ p{
 }
     .dashboardMoto{
 
-    margin-top:-25px;
+    margin-top:-18px;
 
     background:
     linear-gradient(
@@ -709,7 +715,7 @@ p{
 .widgetMini{
 
     background:
-    rgba(255,255,255,.03);
+    rgba(255,255,255,.04);
 
     border:
     1px solid
@@ -790,6 +796,25 @@ p{
 
     color:white;
 }
+    .card h2{
+    font-size:18px;
+    letter-spacing:.3px;
+    margin-bottom:16px;
+}
+
+.widgetValor{
+    font-variant-numeric:tabular-nums;
+}
+
+.alert{
+    background:var(--tesla-glass);
+    border:1px solid var(--tesla-border);
+}
+
+.barraITV{
+    height:12px;
+}
+    
   .settings-row{
     display:flex;
     justify-content:space-between;
@@ -1027,10 +1052,13 @@ Historial
         NSS125AD · Ibiza Edition
     </div>
 
-    <div class="dashboardKilometros">
-        <span id="dashboardKm">0 km</span>
-    </div>
-
+   <div class="dashboardKilometros">
+    <span id="dashboardKm">0 km</span>
+    <br aria-hidden="true">
+    <small style="color:#94a3b8;letter-spacing:1px;">
+        KILOMETRAJE ACTUAL
+    </small>
+</div>
     <div class="dashboardMatricula">
         <span id="dashboardMatriculaTexto">
             0000 AAA
@@ -1038,6 +1066,7 @@ Historial
     </div>
 
 </div>
+    <div style="height:12px"></div>
 <div class="panelResumen">
 
     <div class="widgetMini">
@@ -1079,7 +1108,7 @@ Historial
 </div>
 <div class="card">
     <h2>Avisos</h2>
-    <div id="avisosMoto" class="settings-row">
+    <div id="avisosMoto" class="settings-row" style="line-height:1.6;">
     ✅ No hay avisos pendientes
 </div>
 <button onclick="abrirCalendario()">
