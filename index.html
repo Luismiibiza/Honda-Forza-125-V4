@@ -2269,15 +2269,18 @@ if(duracionAPCTexto && duracionAPC){
         duracionAPC +
         " días";
 }
-    const nombreMoto =
+   const nombreMoto =
     localStorage.getItem("nombreMoto");
+
 if(nombreMoto){
     document.getElementById(
         "nombreMotoMostrar"
-    ).innerHTML =
-        "🏍️ Nombre de la moto: " +
-        nombreMoto;
+    ).innerHTML = `
+        <span class="label-ajuste">MOTO</span>
+        <span class="valor-ajuste">${nombreMoto}</span>
+    `;
 }
+
     const nombreAPC =
     localStorage.getItem("nombreAPC");
 if(nombreAPC){
