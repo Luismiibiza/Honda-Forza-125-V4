@@ -382,17 +382,34 @@ text-align:left;
 button{
     width:100%;
     margin-top:8px;
-    padding:12px;
+    padding:14px 18px;
+
     border:none;
-    border-radius:12px;
-    background:#0284c7;
+    border-radius:16px;
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.02));
+
     color:white;
     cursor:pointer;
     font-weight:600;
     transition:.25s;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    text-align:left;
 }
 button:hover{
-    filter:brightness(1.1);
+    transform:translateY(-1px);
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.04));
 }
 button:active{
     transform:scale(.97);
@@ -558,11 +575,10 @@ h3{
     color:#7f93b7;
 }
 
-    #ajustes button{
-    background:#151d2c !important;
+ 
 }
     
-}
+
     
 </style>
 </head>
