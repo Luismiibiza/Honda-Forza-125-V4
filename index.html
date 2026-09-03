@@ -527,7 +527,22 @@ h3{
     margin-top:16px;
     margin-bottom:8px;
 }
-    
+  #nombreMotoMostrar,
+#matriculaMostrar{
+    font-size:15px;
+    font-weight:500;
+}
+
+#nombreMotoMostrar strong,
+#matriculaMostrar strong{
+    display:block;
+    font-size:11px;
+    color:#7f93b7;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:6px;
+}
+  
 }
     
 </style>
@@ -900,14 +915,15 @@ onchange="seleccionarBackup()">
 
 
         <div class="alert" id="nombreMotoMostrar">
-      Nombre de la moto: Honda Forza 125
+    <strong>Nombre de la moto</strong>
+    Honda Forza 125
 </div>
-
         <button onclick="cambiarNombreMoto()">
             ✏️ Cambiar nombre
         </button>
 <div class="alert" id="matriculaMostrar">
-      Matrícula: Sin registrar
+    <strong>Matrícula</strong>
+    Sin registrar
 </div>
 
 <button onclick="cambiarMatricula()">
