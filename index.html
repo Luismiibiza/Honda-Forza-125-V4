@@ -621,6 +621,26 @@ letter-spacing:.5px;
          0 0 40px rgba(0,140,255,.15),   
        0 10px 30px rgba(0,0,0,.25);
     }
+    #nombreMotoMostrar,
+#matriculaMostrar{
+    position:relative;
+}
+
+#nombreMotoMostrar::before,
+#matriculaMostrar::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:24px;
+    right:24px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(96,165,250,.9),
+        transparent
+    );
+}
 } 
 
 }
