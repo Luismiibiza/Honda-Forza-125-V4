@@ -2234,10 +2234,10 @@ if(nombreMoto){
   document.getElementById(
     "nombreMotoMostrar"
 ).innerHTML =
-'<div style="color:red;font-size:30px;">MOTO</div>' +
-'<div style="color:yellow;font-size:40px;">' +
+'<span class="label-ajuste">Moto</span>' +
+'<span class="valor-ajuste">' +
 nombreMoto +
-'</div>';
+'</span>';
 }
     const nombreAPC =
     localStorage.getItem("nombreAPC");
@@ -2317,13 +2317,13 @@ if(nombreTurtleWax){
     const matriculaMoto =
     localStorage.getItem("matriculaMoto");
 if(matriculaMoto){
-    document.getElementById(
+   document.getElementById(
     "matriculaMostrar"
 ).innerHTML =
-'<div style="color:red;font-size:30px;">MATRÍCULA</div>' +
-'<div style="color:yellow;font-size:40px;">' +
+'<span class="label-ajuste">Matrícula</span>' +
+'<span class="valor-ajuste">' +
 matriculaMoto +
-'</div>';
+'</span>';
 }
 };
     const productos = [
