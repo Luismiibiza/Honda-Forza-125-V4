@@ -2232,11 +2232,13 @@ if(duracionAPCTexto && duracionAPC){
     const nombreMoto =
     localStorage.getItem("nombreMoto");
 if(nombreMoto){
-    document.getElementById(
-        "nombreMotoMostrar"
-    ).innerHTML =
-        "🏍️ Nombre de la moto: " +
-        nombreMoto;
+   document.getElementById(
+    "nombreMotoMostrar"
+).innerHTML =
+'<span class="label-ajuste">Moto</span>' +
+'<span class="valor-ajuste">' +
+nombreMoto +
+'</span>';
 }
     const nombreAPC =
     localStorage.getItem("nombreAPC");
@@ -2321,14 +2323,13 @@ if(matriculaMoto){
     ).innerHTML =
         matriculaMoto.substring(0,4);
     document.getElementById(
-        "matriculaLetras"
-    ).innerHTML =
-        matriculaMoto.substring(4);
-        document.getElementById(
     "matriculaMostrar"
 ).innerHTML =
-    "🚗 Matrícula: " +
-    matriculaMoto;
+'<span class="label-ajuste">Matrícula</span>' +
+'<span class="valor-ajuste">' +
+matriculaMoto +
+'</span>';
+
 }
 };
     const productos = [
