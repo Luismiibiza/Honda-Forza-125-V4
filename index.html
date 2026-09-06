@@ -209,7 +209,7 @@ circle at top,
 button{
     width:100%;
     padding:14px 18px;
-    margin-top:10px;
+    margin-top:4px;
     border:none;
     border-radius:16px;
     background:
@@ -537,7 +537,7 @@ letter-spacing:1px;
 }
    #nombreMotoMostrar,
 #matriculaMostrar{
-    margin-bottom:8px;
+    margin-bottom:0;
 }
 
 #matriculaMostrar{
@@ -563,9 +563,11 @@ letter-spacing:1px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    padding:14px 0;
 }
   #ajustes button{
     position:relative;
+    padding:10px 18px;
     padding-right:50px;
 }
 
@@ -650,6 +652,11 @@ letter-spacing:1px;
 }
     .label-ajuste{
     display:none;
+}
+    .chevron{
+    color:#7f93b7;
+    font-size:20px;
+    font-weight:300;
 }
 
 } 
@@ -1037,7 +1044,7 @@ onchange="seleccionarBackup()">
         </button>
 <div class="settings-row" id="matriculaMostrar">
     <span>9414FFN</span>
-    <span class="chevron">›</span>
+   <span class="chevron">›</span>
 </div>
 <button onclick="cambiarMatricula()">
     ✏️ Cambiar matrícula
