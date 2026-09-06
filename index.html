@@ -2048,6 +2048,7 @@ location.reload();
 
 
 window.onload = function(){  
+    console.log("ONLOAD OK");
     const kmActual =
         localStorage.getItem("kmActual");
     const fechaKmActual =
@@ -2290,7 +2291,7 @@ if(nombreMoto){
 ).innerHTML =
 '<span>' +
 nombreMoto +
-'</span>' 
+'</span>'; 
 }
     const nombreAPC =
     localStorage.getItem("nombreAPC");
@@ -2375,7 +2376,7 @@ if(matriculaMoto){
 ).innerHTML =
 '<span>' +
 matriculaMoto +
-'</span>' 
+'</span>'; 
 }
 };
     const productos = [
@@ -3374,7 +3375,8 @@ function mostrarPantalla(id){
     if(pantalla){
         pantalla.style.display = "block";
     }
-}
+    console.log("MENU OK");
+}    
 window.addEventListener("load", function(){
     document.getElementById("btnInicio").onclick=function(){
         activarMenu(this);
