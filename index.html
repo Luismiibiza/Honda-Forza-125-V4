@@ -578,7 +578,7 @@ h3{
     position:relative;
     padding:1cqb 14px;
     padding-right:50px;
-    font-size:13px;
+    font-size:14px;
     background:transparent;
     border:none;
     box-shadow:none;
@@ -588,7 +588,7 @@ h3{
     opacity:.85;
     text-transform:none;
     letter-spacing:0;
-      min-height:60px;
+    min-height:60px;
 white-space:normal;
 line-height:1.4;
 }
@@ -599,7 +599,7 @@ line-height:1.4;
     top:50%;
     transform:translateY(-50%);
     font-size:26px;
-    color:#60a5fa;
+    color:#60a5fa;    
 }
 .label-ajuste{
     display:block;
@@ -1080,77 +1080,65 @@ onchange="seleccionarBackup()">
 </div>
 
 <div class="card">
-<h3 style="margin-top:10px;">
+<h3 style="margin-top:0;">
     🛠️ Mantenimiento
 </h3>
 
-<div class="alert" id="kmAceiteMostrar">
-    🛢️ Intervalo aceite: Sin configurar
-</div>
-<button onclick="cambiarKmAceite()">
-    🛢️ Cambiar intervalo aceite
+<button
+    id="kmAceiteMostrar"
+    onclick="cambiarKmAceite()">
+    🛢️ Intervalo aceite
 </button>
 
-<div class="alert" id="kmCorreaMostrar">
-    ⚙️ Intervalo correa: Sin configurar
-</div>
-<button onclick="cambiarKmCorrea()">
-    ⚙️ Cambiar intervalo correa
+<button
+    id="kmCorreaMostrar"
+    onclick="cambiarKmCorrea()">
+    ⚙️ Intervalo correa
 </button>
 
-<div class="alert" id="kmDelanteroMostrar">
-    🛞 Intervalo neumático delantero: Sin configurar
-</div>
-<button onclick="cambiarKmDelantero()">
-    🛞 Cambiar intervalo delantero
+
+<button
+    id="kmDelanteroMostrar"
+    onclick="cambiarKmDelantero()">
+    🛞 Intervalo neumático delantero
 </button>
 
-<div class="alert" id="kmTraseroMostrar">
-    🛞 Intervalo neumático trasero: Sin configurar
-</div>
-<button onclick="cambiarKmTrasero()">
-    🛞 Cambiar intervalo trasero
+<button
+    id="kmTraseroMostrar"
+    onclick="cambiarKmTrasero()">
+    🛞 Intervalo neumático trasero
 </button>
 </div>
 
 <div class="card">
 <h3>🧴 Productos</h3>
 
-<div class="alert" id="nombreAPCMostrar">
-    🧼 APC: Sisbrill 361 APC
-    <br>
-    📍 Plásticos, motor y limpieza general
-</div>
-
-<button onclick="cambiarNombreAPC()">
-    🧼 Cambiar APC
+<button
+    id="nombreAPCMostrar"
+    onclick="cambiarNombreAPC()">
+    🧼 Sisbrill 361 APC
 </button>
 
 
-<div class="alert" id="nombreMaddoxMostrar">
-    ✨ Maddox: Maddox Detail
-</div>
-<button onclick="cambiarNombreMaddox()">
-    ✨ Cambiar Maddox
+<button
+    id="nombreMaddoxMostrar"
+    onclick="cambiarNombreMaddox()">
+    ✨ Maddox Detail
 </button>
-<div class="alert" id="nombreSisbrillCarMostrar">
-    🛡️ Sisbrill Car: Sisbrill Car
-</div>
-<button onclick="cambiarNombreSisbrillCar()">
-    🛡️ Cambiar Sisbrill Car
+<button
+    id="nombreSisbrillCarMostrar"
+    onclick="cambiarNombreSisbrillCar()">
+    🛡️ Sisbrill Car
 </button>
-<div class="alert" id="nombreHidraMateMostrar">
-    🧴 Hidra Mate: Hidra Mate & Natural
-</div>
-<button onclick="cambiarNombreHidraMate()">
-🧴 Cambiar Hidra Mate
+<button
+    id="nombreHidraMateMostrar"
+    onclick="cambiarNombreHidraMate()">
+    🧴 Hidra Mate & Natural
 </button>
-<div class="alert" id="nombreTurtleWaxMostrar">
-    🏆 Turtle Wax: Turtle Wax Hybrid
-</div>
-
-<button onclick="cambiarNombreTurtleWax()">
-    🏆 Cambiar Turtle Wax
+<button
+    id="nombreTurtleWaxMostrar"
+    onclick="cambiarNombreTurtleWax()">
+    🏆 Turtle Wax Hybrid
 </button>
     </div>
 </div>
@@ -2181,11 +2169,12 @@ const kmObjetivoAceite =
     );
 if(kmObjetivoAceite){
     document.getElementById(
-        "kmAceiteMostrar"
-    ).innerHTML =
-        "🛢️ Intervalo aceite: " +
-        kmObjetivoAceite +
-        " km";
+    "kmAceiteMostrar"
+).innerHTML =
+    "🛢️ Intervalo aceite" +
+    "<br><span style='color:#7f93b7'>⏳ " +
+    kmObjetivoAceite +
+    " km";
 }
 const kmObjetivoCorrea =
     localStorage.getItem(
@@ -2193,11 +2182,12 @@ const kmObjetivoCorrea =
     );
 if(kmObjetivoCorrea){
     document.getElementById(
-        "kmCorreaMostrar"
-    ).innerHTML =
-        "⚙️ Intervalo correa: " +
-        kmObjetivoCorrea +
-        " km";
+    "kmCorreaMostrar"
+).innerHTML =
+    "⚙️ Intervalo correa" +
+   "<br><span style='color:#7f93b7'>⏳ " +
+    kmObjetivoCorrea +
+    " km";
 }
 const kmObjetivoDelantero =
     localStorage.getItem(
@@ -2205,23 +2195,25 @@ const kmObjetivoDelantero =
     );
 if(kmObjetivoDelantero){
     document.getElementById(
-        "kmDelanteroMostrar"
-    ).innerHTML =
-        "🛞 Intervalo neumático delantero: " +
-        kmObjetivoDelantero +
-        " km";
+    "kmDelanteroMostrar"
+).innerHTML =
+    "🛞 Intervalo neumático delantero" +
+    "<br><span style='color:#7f93b7'>⏳ " +
+    kmObjetivoDelantero +
+    " km";
 }
 const kmObjetivoTrasero =
     localStorage.getItem(
         "kmObjetivoTrasero"
     );
 if(kmObjetivoTrasero){
-    document.getElementById(
-        "kmTraseroMostrar"
-    ).innerHTML =
-        "🛞 Intervalo neumático trasero: " +
-        kmObjetivoTrasero +
-        " km";
+   document.getElementById(
+    "kmTraseroMostrar"
+).innerHTML =
+    "🛞 Intervalo neumático trasero" +
+    "<br><span style='color:#7f93b7'>⏳ " +
+    kmObjetivoTrasero +
+    " km";
 }
 const duracionTurtleWaxTexto =
     document.getElementById(
