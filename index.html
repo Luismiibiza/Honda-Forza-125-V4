@@ -526,6 +526,10 @@ h3{
    #ajustes .alert{
     padding:14px;
     margin-top:6px;
+    border-radius:24px;
+}
+#ajustes h3{
+    margin-bottom:8px;
 }
  #ajustes h2{
     margin-top:0;
@@ -572,7 +576,7 @@ h3{
 }
   #ajustes button{
     position:relative;
-    padding:2px 14px;
+    padding:1cqb 14px;
     padding-right:50px;
     font-size:13px;
     background:transparent;
@@ -580,7 +584,7 @@ h3{
     box-shadow:none;
     border-radius:0;
     color:#7f93b7;
-    font-weight:400;
+    font-weight:400;    
     opacity:.85;
     text-transform:none;
     letter-spacing:0;
@@ -591,8 +595,8 @@ h3{
     right:18px;
     top:50%;
     transform:translateY(-50%);
-    font-size:22px;
-    color:#7f93b7;
+    font-size:26px;
+    color:#60a5fa;
 }
 .label-ajuste{
     display:block;
@@ -637,8 +641,8 @@ h3{
 
     .label-ajuste{
     display:none;
-}
-  
+}  
+   
 
 } 
   
@@ -1036,57 +1040,39 @@ onchange="seleccionarBackup()">
 <br>
 <h3>⏳ Duración de productos</h3>
 <br>
+<!--
 <div class="alert">
     ⏳ Configuración de duración
     <br><br>
     🚧 Modifica la duración estimada de cada producto.
 </div>
+-->
 <br><br>
-<div class="alert" id="duracionAPCMostrar">
+<button
+    id="duracionAPCMostrar"    
+    onclick="cambiarDuracionAPC()">
     🧼 Sisbrill 361 APC
-    <br>
-    ⏳ Duración: 60 días
-</div>
-
-<button onclick="cambiarDuracionAPC()">
-    🧼 Cambiar duración APC
 </button>
-<div class="alert" id="duracionMaddoxMostrar">
+<button
+    id="duracionMaddoxMostrar"
+    onclick="cambiarDuracionMaddox()">
     ✨ Maddox Detail
-    <br>
-    ⏳ Duración: 7 días
-</div>
-
-<button onclick="cambiarDuracionMaddox()">
-    ✨ Cambiar duración Maddox
 </button>
 <br>
-<div class="alert" id="duracionSisbrillCarMostrar">
+<button
+    id="duracionSisbrillCarMostrar"
+    onclick="cambiarDuracionSisbrillCar()">
     🛡️ Sisbrill Car
-    <br>
-    ⏳ Duración: 30 días
-</div>
-
-<button onclick="cambiarDuracionSisbrillCar()">
-    🛡️ Cambiar duración Sisbrill Car
 </button>
-<div class="alert" id="duracionHidraMateMostrar">
-    🧴 Hidra Mate & Natural
-    <br>
-    ⏳ Duración: 30 días
-</div>
-
-<button onclick="cambiarDuracionHidraMate()">
-    🧴 Cambiar duración Hidra Mate
+<button
+    id="duracionHidraMateMostrar"
+    onclick="cambiarDuracionHidraMate()">
+    🧴 Hidra Mate
 </button>
-<div class="alert" id="duracionTurtleWaxMostrar">
+<button
+    id="duracionTurtleWaxMostrar"
+    onclick="cambiarDuracionTurtleWax()">
     🏆 Turtle Wax Hybrid
-    <br>
-    ⏳ Duración: 180 días
-</div>
-
-<button onclick="cambiarDuracionTurtleWax()">
-    🏆 Cambiar duración Turtle Wax
 </button>
 </div>
 
@@ -2178,11 +2164,13 @@ const duracionTurtleWax =
     );
 if(duracionTurtleWax){
     document.getElementById(
-        "duracionTurtleWaxMostrar"
-    ).innerHTML =
-        "🏆 Duración Turtle Wax: " +
-        duracionTurtleWax +
-        " días";
+    "duracionTurtleWaxMostrar"
+).innerHTML =
+    "🏆 " +
+    (localStorage.getItem("nombreTurtleWax") || "Turtle Wax Hybrid") +
+    "<br>⏳ Duración: " +
+    duracionTurtleWax +
+    " días";
 }
 const kmObjetivoAceite =
     localStorage.getItem(
