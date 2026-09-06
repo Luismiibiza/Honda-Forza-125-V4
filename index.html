@@ -1023,7 +1023,7 @@ onchange="seleccionarBackup()">
 <div id="ajustes" class="pantalla">
     <div class="card">
         <h2>⚙️ Ajustes</h2>
-        <h3>Moto</h3>
+        
 
 
         <div class="settings-row" id="nombreMotoMostrar">
@@ -1034,9 +1034,9 @@ onchange="seleccionarBackup()">
         <button onclick="cambiarNombreMoto()">
             ✏️ Cambiar nombre
         </button>
-<div class="alert" id="matriculaMostrar">
-    <span class="label-ajuste">MATRÍCULA</span>
-    <span class="valor-ajuste">9414FFN</span>
+<div class="settings-row" id="matriculaMostrar">
+    <span>9414FFN</span>
+    <span class="chevron">›</span>
 </div>
 <button onclick="cambiarMatricula()">
     ✏️ Cambiar matrícula
@@ -2385,10 +2385,10 @@ if(matriculaMoto){
    document.getElementById(
     "matriculaMostrar"
 ).innerHTML =
-'<span class="label-ajuste">Matrícula</span>' +
-'<span class="valor-ajuste">' +
+'<span>' +
 matriculaMoto +
-'</span>';
+'</span>' +
+'<span class="chevron">›</span>';
 }
 };
     const productos = [
