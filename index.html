@@ -1024,8 +1024,8 @@ onchange="seleccionarBackup()">
     🏍️ Forza Ibiza
 </button>
 
-<button onclick="cambiarMatricula()">
-    ✏️ Cambiar matrícula
+<button id="botonMatricula" onclick="cambiarMatricula()">
+    🚘 9414HHF
 </button>
 </div>
 
@@ -2257,12 +2257,12 @@ if(duracionAPCTexto && duracionAPC){
     const nombreMoto =
     localStorage.getItem("nombreMoto");
 if(nombreMoto){
-  document.getElementById(
-    "nombreMotoMostrar"
+ document.getElementById(
+    "botonNombreMoto"
 ).innerHTML =
-'<span>' +
+"<span style='color:#ffffff'>🏍️ " +
 nombreMoto +
-'</span>'; 
+"</span>";
 }
     const nombreAPC =
     localStorage.getItem("nombreAPC");
@@ -2343,11 +2343,11 @@ if(nombreTurtleWax){
     localStorage.getItem("matriculaMoto");
 if(matriculaMoto){
    document.getElementById(
-    "matriculaMostrar"
+    "botonMatricula"
 ).innerHTML =
-'<span>' +
+"<span style='color:#ffffff'>🚘 " +
 matriculaMoto +
-'</span>'; 
+"</span>";
 }
 };
     const productos = [
