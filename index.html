@@ -166,15 +166,15 @@ circle at top,
 }
 
 .alert{
-    background:rgba(255,255,255,.03);
-    border-radius:26px;
+   background:rgba(255,255,255,.015);
+    border-radius:18px;
      box-shadow:0 0 30px rgba(0,140,255,0.10);
-    padding:18px;
+    padding:12px 18px;
     margin-top:10px;
-    border:1px solid rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.03);
     color:#ffffff;
     transition:all .2s ease;
-    line-height:1.5;
+    line-height:1.2;
 }
 
 .alert:hover{
@@ -198,6 +198,21 @@ circle at top,
     color:#60a5fa;
     pointer-events:none;
 }
+.resumenItem{
+    position:relative;
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:0 0 18px rgba(96,165,250,.05);
+}
+.resumenItem::after{
+    content:"›";
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:26px;
+    color:#60a5fa;
+    pointer-events:none;
+}
 .resumenGrid{
     display:flex;
     flex-direction:column;
@@ -210,13 +225,29 @@ circle at top,
     padding-left:15px;
 }
 .producto{
-    background:#334155;
-    border-radius:12px;
-    padding:12px;
-    margin-top:10px;
+    background:
+    linear-gradient(
+        180deg,
+        rgba(15,25,45,.95),
+        rgba(8,15,28,.95)
+    );
+    border-radius:20px;
+    padding:16px;
+    margin-top:12px;
     border-left:5px solid #22c55e;
-    transition:0.3s;
-    box-shadow:0 4px 10px rgba(0,0,0,.20);
+    transition:.25s;
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.25),
+        0 0 18px rgba(96,165,250,.05);
+}
+.producto strong{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    color:#ffffff;
+    margin-bottom:8px;
+    letter-spacing:0;
 }
 .producto-verde{
     border-left:5px solid #22c55e !important;
@@ -479,11 +510,11 @@ button:active{
 }
 .barraITV{
     width:100%;
-    height:12px;
-    background:#1e293b;
-    border-radius:20px;
+    height:6px;
+    background:rgba(255,255,255,.08);
+    border-radius:999px;
     overflow:hidden;
-    margin-top:10px;
+    margin-top:8px;
 }
 
 #progresoITV{
@@ -524,20 +555,20 @@ button:active{
 }
 
 
-#textoITV{
-    margin-top:8px;
-    margin-bottom:2px;
-    font-size:12px;
-    color:#94a3b8;
+#textoITV,
+#textoAceite,
+#textoCorrea,
+#textoDelantero,
+#textoTrasero{
+    margin-top:6px;
+    margin-bottom:4px;
+    font-size:13px;
+    color:#e2e8f0;
     text-align:right;
+    font-weight:600;
+    letter-spacing:.3px;
 }
-#textoAceite{
-    margin-top:8px;
-    margin-bottom:6px;
-    font-size:12px;
-    color:#94a3b8;
-    text-align:right;
-}
+
     h2{
     font-size:24px;
     font-weight:700;
@@ -842,9 +873,12 @@ Historial
 
     <div class="resumenGrid">
 
-        <div id="ultimoProducto" class="alert">
-            🧴 Último producto: Ninguno
-        </div>
+       <div
+    id="ultimoProducto"
+    class="alert resumenItem"
+    style="display:none;">
+    🧴 Último producto: Ninguno
+</div>
 
         <div id="ultimoMantenimiento" class="alert">
             🛠️ Último mantenimiento: Ninguno
@@ -861,7 +895,12 @@ Historial
         <div class="barraITV">
             <div id="progresoITV"></div>
         </div>
-
+<hr style="
+border:none;
+height:1px;
+background:rgba(255,255,255,.08);
+margin:20px 0;
+">
     </div>
 
 </div>
@@ -2628,10 +2667,9 @@ if(estadoITV){
     document.getElementById("textoITV");
 if(textoITV){
     textoITV.innerHTML =
-        "ITV al " +
         Math.round(porcentajeITV) +
         "%";
-     }      
+}   
   }   
 // Aceite
 const fechaAceite =
@@ -2685,11 +2723,9 @@ const textoAceite =
     );
 if(textoAceite){
     textoAceite.innerHTML =
-        "Aceite al " +
-        Math.round(
-            porcentajeAceite
-        ) +
-        "%";
+    Math.round(
+        porcentajeAceite
+    ) + "%";
 }
 const estadoAceite =
     document.getElementById(
@@ -2823,11 +2859,8 @@ const textoCorrea =
     document.getElementById("textoCorrea");
 if(textoCorrea){
     textoCorrea.innerHTML =
-        "Correa al " +
-        Math.round(porcentajeCorrea) +
-        "% (" +
-        kmRestantesCorrea +
-        " km)";
+    Math.round(porcentajeCorrea) +
+    "%";
 }
 if(fechaCorrea){
 const kmObjetivoCorrea =
@@ -2963,11 +2996,8 @@ const textoDelantero =
     document.getElementById("textoDelantero");
 if(textoDelantero){
     textoDelantero.innerHTML =
-        "Delantero al " +
         Math.round(porcentajeDelantero) +
-        "% (" +
-        kmRestantesDelantero +
-        " km)";
+        "%";
 }
 let claseDelantero = "verde";
 let mensajeDelantero = "";
@@ -3112,11 +3142,8 @@ const textoTrasero =
     document.getElementById("textoTrasero");
 if(textoTrasero){
     textoTrasero.innerHTML =
-        "Trasero al " +
         Math.round(porcentajeTrasero) +
-        "% (" +
-        kmRestantesTrasero +
-        " km)";
+        "%";
 }
 let claseTrasero = "verde";
 let mensajeTrasero = "";
