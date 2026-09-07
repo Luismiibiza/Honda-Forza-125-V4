@@ -522,6 +522,7 @@ h3{
     overflow:hidden;
     max-width:900px;
     margin:0 auto;
+    background:transparent;
 }
    #ajustes .alert{
     padding:14px;
@@ -530,6 +531,7 @@ h3{
 }
 #ajustes h3{
     margin-bottom:8px;
+    padding-left:12px;
 }
  #ajustes h2{
     margin-top:0;
@@ -540,8 +542,8 @@ h3{
 }
     #nombreMotoMostrar,
 #matriculaMostrar{
-    font-size:15px;
-    font-weight:500;
+    font-size:18px;
+    font-weight:600;
 }
    #nombreMotoMostrar,
 #matriculaMostrar{
@@ -549,14 +551,10 @@ h3{
 }
 
 #matriculaMostrar{
-    margin-top:8px;
+    margin-top:4cqb;
     margin-bottom:4px;
 }
-  #nombreMotoMostrar,
-#matriculaMostrar{
-    font-size:15px;
-    font-weight:500;
-}
+  
 
 #nombreMotoMostrar strong,
 #matriculaMostrar strong{
@@ -599,7 +597,8 @@ line-height:1.4;
     top:50%;
     transform:translateY(-50%);
     font-size:26px;
-    color:#60a5fa;    
+    color:#60a5fa;
+    pointer-events:none;    
 }
 .label-ajuste{
     display:block;
@@ -1037,8 +1036,6 @@ onchange="seleccionarBackup()">
 </button>
 </div>
 
-</div>
-
 <div class="card">
 <br>
 <h3>⏳ Duración de productos</h3>
@@ -1050,7 +1047,7 @@ onchange="seleccionarBackup()">
     🚧 Modifica la duración estimada de cada producto.
 </div>
 -->
-<br><br>
+
 <button
     id="duracionAPCMostrar"    
     onclick="cambiarDuracionAPC()">
@@ -2093,11 +2090,11 @@ if(duracionAPC){
     document.getElementById(
         "duracionAPCMostrar"
     ).innerHTML =
-        "🧼 " +
+        "<span style='color:#ffffff'>🧼 " +
         (localStorage.getItem("nombreAPC") || "Sisbrill 361 APC") +
-        "<br>⏳ Duración: " +
-        duracionAPC +
-        " días";
+            "<br><span style='color:#7f93b7'>⏳ Duración: " +
+    duracionAPC +
+    " días</span>";
 }
 const duracionMaddox =
     localStorage.getItem("duracionMaddox");
@@ -2105,11 +2102,11 @@ if(duracionMaddox){
     document.getElementById(
         "duracionMaddoxMostrar"
     ).innerHTML =
-        "✨ " +
-        (localStorage.getItem("nombreMaddox") || "Maddox Detail") +
-        "<br>⏳ Duración: " +
-        duracionMaddox +
-        " días";
+       "<span style='color:#ffffff'>✨ " +
+(localStorage.getItem("nombreMaddox") || "Maddox Detail") +
+"</span><br><span style='color:#7f93b7'>⏳ Duración: " +
+duracionMaddox +
+" días</span>";
 }
 const duracionMaddoxTexto =
     document.getElementById(
@@ -2129,11 +2126,11 @@ if(duracionSisbrillCar){
     document.getElementById(
         "duracionSisbrillCarMostrar"
     ).innerHTML =
-        "🛡️ " +
+        "<span style='color:#ffffff'>🛡️ " +
         (localStorage.getItem("nombreSisbrillCar") || "Sisbrill Car") +
-        "<br>⏳ Duración: " +
+        "</span><br><span style='color:#7f93b7'>⏳ Duración: " +
         duracionSisbrillCar +
-        " días";
+        " días</span>";
 }
 const duracionHidraMate =
     localStorage.getItem(
@@ -2143,11 +2140,11 @@ if(duracionHidraMate){
     document.getElementById(
         "duracionHidraMateMostrar"
     ).innerHTML =
-        "🧴 " +
+        "<span style='color:#ffffff'>🧴 " +
         (localStorage.getItem("nombreHidraMate") || "Hidra Mate & Natural") +
-        "<br>⏳ Duración: " +
+        "</span><br><span style='color:#7f93b7'>⏳ Duración: " +
         duracionHidraMate +
-        " días";
+        " días</span>";
 }
 const duracionTurtleWax =
     localStorage.getItem(
@@ -2157,37 +2154,37 @@ if(duracionTurtleWax){
     document.getElementById(
     "duracionTurtleWaxMostrar"
 ).innerHTML =
-    "🏆 " +
+    "<span style='color:#ffffff'>🏆 " +
     (localStorage.getItem("nombreTurtleWax") || "Turtle Wax Hybrid") +
-    "<br>⏳ Duración: " +
+    "</span><br><span style='color:#7f93b7'>⏳ Duración: " +
     duracionTurtleWax +
-    " días";
+    " días</span>";
 }
 const kmObjetivoAceite =
     localStorage.getItem(
         "kmObjetivoAceite"
     );
 if(kmObjetivoAceite){
-    document.getElementById(
+   document.getElementById(
     "kmAceiteMostrar"
 ).innerHTML =
-    "🛢️ Intervalo aceite" +
+    "<span style='color:#ffffff'>🛢️ Intervalo aceite</span>" +
     "<br><span style='color:#7f93b7'>⏳ " +
     kmObjetivoAceite +
-    " km";
+    " km</span>";
 }
 const kmObjetivoCorrea =
     localStorage.getItem(
         "kmObjetivoCorrea"
     );
 if(kmObjetivoCorrea){
-    document.getElementById(
+   document.getElementById(
     "kmCorreaMostrar"
 ).innerHTML =
-    "⚙️ Intervalo correa" +
-   "<br><span style='color:#7f93b7'>⏳ " +
+    "<span style='color:#ffffff'>⚙️ Intervalo correa</span>" +
+    "<br><span style='color:#7f93b7'>⏳ " +
     kmObjetivoCorrea +
-    " km";
+    " km</span>";
 }
 const kmObjetivoDelantero =
     localStorage.getItem(
@@ -2197,23 +2194,23 @@ if(kmObjetivoDelantero){
     document.getElementById(
     "kmDelanteroMostrar"
 ).innerHTML =
-    "🛞 Intervalo neumático delantero" +
+    "<span style='color:#ffffff'>🛞 Intervalo neumático delantero</span>" +
     "<br><span style='color:#7f93b7'>⏳ " +
     kmObjetivoDelantero +
-    " km";
+    " km</span>";
 }
 const kmObjetivoTrasero =
     localStorage.getItem(
         "kmObjetivoTrasero"
     );
 if(kmObjetivoTrasero){
-   document.getElementById(
+  document.getElementById(
     "kmTraseroMostrar"
 ).innerHTML =
-    "🛞 Intervalo neumático trasero" +
+    "<span style='color:#ffffff'>🛞 Intervalo neumático trasero</span>" +
     "<br><span style='color:#7f93b7'>⏳ " +
     kmObjetivoTrasero +
-    " km";
+    " km</span>";
 }
 const duracionTurtleWaxTexto =
     document.getElementById(
@@ -2286,8 +2283,8 @@ if(nombreAPC){
     document.getElementById(
         "nombreAPCMostrar"
     ).innerHTML =
-        "🧼 " + nombreAPC +
-"<br>📍 Plásticos, motor y limpieza general";
+        "<span style='color:#ffffff'>🧼 " + nombreAPC +
+        "</span><br><span style='color:#7f93b7'>📍 Plásticos, motor y limpieza general</span>";
 }
 const nombreMaddox =
     localStorage.getItem("nombreMaddox");
@@ -2301,8 +2298,8 @@ if(nombreMaddox){
     document.getElementById(
         "nombreMaddoxMostrar"
     ).innerHTML =
-       "✨ " + nombreMaddox +
-"<br>📍 Acabado rápido y brillo";
+        "<span style='color:#ffffff'>✨ " + nombreMaddox +
+        "</span><br><span style='color:#7f93b7'>📍 Acabado rápido y brillo</span>";
 }
 const nombreSisbrillCar =
     localStorage.getItem("nombreSisbrillCar");
@@ -2316,8 +2313,8 @@ if(nombreSisbrillCar){
     document.getElementById(
         "nombreSisbrillCarMostrar"
     ).innerHTML =
-        "🛡️ " + nombreSisbrillCar +
-"<br>📍 Pintura, carenados y protección exterior";
+        "<span style='color:#ffffff'>🛡️ " + nombreSisbrillCar +
+        "</span><br><span style='color:#7f93b7'>📍 Pintura, carenados y protección exterior</span>";
 }
 const nombreHidraMate =
     localStorage.getItem("nombreHidraMate");
@@ -2331,8 +2328,8 @@ if(nombreHidraMate){
     document.getElementById(
         "nombreHidraMateMostrar"
     ).innerHTML =
-        "🧴 " + nombreHidraMate +
-"<br>📍 Plásticos mate y gomas";
+        "<span style='color:#ffffff'>🧴 " + nombreHidraMate +
+        "</span><br><span style='color:#7f93b7'>📍 Plásticos mate y gomas</span>";
 }
 const nombreTurtleWax =
     localStorage.getItem("nombreTurtleWax");
@@ -2346,8 +2343,8 @@ if(nombreTurtleWax){
     document.getElementById(
         "nombreTurtleWaxMostrar"
     ).innerHTML =
-        "🏆 " + nombreTurtleWax +
-"<br>📍 Sellado y protección hidrofóbica";
+        "<span style='color:#ffffff'>🏆 " + nombreTurtleWax +
+        "</span><br><span style='color:#7f93b7'>📍 Sellado y protección hidrofóbica</span>";
 }
     const matriculaMoto =
     localStorage.getItem("matriculaMoto");
