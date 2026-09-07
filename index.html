@@ -586,7 +586,7 @@ h3{
     opacity:.85;
     text-transform:none;
     letter-spacing:0;
-    min-height:30px;
+    min-height:44px;
 white-space:normal;
 line-height:1.4;
 }
@@ -638,7 +638,7 @@ line-height:1.4;
     
     #nombreMotoMostrar,
 #matriculaMostrar{
-    position:relative;
+    display:none;
 }
 
     .label-ajuste{
@@ -1019,18 +1019,11 @@ onchange="seleccionarBackup()">
         
 
 
-        <div class="settings-row" id="nombreMotoMostrar">
-    <span>Honda Forza 125</span>
-    
-</div>
 
-        <button onclick="cambiarNombreMoto()">
-            ✏️ Cambiar nombre
-        </button>
-<div class="settings-row" id="matriculaMostrar">
-    <span>9414FFN</span>
-   
-</div>
+        <button id="botonNombreMoto" onclick="cambiarNombreMoto()">
+    🏍️ Forza Ibiza
+</button>
+
 <button onclick="cambiarMatricula()">
     ✏️ Cambiar matrícula
 </button>
