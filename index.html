@@ -3,18 +3,7 @@ VERSION TESLA
 
 Tesla UI v2 estable
 
-COMPLETADO:
-✅ Fondo Tesla
-✅ Cards premium
-✅ Botones premium
-✅ Moto formato Tesla
-✅ Matrícula formato Tesla
-✅ JavaScript actualizado
-✅ Móvil funcionando
 
-PRÓXIMO PASO:
-Mejorar visualmente la tarjeta Moto
-sin tocar lógica.
 -->
 <!DOCTYPE html>
 <html lang="es">
@@ -166,13 +155,18 @@ circle at top,
 }
 
 .alert{
-   background:rgba(255,255,255,.015);
-    border-radius:18px;
-     box-shadow:0 0 30px rgba(0,140,255,0.10);
-    padding:12px 18px;
+   background:
+linear-gradient(
+180deg,
+rgba(8,25,50,.55),
+rgba(3,12,25,.55)
+);
+    border-radius:14px;
+     box-shadow:
+    0 0 12px rgba(0,140,255,0.05);
+    padding:10px 18px;
     margin-top:10px;
-    border:1px solid rgba(255,255,255,.03);
-    color:#ffffff;
+   border:1px solid rgba(255,255,255,.015);
     transition:all .2s ease;
     line-height:1.2;
 }
@@ -505,16 +499,15 @@ button:active{
     border-left:5px solid #f59e0b;
 }
 
-#estadoITV{
-    border-left:5px solid #ef4444;
-}
+
 .barraITV{
     width:100%;
     height:6px;
     background:rgba(255,255,255,.08);
     border-radius:999px;
     overflow:hidden;
-    margin-top:8px;
+    margin-top:11px;
+    margin-bottom:6px;
 }
 
 #progresoITV{
@@ -560,8 +553,7 @@ button:active{
 #textoCorrea,
 #textoDelantero,
 #textoTrasero{
-    margin-top:6px;
-    margin-bottom:4px;
+    margin:0cqw;   
     font-size:13px;
     color:#e2e8f0;
     text-align:right;
@@ -712,7 +704,11 @@ line-height:1.4;
     .label-ajuste{
     display:none;
 }  
-   
+   #estadoAceite{
+    font-weight:600;
+    display:flex;
+    align-items:center;
+}
 
 } 
   
@@ -880,71 +876,122 @@ Historial
     🧴 Último producto: Ninguno
 </div>
 
-        <div id="ultimoMantenimiento" class="alert">
-            🛠️ Último mantenimiento: Ninguno
+       <div id="ultimoMantenimiento"
+     style="
+        font-weight:600;
+        margin-bottom:18px;
+     ">
         </div>
 
-        <div id="estadoITV" class="alert">
-            🔴 ITV pendiente
-        </div>
+        <div
+    style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+    "
+>
+    <div id="estadoITV">
+        🔴 ITV pendiente
+    </div>
 
-        <div id="textoITV">
-            ITV al 70%
-        </div>
+    <div id="textoITV">
+        100%
+    </div>
+</div>
 
-        <div class="barraITV">
-            <div id="progresoITV"></div>
-        </div>
+<div class="barraITV">
+    <div id="progresoITV"></div>
+</div>
+<!--
 <hr style="
 border:none;
 height:1px;
 background:rgba(255,255,255,.08);
 margin:20px 0;
 ">
+-->
     </div>
 
 </div>
-<div id="estadoAceite" class="alert">
-    🛢️ Aceite pendiente
-</div>
+<div
+    style="
+        display:flex;
+        justify-content:flex-start;
+        gap:10px;
+        align-items:center;
+        min-height:24px;
+        margin-bottom:10px;
+    "
+>
+    <div id="estadoAceite">
 
-<div id="textoAceite">
-    Aceite al 100%
+        🛢️ Aceite pendiente
+    </div>
+
+    <div id="textoAceite">
+        100%
+    </div>
 </div>
 
 <div class="barraITV">
     <div id="progresoAceite"></div>
 </div>
 
-<div id="estadoCorrea" class="alert">
-    ⚙️ Correa CVT pendiente
-</div>
+<div
+    style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-bottom:4px;
+    "
+>
+    <div id="estadoCorrea">
+        ⚙️ Correa CVT pendiente
+    </div>
 
-<div id="textoCorrea">
-    Correa al 100%
+    <div id="textoCorrea">
+        100%
+    </div>
 </div>
 
 <div class="barraITV">
     <div id="progresoCorrea"></div>
 </div>
-<div id="estadoDelantero" class="alert">
-    🛞 Neumático delantero correcto
-</div>
+<div
+    style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-bottom:4px;
+    "
+>
+    <div id="estadoDelantero">
+        🛞 Neumático delantero
+    </div>
 
-<div id="textoDelantero">
-    Delantero al 100%
+    <div id="textoDelantero">
+        100%
+    </div>
 </div>
 
 <div class="barraITV">
     <div id="progresoDelantero"></div>
 </div>
+<div
+    style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+        margin-bottom:4px;
+    "
+>
+    <div id="estadoTrasero">
+        🛞 Neumático trasero
+    </div>
 
-<div id="estadoTrasero" class="alert">
-    🛞 Neumático trasero correcto
-</div>
-
-<div id="textoTrasero">
-    Trasero al 100%
+    <div id="textoTrasero">
+        100%
+    </div>
 </div>
 
 <div class="barraITV">
@@ -2733,7 +2780,7 @@ const estadoAceite =
 if(estadoAceite){
     if(porcentajeAceite > 60){
         estadoAceite.innerHTML =
-            "🟢 Aceite correcto";
+            "🟢 Aceite ";
     }
     else if(porcentajeAceite > 30){
         estadoAceite.innerHTML =
@@ -2844,7 +2891,7 @@ const estadoCorrea =
 if(estadoCorrea){
     if(porcentajeCorrea > 60){
         estadoCorrea.innerHTML =
-            "🟢 Correa correcta";
+            "🟢 Correa";
     }
     else if(porcentajeCorrea > 30){
         estadoCorrea.innerHTML =
@@ -2981,7 +3028,7 @@ const estadoDelantero =
 if(estadoDelantero){
     if(porcentajeDelantero > 60){
         estadoDelantero.innerHTML =
-            "🟢 Neumático delantero correcto";
+            "🟢 Neumático delantero ";
     }
     else if(porcentajeDelantero > 30){
         estadoDelantero.innerHTML =
@@ -3127,7 +3174,7 @@ const estadoTrasero =
 if(estadoTrasero){
     if(porcentajeTrasero > 60){
         estadoTrasero.innerHTML =
-            "🟢 Neumático trasero correcto";
+            "🟢 Neumático trasero ";
     }
     else if(porcentajeTrasero > 30){
         estadoTrasero.innerHTML =
