@@ -399,13 +399,27 @@ text-align:left;
     margin-bottom:4px;
     transition:all .3s ease;
 }
+    .menuIcon{
+    width:24px;
+    height:24px;
+    filter:invert(1);
+    transition:all .3s ease;
+}
+    
 .menuBtn.activo{
     color:#60a5fa;
     font-weight:bold;
 }
 
-.menuBtn.activo span{
-    filter:drop-shadow(0 0 8px #60a5fa);
+.menuBtn.activo .menuIcon{
+    filter:
+        invert(72%)
+        sepia(22%)
+        saturate(1874%)
+        hue-rotate(182deg)
+        brightness(104%)
+        contrast(100%)
+        drop-shadow(0 0 8px #60a5fa);
     transform:scale(1.15);
 }
 
