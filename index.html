@@ -412,7 +412,8 @@ text-align:left;
 .menuIcon{
     width:24px;
     height:24px;
-    filter:invert(1);
+    opacity:.65;
+    filter:invert(75%);
 }
 .menuBtn.activo .menuIcon{
     filter:
@@ -3555,25 +3556,26 @@ window.addEventListener("load", function(){
 </script>
 <div class="menuInferior">
 
-<div id="btnInicio" class="menuBtn activo"> <span> <img src="icons/house.svg" class="menuIcon"> </span> Inicio </div>
+<div id="btnInicio" class="menuBtn activo">
+    <span> <img src="icons/house.svg" class="menuIcon"> </span> Inicio </div>
 
 <div id="btnLimpieza" class="menuBtn">
-    <span>🧴</span>
+    <span> <img src="icons/droplets.svg" class="menuIcon"> </span> Inicio </div>
     Limpieza
 </div>
 
 <div id="btnMant" class="menuBtn">
-    <span>🛠️</span>
+    <span> <img src="icons/wrench.svg" class="menuIcon"> </span> Inicio </div>
     Mant.
 </div>
 
 <div id="btnHist" class="menuBtn">
-    <span>📋</span>
+     <span> <img src="icons/rotate-ccw-clock" class="menuIcon"> </span> Inicio </div>
     Hist.
 </div>
 
 <div id="btnAjustes" class="menuBtn">
-    <span>⚙️</span>
+     <span> <img src="icons/settings.svg" class="menuIcon"> </span> Inicio </div>
     Ajustes
 </div>
 
