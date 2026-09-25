@@ -48,9 +48,9 @@ Tesla UI v2 estable
     margin:0;
 }
 
-tituloCalendario{
-    font-weight:bold;
-    font-size:18px;
+#tituloCalendario {
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .diasSemana{
@@ -149,7 +149,7 @@ circle at top,
     position:absolute;
 
     right:10px;
-    bottom:10px;
+    bottom:-12px;
 
     width:42%;
     max-width:260px;
@@ -314,6 +314,7 @@ text-align:left;
     position:absolute;
     top:10px;
     right:42px;
+    z-index:2;
 
     display:flex;
     width:60px;
@@ -399,29 +400,25 @@ text-align:left;
     margin-bottom:4px;
     transition:all .3s ease;
 }
-   
-    
+.menuBtn img{
+    width:26px;
+    height:26px;
+    display:block;
+    margin:0 auto 4px;
+    filter:brightness(0) invert(1);
+}
 .menuBtn.activo{
     color:#60a5fa;
     font-weight:bold;
 }
-.menuIcon{
-    width:24px;
-    height:24px;
-    opacity:.8;
-    filter:invert(1);
+
+.menuBtn.activo span,
+.menuBtn.activo img{
+    transform:scale(1.15);
 }
 
-.menuBtn.activo .menuIcon{
-    filter:
-        invert(72%)
-        sepia(22%)
-        saturate(1874%)
-        hue-rotate(182deg)
-        brightness(104%)
-        contrast(100%)
-        drop-shadow(0 0 8px #60a5fa);
-    transform:scale(1.15);
+.menuBtn.activo img{
+    filter:brightness(0) saturate(100%) invert(54%) sepia(95%) saturate(1800%) hue-rotate(190deg) brightness(103%) contrast(101%) drop-shadow(0 0 8px #60a5fa);
 }
 
 .menuBtn:hover{
@@ -463,6 +460,8 @@ text-align:left;
 }
    .header{
     position:relative;
+    overflow:hidden;
+    min-height:280px;
 
     background:
     linear-gradient(
@@ -590,13 +589,13 @@ button:active{
 #textoAceite,
 #textoCorrea,
 #textoDelantero,
-#textoTrasero{
-    margin:0cqw;   
-    font-size:13px;
-    color:#e2e8f0;
-    text-align:right;
-    font-weight:600;
-    letter-spacing:.3px;
+#textoTrasero {
+    margin: 0;
+    font-size: 13px;
+    color: #e2e8f0;
+    text-align: right;
+    font-weight: 600;
+    letter-spacing: .3px;
 }
 
     h2{
@@ -604,6 +603,49 @@ button:active{
     font-weight:700;
     margin-bottom:20px;
     color:#fff;
+}
+
+.kilometrajeActualCabecera{
+    position:relative;
+    width:max-content;
+    padding:6px 42px 6px 0;
+    margin:6px 0 0;
+    border:0;
+    border-radius:0;
+    background:transparent;
+    color:#60a5fa;
+    font:inherit;
+    font-size:16px;
+    font-weight:600;
+    text-align:left;
+    cursor:pointer;
+}
+
+.kilometrajeActualCabecera::after{
+    content:"↻";
+    position:absolute;
+    right:8px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:24px;
+    color:#60a5fa;
+    pointer-events:none;
+}
+
+.kilometrajeActualCabecera:hover{
+    color:#93c5fd;
+}
+
+.kilometrajeActualCabecera:focus-visible{
+    outline:2px solid #60a5fa;
+    outline-offset:4px;
+}
+
+.edicionMoto{
+    margin-top:6px;
+    font-size:16px;
+    color:#60a5fa;
+    font-weight:600;
 }
 
 h3{
@@ -619,7 +661,8 @@ h3{
     #ajustes .card{
     overflow:hidden;
     max-width:900px;
-    margin:0 auto;
+    padding:12px 16px;
+    margin:0 auto 8px;
     background:transparent;
 }
    #ajustes .alert{
@@ -628,6 +671,7 @@ h3{
     border-radius:24px;
 }
 #ajustes h3{
+    margin-top:8px;
     margin-bottom:8px;
     padding-left:12px;
 }
@@ -648,9 +692,9 @@ h3{
     margin-bottom:0;
 }
 
-#matriculaMostrar{
-    margin-top:4cqb;
-    margin-bottom:4px;
+#matriculaMostrar {
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
   
 
@@ -672,7 +716,7 @@ h3{
 }
   #ajustes button{
     position:relative;
-    padding:8cqb 14px;
+        padding: 9px 14px;
     padding-right:50px;
     font-size:14px;
     background:transparent;
@@ -684,7 +728,7 @@ h3{
     opacity:.85;
     text-transform:none;
     letter-spacing:0;
-    min-height:36px;
+    min-height:38px;
 white-space:normal;
 line-height:1.4;
 }
@@ -835,14 +879,20 @@ line-height:1.4;
     </div>
 
     <img
-        src="forza-home.jpg"
+        src="forza-home.png"
         alt="Honda Forza 125 V4"
         class="logo"
     >
 
     <h1>Honda Forza 125 V4</h1>    
-     Ibiza Edition
-    3825 km
+    <div class="edicionMoto">Ibiza Edition</div>
+    <button
+        id="kilometrajeActualCabecera"
+        class="kilometrajeActualCabecera"
+        onclick="actualizarKilometros()"
+        title="Actualizar kilómetros">
+        Km actuales: Sin registrar
+    </button>
 
 </div>
 
@@ -878,26 +928,6 @@ Historial
 ...
 </div>
 -->
-<div class="card">
-    <h2>🏍️ Kilometraje</h2>
-
-    <div id="kmActual" class="alert">
-        Kilometraje actual: Sin registrar
-    </div>
-
-    <!--
-<div id="fechaKm" class="alert">
-    Última actualización: -
-</div>
--->
-
-    <button
-    class="botonChevron"
-    onclick="actualizarKilometros()">
-    ✏️ Actualizar kilómetros
-</button>
-    
-</div>
 <div class="card">
     <h2>🔔 Avisos</h2>
     <div id="avisosMoto" class="alert alertAvisos">
@@ -1137,27 +1167,6 @@ margin:20px 0;
 
 <h2>🛠️ Mantenimiento</h2>
 
-<div class="producto">
-    <strong>🛢️ Aceite</strong>
-    <button onclick="realizarMantenimiento('Aceite')">Realizado</button>
-</div>
-
-<div class="producto">
-    <strong>🚦 ITV</strong>
-    <button onclick="realizarMantenimiento('ITV')">Realizado</button>
-</div>
-
-<div class="producto">
-    <strong>⚙️ Correa CVT</strong>
-    <button onclick="realizarMantenimiento('Correa CVT')">Realizado</button>
-</div>
-<div class="producto">
-    <strong>🛞 Neumático delantero</strong>
-    <button onclick="realizarMantenimiento('NeumaticoDelantero')">
-        Realizado
-    </button>
-</div>
-<div class="producto">
     <strong>🛞 Neumático trasero</strong>
     <button onclick="realizarMantenimiento('NeumaticoTrasero')">
         Realizado
@@ -1212,18 +1221,16 @@ onchange="seleccionarBackup()">
 
 
         <button id="botonNombreMoto" onclick="cambiarNombreMoto()">
-    Honda Forza 125
+    🏍️ Forza Ibiza
 </button>
 
 <button id="botonMatricula" onclick="cambiarMatricula()">
-     9414HHF
+    🚘 9414HHF
 </button>
 </div>
 
 <div class="card">
-<br>
 <h3>⏳ Duración de productos</h3>
-<br>
 <!--
 <div class="alert">
     ⏳ Configuración de duración
@@ -1242,7 +1249,6 @@ onchange="seleccionarBackup()">
     onclick="cambiarDuracionMaddox()">
     ✨ Maddox Detail
 </button>
-<br>
 <button
     id="duracionSisbrillCarMostrar"
     onclick="cambiarDuracionSisbrillCar()">
@@ -2211,16 +2217,20 @@ window.onload = function(){
         localStorage.getItem("fechaKmActual");
     if(kmActual){
         document.getElementById(
-            "kmActual"
+            "kilometrajeActualCabecera"
         ).innerHTML =
-            "🏍️ Kilometraje actual: " +
+            "Km actuales: " +
             kmActual +
             " km";
-        document.getElementById(
-            "fechaKm"
-        ).innerHTML =
-            "📅 Última actualización: " +
-            fechaKmActual;
+       // ...existing code...
+const elementoFechaKm = document.getElementById("fechaKm");
+
+if (elementoFechaKm) {
+    elementoFechaKm.innerHTML =
+        "📅 Última actualización: " +
+        fechaKmActual;
+}
+// ...existing code...
     }    
     mostrarHistorial();
     const ultimo =
@@ -3554,25 +3564,27 @@ window.addEventListener("load", function(){
 <div class="menuInferior">
 
 <div id="btnInicio" class="menuBtn activo">
-    <span> <img src="icons/settings.svg" class="menuIcon"> </span> Inicio </div>
+    <span><img src="icons/house.svg" alt=""></span>
+    Inicio
+</div>
 
 <div id="btnLimpieza" class="menuBtn">
-    <span> <img src="icons/droplets.svg" class="menuIcon"> </span> 
+    <span><img src="icons/droplets.svg" alt=""></span>
     Limpieza
 </div>
 
 <div id="btnMant" class="menuBtn">
-    <span> <img src="icons/wrench.svg" class="menuIcon"> </span>
+    <span><img src="icons/wrench.svg" alt=""></span>
     Mant.
 </div>
 
 <div id="btnHist" class="menuBtn">
-     <span> <img src="icons/rotate-ccw-clock.svg" class="menuIcon"> </span>
+    <span><img src="icons/rotate-ccw-clock.svg" alt=""></span>
     Hist.
 </div>
 
 <div id="btnAjustes" class="menuBtn">
-     <span> <img src="icons/settings.svg" class="menuIcon"> </span> 
+    <span><img src="icons/settings.svg" alt=""></span>
     Ajustes
 </div>
 
