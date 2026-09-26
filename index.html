@@ -147,17 +147,17 @@ circle at top,
 
 .logo{
     position:absolute;
-    right:8px;
-    bottom:-6px;
-    width:42%;
-    max-width:260px;
+    right:0;
+    bottom:-8px;
+    width:48%;
+    max-width:240px;
     opacity:1;
     object-fit:contain;
     object-position:center bottom;
     margin:0;
     border-radius:0;
     pointer-events:none;
-    filter:drop-shadow(0 14px 22px rgba(0,0,0,.4));
+    filter:drop-shadow(0 14px 20px rgba(0,0,0,.38));
 }
 
 .alert{
@@ -307,7 +307,7 @@ text-align:left;
 .matriculaMoto{
     position:absolute;
     top:14px;
-    right:18px;
+    right:16px;
     z-index:2;
 
     display:flex;
@@ -320,6 +320,11 @@ text-align:left;
     overflow:hidden;
 
     box-shadow:0 6px 12px rgba(0,0,0,0.2);
+}
+
+.header .matriculaMoto{
+    right: 18px;
+    top: 12px;
 }
 
 .eu{
@@ -460,20 +465,20 @@ text-align:left;
     background:
     linear-gradient(
         135deg,
-        rgba(11,22,38,.96),
-        rgba(7,12,22,.98)
+        rgba(12,22,36,.98),
+        rgba(5,10,18,.98)
     );
 
-    border-radius:28px;
+    border-radius:26px;
 
-    padding:18px 150px 18px 18px;
+    padding:16px 150px 16px 18px;
 
     margin-bottom:18px;
 
-    border:1px solid rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.06);
 
     box-shadow:
-        0 12px 30px rgba(0,0,0,.35);
+        0 12px 30px rgba(0,0,0,.32);
 
     text-align:left;
 }
@@ -482,21 +487,23 @@ text-align:left;
     content:"";
     position:absolute;
     inset:0;
-    background:radial-gradient(circle at 75% 25%, rgba(86,150,255,.18), transparent 28%);
+    background:
+        linear-gradient(90deg, rgba(16,25,39,0.08), rgba(16,25,39,0.02)),
+        radial-gradient(circle at 72% 20%, rgba(78,132,255,.18), transparent 30%);
     pointer-events:none;
 }
 
 .header h1{
     position:relative;
     z-index:1;
-    margin: 6px 0 4px;
-    font-size: clamp(24px, 6vw, 36px);
-    line-height: 0.92;
+    margin: 12px 0 4px;
+    font-size: clamp(26px, 5.8vw, 32px);
+    line-height: 0.95;
     letter-spacing: -0.07em;
     font-weight: 800;
     color: #f7fbff;
-    text-shadow: 0 6px 18px rgba(12, 27, 52, 0.35);
-    max-width: 200px;
+    text-shadow: 0 8px 18px rgba(0,0,0,.18);
+    max-width: 190px;
 }
 
 
@@ -622,8 +629,8 @@ button:active{
     position:relative;
     z-index:1;
     width:max-content;
-    padding: 0 28px 0 0;
-    margin: 10px 0 0;
+    padding: 0 24px 0 0;
+    margin: 8px 0 0;
     border:0;
     border-radius:0;
     background:transparent;
@@ -634,24 +641,24 @@ button:active{
     text-align:left;
     cursor:pointer;
     letter-spacing:-0.04em;
-    line-height:1.2;
+    line-height:1.15;
 }
 
 .kilometrajeActualCabecera::after{
     content:"↻";
     position:absolute;
-    right:4px;
+    right:2px;
     top:50%;
     transform:translateY(-50%);
-    font-size:18px;
-    color:#7cc4ff;
+    font-size:17px;
+    color:#8cc8ff;
     pointer-events:none;
 }
 
 .fechaKmCabecera{
     position:relative;
     z-index:1;
-    margin-top: 6px;
+    margin-top: 5px;
     font-size: 11px;
     color: rgba(216, 227, 242, 0.8);
     letter-spacing: 0.02em;
@@ -669,11 +676,12 @@ button:active{
 .edicionMoto{
     position:relative;
     z-index:1;
-    margin: 0 0 10px;
-    font-size: 14px;
-    color: rgba(197, 214, 234, 0.82);
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: rgba(192, 210, 230, 0.8);
     font-weight: 500;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
+    text-transform: none;
 }
 
 h3{
@@ -816,9 +824,9 @@ line-height:1.4;
 
     .header h1{
         margin: 0 0 8px;
-        font-size: 28px;
+        font-size: 30px;
         line-height: 0.96;
-        max-width: 170px;
+        max-width: 180px;
     }
 
     .edicionMoto{
@@ -2696,6 +2704,20 @@ if(nombreTurtleWax){
     const matriculaMoto =
     localStorage.getItem("matriculaMoto");
 if(matriculaMoto){
+   const placa = matriculaMoto.toUpperCase().replace(/\s+/g, "");
+   const numeros = (placa.match(/\d+/g)?.join("") || "0000").slice(-4).padStart(4, "0");
+   const letras = (placa.match(/[A-Z]+/g)?.join("") || "AAA").slice(-3).padStart(3, "A");
+
+   const matriculaNumeros = document.getElementById("matriculaNumeros");
+   const matriculaLetras = document.getElementById("matriculaLetras");
+
+   if(matriculaNumeros){
+       matriculaNumeros.textContent = numeros;
+   }
+   if(matriculaLetras){
+       matriculaLetras.textContent = letras;
+   }
+
    document.getElementById(
     "botonMatricula"
 ).innerHTML =
